@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+*.db
+
+# Node / React (for frontend-clinic, frontend-hospital when added)
+node_modules/
+dist/
+.DS_Store
+
+# ML artifacts (regenerate locally, don't commit)
+app/ml/risk_model.pkl
+app/ml/feature_importance.json
+
+# Data (dataset shouldn't be committed if large / has license restrictions)
+data/*.csv

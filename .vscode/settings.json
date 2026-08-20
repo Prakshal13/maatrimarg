@@ -1,0 +1,7 @@
+{
+  "python.defaultInterpreterPath": "/Users/prakshal13/Desktop/maatrimarg/backend/venv/bin/python",
+  "python.analysis.extraPaths": [
+    "/Users/prakshal13/Desktop/maatrimarg/backend",
+    "/Users/prakshal13/Desktop/maatrimarg/backend/app"
+  ]
+}

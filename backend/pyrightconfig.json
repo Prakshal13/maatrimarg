@@ -1,0 +1,9 @@
+{
+  "venvPath": "/Users/prakshal13/Desktop/maatrimarg/backend",
+  "venv": "venv",
+  "extraPaths": [
+    "/Users/prakshal13/Desktop/maatrimarg/backend",
+    "/Users/prakshal13/Desktop/maatrimarg/backend/app"
+  ],
+  "pythonVersion": "3.14"
+}
