@@ -1,0 +1,17 @@
+# Node / React
+node_modules/
+dist/
+.DS_Store
+
+# Python (backend already has its own, this is a safety net)
+__pycache__/
+*.pyc
+venv/
+*.db
+
+# ML artifacts
+app/ml/risk_model.pkl
+app/ml/feature_importance.json
+
+# Data
+data/*.csv
