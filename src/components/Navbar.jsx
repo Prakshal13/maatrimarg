@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
-import { api } from '../api/endpoints';
 import { 
-  Activity, 
-  HeartPulse, 
-  Hospital, 
-  Baby, 
-  ActivitySquare, 
   Globe, 
   LogOut, 
   Lock, 
   Moon, 
   ChevronDown, 
-  CheckCircle2,
-  Sparkles
+  CheckCircle2
 } from 'lucide-react';
 
 const Navbar = () => {
-  const { lang, changeLanguage, t } = useLanguage();
+  const { lang, changeLanguage } = useLanguage();
   const { user, logout } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
   const languages = [
@@ -34,13 +26,15 @@ const Navbar = () => {
 
   const currentLang = languages.find(l => l.code === lang) || languages[0];
 
-  const navLinks = [
-    { path: '/asha/maternal', label: t('maternal_portal'), icon: HeartPulse },
-    { path: '/asha/child', label: t('child_portal'), icon: Baby },
-    { path: '/asha/chronic', label: t('chronic_portal'), icon: ActivitySquare },
-    { path: '/hospital', label: t('hospitals'), icon: Hospital },
-    { path: '/command-center', label: t('dashboard'), icon: Activity },
-  ];
+  // If we are inside portal pages with a sidebar (command-center, hospital, asha), we can let the page header take care of headers or render a minimal header
+  const isPortalPage = location.pathname.startsWith('/command-center') || 
+                       location.pathname.startsWith('/hospital') || 
+                       location.pathname.startsWith('/asha');
+
+  // If inside portal with full sidebar, hide top global navbar to give full screen real estate to the dashboard
+  if (isPortalPage) {
+    return null;
+  }
 
   return (
     <header className="sticky top-0 z-50 bg-[#f7f9fb]/90 backdrop-blur-md border-b border-slate-200/80">
@@ -49,7 +43,7 @@ const Navbar = () => {
           
           {/* Logo matching Stitch Screen 1 */}
           <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-[#091426] flex items-center justify-center text-[#2dd4bf] shadow-sm">
+            <div className="w-8 h-8 rounded-lg bg-[#091426] flex items-center justify-center text-[#2dd4bf] shadow-sm group-hover:scale-105 transition-transform">
               <span className="text-lg font-black leading-none">✱</span>
             </div>
             <span className="font-extrabold text-sm tracking-wider text-[#091426] uppercase font-['Plus_Jakarta_Sans']">
@@ -57,30 +51,8 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              const isActive = location.pathname === link.path;
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    isActive
-                      ? 'bg-slate-200/70 text-[#006b5f] font-extrabold shadow-2xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/60'
-                  }`}
-                >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#006b5f]' : 'text-slate-400'}`} />
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
           {/* Right Action: Language Selector, Theme Toggle, Clinician Login */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             
             {/* Language Selector Dropdown (Pill from screenshot) */}
             <div className="relative">
