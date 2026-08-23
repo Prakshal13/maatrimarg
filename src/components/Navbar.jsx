@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import EmergencyLocationModal from './EmergencyLocationModal';
+import UserProfileDropdown from './UserProfileDropdown';
 import { 
   Globe, 
   LogOut, 
@@ -12,14 +13,13 @@ import {
   Sun, 
   ChevronDown, 
   CheckCircle2,
-  MapPin,
-  ArrowRight
+  MapPin
 } from 'lucide-react';
 
 const Navbar = () => {
   const { lang, changeLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
@@ -43,45 +43,13 @@ const Navbar = () => {
     return null;
   }
 
-  // Get user-friendly role label and icon
-  const getRoleBadge = () => {
-    if (!user) {
-      return {
-        icon: 'account_circle',
-        label: t('clinician_login_btn') || 'Clinician Portal',
-        link: '/login'
-      };
-    }
-    if (user.role === 'dho_command') {
-      return {
-        icon: 'admin_panel_settings',
-        label: lang === 'mr' ? 'DHO कमांड मुख्यालय' : lang === 'hi' ? 'DHO कमान मुख्यालय' : lang === 'ta' ? 'DHO கட்டளை மையம்' : 'DHO Command HQ',
-        link: '/command-center'
-      };
-    }
-    if (user.role === 'hospital_staff') {
-      return {
-        icon: 'local_hospital',
-        label: lang === 'mr' ? 'रुग्णालय CMO' : lang === 'hi' ? 'अस्पताल सीएमओ' : lang === 'ta' ? 'மருத்துவமனை CMO' : 'Hospital CMO',
-        link: '/hospital'
-      };
-    }
-    return {
-      icon: 'medical_services',
-      label: lang === 'mr' ? 'आशा कार्यकर्ता' : lang === 'hi' ? 'आशा कार्यकर्ता' : lang === 'ta' ? 'ஆஷா பணியாளர்' : 'ASHA Worker',
-      link: '/asha/maternal'
-    };
-  };
-
-  const roleInfo = getRoleBadge();
-
   return (
     <>
       <header className="sticky top-0 z-50 bg-[#f7f9fb]/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             
-            {/* Logo matching exact Screenshot */}
+            {/* Logo */}
             <Link to="/" className="flex items-center gap-2.5 group">
               <div className="w-8 h-8 rounded-lg bg-[#091426] dark:bg-teal-500 flex items-center justify-center text-[#2dd4bf] dark:text-slate-950 shadow-sm group-hover:scale-105 transition-transform">
                 <span className="material-symbols-outlined text-[20px]">hub</span>
@@ -91,10 +59,10 @@ const Navbar = () => {
               </span>
             </Link>
 
-            {/* Right Action Items matching Screenshot */}
+            {/* Right Action Items */}
             <div className="flex items-center gap-2 sm:gap-3">
               
-              {/* 1. Home SOS Route (Google Maps) Button (Red/Coral Pill from Screenshot) */}
+              {/* 1. Home SOS Route (Google Maps) Button */}
               <button
                 onClick={() => setSosModalOpen(true)}
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#cb4646] hover:bg-[#b91c1c] text-white text-xs font-bold shadow-xs transition-all hover:scale-105 cursor-pointer"
@@ -105,7 +73,7 @@ const Navbar = () => {
                 <span className="sm:hidden">SOS Route</span>
               </button>
 
-              {/* 2. Language Selector Dropdown (Pill from Screenshot) */}
+              {/* 2. Language Selector Dropdown */}
               <div className="relative">
                 <button
                   onClick={() => setLangDropdownOpen(!langDropdownOpen)}
@@ -151,28 +119,8 @@ const Navbar = () => {
                 </span>
               </button>
 
-              {/* 4. Clinician Profile Icon Button (Icon Only) */}
-              <div className="flex items-center gap-2">
-                <Link
-                  to={roleInfo.link}
-                  className="w-9 h-9 rounded-full bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 flex items-center justify-center shadow-xs transition-all hover:scale-110 active:scale-95 cursor-pointer border border-teal-400/40"
-                  title={roleInfo.label}
-                >
-                  <span className="material-symbols-outlined text-[20px] leading-none">
-                    {user ? (user.role === 'dho_command' ? 'admin_panel_settings' : user.role === 'hospital_staff' ? 'local_hospital' : 'medical_services') : 'person'}
-                  </span>
-                </Link>
-
-                {user && (
-                  <button
-                    onClick={logout}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                    title={t('logout_session')}
-                  >
-                    <span className="material-symbols-outlined text-[18px]">logout</span>
-                  </button>
-                )}
-              </div>
+              {/* 4. Interactive Clinician Profile & Persona Selection Dropdown */}
+              <UserProfileDropdown />
 
             </div>
 
