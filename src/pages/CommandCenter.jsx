@@ -4,6 +4,8 @@ import { api } from '../api/endpoints';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 import UserProfileDropdown from '../components/UserProfileDropdown';
+import AppSidebar from '../components/AppSidebar';
+import LiveNetworkMap from '../components/LiveNetworkMap';
 import { 
   Activity, 
   Hospital, 
@@ -94,116 +96,8 @@ const CommandCenter = () => {
   return (
     <div className="flex min-h-screen bg-[#f6fafe] text-[#171c1f] font-sans antialiased">
       
-      {/* Sidebar Navigation matching Stitch Screen 5 */}
-      <aside className="w-[260px] bg-white border-r border-slate-200 shadow-xs hidden md:flex flex-col shrink-0">
-        <div className="p-6 border-b border-slate-200">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#006b5f] flex items-center justify-center text-white font-black text-base shadow-sm">
-              M
-            </div>
-            <div>
-              <h1 className="text-base font-extrabold text-slate-900 leading-tight font-['Plus_Jakarta_Sans']">
-                MaatriMarg
-              </h1>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                Command Center
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <nav className="flex-1 px-3 py-4 space-y-1 text-xs font-bold text-left">
-          <button
-            onClick={() => setActiveTab('network')}
-            className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all ${
-              activeTab === 'network' ? 'bg-[#006b5f]/10 text-[#006b5f] font-extrabold' : 'text-slate-600 hover:bg-slate-100'
-            }`}
-          >
-            <span className="material-symbols-outlined text-[18px]">hub</span>
-            <span>Network Hospitals</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('dispatches')}
-            className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all ${
-              activeTab === 'dispatches' ? 'bg-[#006b5f]/10 text-[#006b5f] font-extrabold' : 'text-slate-600 hover:bg-slate-100'
-            }`}
-          >
-            <span className="material-symbols-outlined text-[18px]">ambulance</span>
-            <span>Live 108 Dispatches</span>
-            {activeReferrals.length > 0 && (
-              <span className="ml-auto px-1.5 py-0.5 rounded-full bg-rose-600 text-white text-[10px] font-mono">
-                {activeReferrals.length}
-              </span>
-            )}
-          </button>
-
-          <Link
-            to="/hospital"
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">domain</span>
-            <span>Hospital Directory</span>
-          </Link>
-
-          <Link
-            to="/asha/maternal"
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">clinical_notes</span>
-            <span>Maternal Risk Triage</span>
-          </Link>
-
-          <button
-            onClick={() => setActiveTab('audit')}
-            className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all ${
-              activeTab === 'audit' ? 'bg-[#006b5f]/10 text-[#006b5f] font-extrabold' : 'text-slate-600 hover:bg-slate-100'
-            }`}
-          >
-            <span className="material-symbols-outlined text-[18px]">policy</span>
-            <span>ABDM / DISHA Audit</span>
-          </button>
-
-          <div className="pt-6 pb-2 px-3">
-            <span className="text-[10px] uppercase font-extrabold text-slate-400 tracking-widest">
-              System Modules
-            </span>
-          </div>
-
-          <Link
-            to="/asha/child"
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">child_care</span>
-            <span>Pediatric VIPER</span>
-          </Link>
-
-          <Link
-            to="/asha/chronic"
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">ecg_heart</span>
-            <span>Cardiovascular Risk</span>
-          </Link>
-        </nav>
-
-        <div className="p-4 border-t border-slate-200">
-          <Link
-            to="/"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 text-xs font-bold transition-all mb-1"
-          >
-            <span className="material-symbols-outlined text-[18px]">home</span>
-            <span>Back to Home</span>
-          </Link>
-          <button
-            onClick={() => { logout(); }}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-700 text-xs font-bold transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">logout</span>
-            <span>Log Out</span>
-          </button>
-        </div>
-      </aside>
+      {/* Sidebar Navigation */}
+      <AppSidebar />
 
       {/* Main Command Center Canvas */}
       <div className="flex-1 flex flex-col min-w-0">
@@ -327,94 +221,14 @@ const CommandCenter = () => {
           {/* Middle Section from Stitch Screen 5: Live Network Map & Active Missions Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            {/* Live Network Map (Spans 2 columns) */}
-            <div className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-2xs flex flex-col relative min-h-[380px]">
-              <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-white/90 backdrop-blur-xs z-10">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[#006b5f]">map</span>
-                  <h3 className="text-sm font-bold text-slate-900 font-['Plus_Jakarta_Sans']">
-                    Live Regional Network Routing Map
-                  </h3>
-                </div>
-                <div className="flex bg-slate-100 rounded-lg p-0.5 border border-slate-200 text-xs font-bold">
-                  <button
-                    onClick={() => setMapMode('topography')}
-                    className={`px-3 py-1 rounded-md transition-colors ${mapMode === 'topography' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-500 hover:text-slate-900'}`}
-                  >
-                    Topography
-                  </button>
-                  <button
-                    onClick={() => setMapMode('satellite')}
-                    className={`px-3 py-1 rounded-md transition-colors ${mapMode === 'satellite' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-500 hover:text-slate-900'}`}
-                  >
-                    Satellite
-                  </button>
-                </div>
-              </div>
-
-              {/* Map Canvas with Interactive Nodes & Glowing Network Pathways */}
-              <div className="flex-1 bg-gradient-to-tr from-slate-900 via-[#131b2e] to-slate-950 relative p-6 flex items-center justify-center overflow-hidden min-h-[300px]">
-                
-                {/* Visual Grid Background */}
-                <div 
-                  className="absolute inset-0 opacity-20 pointer-events-none"
-                  style={{
-                    backgroundImage: 'radial-gradient(#38bdf8 1px, transparent 1px)',
-                    backgroundSize: '24px 24px'
-                  }}
-                />
-
-                {/* SVG Connecting Pathways */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                  <line x1="20%" y1="30%" x2="50%" y2="50%" stroke="#2dd4bf" strokeWidth="2" strokeDasharray="4 4" className="animate-pulse" opacity="0.6" />
-                  <line x1="80%" y1="25%" x2="50%" y2="50%" stroke="#2dd4bf" strokeWidth="2" opacity="0.5" />
-                  <line x1="30%" y1="75%" x2="50%" y2="50%" stroke="#38bdf8" strokeWidth="2" strokeDasharray="6 3" opacity="0.7" />
-                  <line x1="75%" y1="70%" x2="50%" y2="50%" stroke="#f43f5e" strokeWidth="2.5" className="animate-pulse" />
-                </svg>
-
-                {/* Central District Tertiary Facility */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center group cursor-pointer">
-                  <div className="w-12 h-12 rounded-full bg-[#006b5f] border-2 border-teal-300 shadow-lg shadow-teal-500/50 flex items-center justify-center text-white animate-pulse">
-                    <Hospital className="w-6 h-6" />
-                  </div>
-                  <span className="mt-1.5 px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-teal-500/40 text-[10px] font-bold text-teal-300 backdrop-blur-sm">
-                    Tertiary Referral Center (Gadchiroli / Chennai)
-                  </span>
-                </div>
-
-                {/* Surrounding Rural PHC Sub-Centre Nodes */}
-                <div className="absolute top-[28%] left-[20%] z-10 flex flex-col items-center">
-                  <div className="w-6 h-6 rounded-full bg-teal-500 border border-white shadow-md flex items-center justify-center text-[10px] font-bold text-white">
-                    P1
-                  </div>
-                  <span className="text-[9px] text-slate-300 mt-1 font-mono">PHC Bhamragad</span>
-                </div>
-
-                <div className="absolute top-[22%] right-[20%] z-10 flex flex-col items-center">
-                  <div className="w-6 h-6 rounded-full bg-teal-500 border border-white shadow-md flex items-center justify-center text-[10px] font-bold text-white">
-                    P2
-                  </div>
-                  <span className="text-[9px] text-slate-300 mt-1 font-mono">PHC Aheri</span>
-                </div>
-
-                <div className="absolute bottom-[22%] left-[28%] z-10 flex flex-col items-center">
-                  <div className="w-6 h-6 rounded-full bg-blue-500 border border-white shadow-md flex items-center justify-center text-[10px] font-bold text-white">
-                    P3
-                  </div>
-                  <span className="text-[9px] text-slate-300 mt-1 font-mono">PHC Melghat</span>
-                </div>
-
-                {/* Critical Emergency 108 Ambulance Unit */}
-                <div className="absolute bottom-[26%] right-[24%] z-10 flex flex-col items-center">
-                  <div className="w-8 h-8 rounded-full bg-rose-600 border-2 border-white shadow-lg shadow-rose-600/60 flex items-center justify-center text-white animate-bounce">
-                    <span className="material-symbols-outlined text-[16px]">ambulance</span>
-                  </div>
-                  <span className="text-[9px] text-rose-300 font-bold mt-1 bg-rose-950/80 px-2 py-0.5 rounded border border-rose-600/40">
-                    108 Unit MH-34 (ETA 4m)
-                  </span>
-                </div>
-
-              </div>
+            {/* Real-time Interactive Leaflet Map (Spans 2 columns) */}
+            <div className="lg:col-span-2">
+              <LiveNetworkMap 
+                hospitals={networkHospitals} 
+                onSelectHospital={(h) => {
+                  alert(`108 Emergency Dispatch route locked to: ${h.name} (${h.district}, ${h.state})`);
+                }}
+              />
             </div>
 
             {/* Active Missions Sidebar (Stitch Screen 5) */}
