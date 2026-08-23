@@ -20,6 +20,7 @@ import {
   ActivitySquare, 
   Building2, 
   ChevronRight,
+  ChevronDown,
   TrendingUp,
   Flame,
   Clock
