@@ -35,7 +35,7 @@ const LandingPage = () => {
         const res = await api.getCommandCenterSummary();
         setSummary(res.data);
       } catch (e) {
-        // Fallback realistic metrics
+        // Silent fallback
       }
     };
     fetchSummary();
@@ -44,115 +44,122 @@ const LandingPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-[#f7f9fb] text-[#191c1e] antialiased relative overflow-x-hidden font-sans">
       
-      {/* Ambient Blurred Background Accents */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[120px] pointer-events-none transform translate-x-1/3 -translate-y-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-teal-100/40 rounded-full blur-[100px] pointer-events-none transform -translate-x-1/3 translate-y-1/3"></div>
+      {/* Stitch Design DNA: Ambient Blurred Background Gradients */}
+      <div className="fixed inset-0 z-0 pointer-events-none bg-[#f7f9fb]">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#d8e3fb] rounded-full blur-[120px] opacity-25 transform translate-x-1/3 -translate-y-1/3"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#9ff2e2] rounded-full blur-[100px] opacity-25 transform -translate-x-1/3 translate-y-1/3"></div>
       </div>
 
-      {/* Hero Section */}
-      <section className="w-full flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 relative pt-6 pb-16 z-10 max-w-7xl mx-auto">
+      {/* Hero Section with Three.js Background */}
+      <section className="w-full flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 relative pt-6 pb-20 z-10 max-w-7xl mx-auto">
         
-        {/* Three.js Background Canvas (Positioned behind central card) */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-80 min-h-[500px]">
+        {/* Three.js Background Canvas */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-60 mix-blend-multiply rounded-3xl min-h-[520px]">
           <NetworkThreeGlobe />
         </div>
 
         {/* Central Content Header */}
-        <div className="relative z-10 w-full max-w-4xl flex flex-col items-center text-center mt-4">
+        <div className="relative z-10 w-full max-w-4xl flex flex-col items-center text-center mt-6">
           
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 mb-5 shadow-xs backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-[#2dd4bf] animate-ping"></span>
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-slate-700">
-              • NATIONAL COMMAND INFRASTRUCTURE ACTIVE • MAHARASHTRA & TAMIL NADU
+          {/* Status Badge with Stitch pulse-node animation */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#e0e3e5]/80 border border-[#e2e8f0] animate-reveal mb-5 backdrop-blur-md shadow-2xs">
+            <div className="w-2 h-2 rounded-full bg-[#2dd4bf] pulse-node"></div>
+            <span className="text-[12px] font-bold uppercase tracking-wider text-[#45474c]">
+              National Command Infrastructure Active
             </span>
           </div>
 
-          {/* Main 2-Line Headline matching Screenshot */}
-          <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] max-w-3xl font-['Plus_Jakarta_Sans']">
-            Maternal Healthcare <br />
-            <span className="text-[#006b5f] bg-clip-text text-transparent bg-gradient-to-r from-[#006b5f] to-[#0b6f63]">
-              Intelligence Platform
-            </span>
+          {/* Main Display Headline with Stitch negative letter spacing */}
+          <h1 className="text-4xl sm:text-6xl font-bold text-[#1e293b] tracking-[-0.02em] leading-[1.15] max-w-3xl animate-reveal animate-reveal-delay-1 font-['Plus_Jakarta_Sans']">
+            Maternal Healthcare Intelligence
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mt-4 leading-relaxed font-normal">
-            Predict clinical risk. Optimize real-time ICU bed allocation. Seamlessly route mothers to the right tertiary facilities across districts.
+          <p className="text-base sm:text-lg text-[#45474c] max-w-2xl mt-5 leading-relaxed font-normal animate-reveal animate-reveal-delay-2">
+            Predict risk. Optimize healthcare access. Connect mothers with the right care at the right time. The definitive command center for clinical logistics.
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 mt-7 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto animate-reveal animate-reveal-delay-3">
             <Link
               to="/command-center"
-              className="bg-[#091426] hover:bg-[#1e293b] text-white font-bold text-xs sm:text-sm py-3.5 px-7 rounded-xl shadow-lg shadow-slate-900/20 transition-all hover:scale-[1.02] flex items-center justify-center gap-2 group"
+              className="bg-[#1e293b] hover:bg-[#0f172a] text-white font-semibold text-sm sm:text-base py-4 px-8 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex items-center justify-center gap-2 group"
             >
               <span>Login to Command Center</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">
+                arrow_forward
+              </span>
             </Link>
 
             <Link
               to="/hospital"
-              className="bg-white/90 hover:bg-white border border-slate-200 text-slate-800 font-bold text-xs sm:text-sm py-3.5 px-6 rounded-xl shadow-xs transition-all hover:scale-[1.02] flex items-center justify-center"
+              className="bg-white/80 border border-[#e2e8f0] text-[#1e293b] hover:bg-slate-50 font-semibold text-sm sm:text-base py-4 px-8 rounded-lg transition-all duration-300 hover:scale-[1.02] flex items-center justify-center shadow-2xs backdrop-blur-sm"
             >
-              Explore Live Matrix
+              Explore Platform
             </Link>
           </div>
 
         </div>
 
-        {/* Floating Glassmorphic Telemetry Card (Exact from Stitch Screen 1) */}
-        <div className="w-full max-w-4xl mt-12 relative z-10">
-          <div className="rounded-3xl bg-white/85 backdrop-blur-xl border border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.08)] p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-stretch">
+        {/* Conceptual Dashboard Preview (Glassmorphic Card matching Stitch Screen 1) */}
+        <div className="w-full max-w-5xl mt-20 mb-12 relative z-10 animate-reveal animate-reveal-delay-3">
+          <div className="glass-card w-full relative overflow-hidden shadow-[0_20px_50px_rgba(15,23,42,0.07)] p-6 sm:p-8 flex items-center justify-center border-t border-white/70">
             
-            {/* Left Sub-card: Active Monitoring KPI */}
-            <div className="w-full md:w-1/3 bg-slate-50/90 rounded-2xl p-5 border border-slate-200/70 flex flex-col justify-between text-left space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-extrabold text-[#006b5f] uppercase tracking-wider">
-                  ACTIVE MONITORING
-                </span>
-                <span className="w-2.5 h-2.5 rounded-full bg-[#2dd4bf] shadow-sm shadow-teal-500 animate-pulse"></span>
-              </div>
+            {/* Abstract visualization network overlay */}
+            <div className="absolute inset-0 bg-cover bg-center w-full h-full opacity-20 mix-blend-darken pointer-events-none" 
+                 style={{ backgroundImage: 'radial-gradient(#006b5f 1px, transparent 1px)', backgroundSize: '16px 16px' }} 
+            />
 
-              <div className="space-y-2">
-                <div className="h-2 w-full bg-slate-200 rounded-full"></div>
-                <div className="h-2 w-4/5 bg-slate-200 rounded-full"></div>
-                <div className="h-2 w-3/5 bg-slate-200 rounded-full"></div>
-              </div>
-
-              <div className="pt-4 border-t border-slate-200/60">
-                <div className="text-3xl font-black text-slate-900 font-['Plus_Jakarta_Sans']">
-                  98.4%
-                </div>
-                <div className="text-[11px] font-bold text-slate-500">
-                  Network Operational Fidelity
-                </div>
-              </div>
-            </div>
-
-            {/* Right Sub-card: Animated Telemetry Bar Visualizer & Quote */}
-            <div className="w-full md:w-2/3 bg-slate-50/90 rounded-2xl p-6 border border-slate-200/70 flex flex-col items-center justify-center text-center gap-5">
+            {/* UI Overlay Mock Inside Glass Container */}
+            <div className="relative w-full rounded-2xl border border-slate-200/60 bg-white/60 backdrop-blur-md flex p-6 gap-6 flex-col md:flex-row items-stretch">
               
-              {/* Telemetry Bar Chart Mock */}
-              <div className="w-full h-24 flex items-end justify-around px-4 pb-2 border-b border-slate-200/60">
-                <div className="w-9 bg-[#2dd4bf]/25 h-10 rounded-t-lg transition-all hover:h-12"></div>
-                <div className="w-9 bg-[#2dd4bf]/40 h-16 rounded-t-lg transition-all hover:h-18"></div>
-                <div className="w-9 bg-[#006b5f] h-22 rounded-t-lg shadow-sm"></div>
-                <div className="w-9 bg-[#2dd4bf]/60 h-14 rounded-t-lg transition-all hover:h-16"></div>
-                <div className="w-9 bg-[#2dd4bf]/35 h-18 rounded-t-lg transition-all hover:h-20"></div>
-                <div className="w-9 bg-[#2dd4bf]/80 h-20 rounded-t-lg transition-all hover:h-22"></div>
+              {/* Left Sub-Card: Active Monitoring */}
+              <div className="w-full md:w-1/3 bg-white/85 rounded-xl shadow-sm border border-slate-200/80 p-5 flex flex-col justify-between text-left gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="h-4 w-24 bg-[#e0e3e5] rounded"></div>
+                  <div className="w-2 h-2 rounded-full bg-[#2dd4bf] pulse-node"></div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="h-2 w-full bg-[#eceef0] rounded-full"></div>
+                  <div className="h-2 w-5/6 bg-[#eceef0] rounded-full"></div>
+                  <div className="h-2 w-4/6 bg-[#eceef0] rounded-full"></div>
+                </div>
+
+                <div className="mt-auto pt-4 border-t border-slate-200/80">
+                  <div className="text-[12px] font-bold uppercase tracking-wider text-[#006b5f]">
+                    Active Monitoring
+                  </div>
+                  <div className="text-3xl font-bold text-[#1e293b] font-['Plus_Jakarta_Sans']">
+                    98.2%
+                  </div>
+                </div>
               </div>
 
-              {/* Quote from Screenshot */}
-              <p className="text-xs sm:text-sm font-semibold text-slate-700 italic max-w-md">
-                "Advancing maternal outcomes through clinical machine intelligence and regional infrastructure routing."
-              </p>
+              {/* Right Sub-Card: Telemetry Bar Visualizer & Quote */}
+              <div className="w-full md:w-2/3 bg-white/85 rounded-xl shadow-sm border border-slate-200/80 p-6 flex flex-col items-center justify-center text-center gap-6">
+                
+                {/* 5-Bar Chart Visualizer from Stitch Screen 1 */}
+                <div className="relative w-full h-28 flex items-end justify-around px-4 pb-2 border-b border-slate-200/60">
+                  <div className="w-8 bg-[#2dd4bf]/20 h-12 rounded-t hover:h-14 transition-all"></div>
+                  <div className="w-8 bg-[#2dd4bf]/40 h-20 rounded-t hover:h-22 transition-all"></div>
+                  <div className="w-8 bg-[#2dd4bf] h-28 rounded-t shadow-xs"></div>
+                  <div className="w-8 bg-[#2dd4bf]/60 h-16 rounded-t hover:h-18 transition-all"></div>
+                  <div className="w-8 bg-[#2dd4bf]/30 h-24 rounded-t hover:h-26 transition-all"></div>
+                </div>
 
-              {/* State Pill */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-[10px] font-extrabold text-teal-800 uppercase tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                <span>Network State: Optimal Transit Readiness</span>
+                {/* Italic Clinical Quote */}
+                <p className="text-sm font-semibold text-[#1e293b] italic max-w-md">
+                  "Advancing Maternal Health through Clinical Intelligence and Network Excellence"
+                </p>
+
+                {/* Network Status Pill */}
+                <div className="flex gap-2">
+                  <div className="px-3.5 py-1 rounded-full bg-[#eceef0] border border-slate-200/80 text-[11px] font-bold text-[#45474c] uppercase tracking-wider">
+                    Network Status: Optimal
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -162,80 +169,80 @@ const LandingPage = () => {
 
       </section>
 
-      {/* 4 Feature Capability Cards (Exact from Stitch Screen 1) */}
-      <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-white border-t border-slate-200 relative z-10">
-        <div className="max-w-7xl mx-auto space-y-12">
+      {/* Feature Preview Section (4 Glass Cards matching Stitch Screen 1) */}
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 bg-white/60 relative z-10 border-t border-[#e2e8f0]/80">
+        <div className="max-w-7xl mx-auto flex flex-col gap-10">
           
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-['Plus_Jakarta_Sans']">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#1e293b] font-['Plus_Jakarta_Sans'] tracking-tight">
               Comprehensive System Capabilities
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
+            <p className="text-sm text-[#45474c]">
               Modular intelligence designed for clinical precision and operational scale.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             
-            <Link
-              to="/asha/maternal"
-              className="p-6 rounded-2xl bg-[#f7f9fb] hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-[#006b5f] group-hover:scale-105 transition-transform">
-                <HeartPulse className="w-5 h-5" />
+            {/* Card 1: AI Risk Assessment */}
+            <div className="glass-card p-6 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300 group cursor-default">
+              <div className="w-12 h-12 rounded-lg bg-[#2dd4bf]/15 flex items-center justify-center text-[#006b5f] mb-2">
+                <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  health_and_safety
+                </span>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm group-hover:text-[#006b5f] transition-colors">
+              <h3 className="font-bold text-base text-[#1e293b] group-hover:text-[#006b5f] transition-colors">
                 AI Risk Assessment
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Predictive modeling identifying high-risk pregnancies before complications arise with mg/dL auto-normalization.
+              <p className="text-xs sm:text-sm text-[#45474c] leading-relaxed">
+                Predictive modeling identifying high-risk pregnancies before complications arise, ensuring proactive clinical intervention.
               </p>
-            </Link>
+            </div>
 
-            <Link
-              to="/hospital"
-              className="p-6 rounded-2xl bg-[#f7f9fb] hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-[#006b5f] group-hover:scale-105 transition-transform">
-                <Hospital className="w-5 h-5" />
+            {/* Card 2: Hospital Network Intelligence */}
+            <div className="glass-card p-6 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300 group cursor-default">
+              <div className="w-12 h-12 rounded-lg bg-[#2dd4bf]/15 flex items-center justify-center text-[#006b5f] mb-2">
+                <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  account_tree
+                </span>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm group-hover:text-[#006b5f] transition-colors">
+              <h3 className="font-bold text-base text-[#1e293b] group-hover:text-[#006b5f] transition-colors">
                 Hospital Network Intelligence
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Real-time mapping of facility capabilities, ICU bed availability, and blood bank units across regions.
+              <p className="text-xs sm:text-sm text-[#45474c] leading-relaxed">
+                Real-time mapping of facility capabilities, bed availability, and specialized care units across regions.
               </p>
-            </Link>
+            </div>
 
-            <Link
-              to="/asha/maternal"
-              className="p-6 rounded-2xl bg-[#f7f9fb] hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-[#006b5f] group-hover:scale-105 transition-transform">
-                <Navigation className="w-5 h-5" />
+            {/* Card 3: Smart Routing */}
+            <div className="glass-card p-6 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300 group cursor-default">
+              <div className="w-12 h-12 rounded-lg bg-[#2dd4bf]/15 flex items-center justify-center text-[#006b5f] mb-2">
+                <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  route
+                </span>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm group-hover:text-[#006b5f] transition-colors">
+              <h3 className="font-bold text-base text-[#1e293b] group-hover:text-[#006b5f] transition-colors">
                 Smart Routing
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Algorithmic patient transfer protocols optimizing rural road tortuosity (1.25x), urgency, and blood match.
+              <p className="text-xs sm:text-sm text-[#45474c] leading-relaxed">
+                Algorithmic patient transfer protocols optimizing distance, urgency, and specific facility readiness.
               </p>
-            </Link>
+            </div>
 
-            <Link
-              to="/command-center"
-              className="p-6 rounded-2xl bg-[#f7f9fb] hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-[#006b5f] group-hover:scale-105 transition-transform">
-                <Activity className="w-5 h-5" />
+            {/* Card 4: Real-Time Command Center */}
+            <div className="glass-card p-6 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300 group cursor-default">
+              <div className="w-12 h-12 rounded-lg bg-[#2dd4bf]/15 flex items-center justify-center text-[#006b5f] mb-2">
+                <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  dashboard_customize
+                </span>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm group-hover:text-[#006b5f] transition-colors">
+              <h3 className="font-bold text-base text-[#1e293b] group-hover:text-[#006b5f] transition-colors">
                 Real-Time Command Center
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#45474c] leading-relaxed">
                 A centralized, high-fidelity overview for administrators to monitor regional maternal health logistics instantly.
               </p>
-            </Link>
+            </div>
 
           </div>
 
@@ -243,15 +250,21 @@ const LandingPage = () => {
       </section>
 
       {/* Footer from Stitch Screen 1 */}
-      <footer className="w-full bg-[#f0f4f8] border-t border-slate-200 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="font-bold text-slate-700">
+      <footer className="w-full mt-auto bg-[#ffffff] border-t border-[#e2e8f0]">
+        <div className="flex flex-col md:flex-row justify-between items-center py-6 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto gap-4 text-xs text-[#45474c]">
+          <div className="font-bold text-[#1e293b]">
             © 2026 MaatriMarg AI. Clinical Precision, Human Care. • Smart India Hackathon PS 26133
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 font-medium text-slate-600">
-            <a href="#" onClick={(e) => { e.preventDefault(); alert("Terms of Service: MaatriMarg Clinical AI & Regional Health Protocol (Ayushman Bharat / DISHA Compliant)"); }} className="hover:text-teal-700 transition-colors">Terms of Service</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); alert("Data Privacy: End-to-End Encrypted Patient Telemetry & Anonymized PHI Storage"); }} className="hover:text-teal-700 transition-colors">Data Privacy</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); alert("System Admin: Contact District Health Command HQ (DHO Technical Operations)"); }} className="hover:text-teal-700 transition-colors">Contact System Admin</a>
+          <div className="flex flex-wrap justify-center gap-6 font-medium">
+            <a href="#" onClick={(e) => { e.preventDefault(); alert("Terms of Service: MaatriMarg Clinical AI & Regional Health Protocol (Ayushman Bharat / DISHA Compliant)"); }} className="hover:text-[#006b5f] transition-colors">
+              Terms of Service
+            </a>
+            <a href="#" onClick={(e) => { e.preventDefault(); alert("Data Privacy: End-to-End Encrypted Patient Telemetry & Anonymized PHI Storage"); }} className="hover:text-[#006b5f] transition-colors">
+              Data Privacy
+            </a>
+            <a href="#" onClick={(e) => { e.preventDefault(); alert("System Admin: Contact District Health Command HQ (DHO Technical Operations)"); }} className="hover:text-[#006b5f] transition-colors">
+              Contact System Admin
+            </a>
           </div>
         </div>
       </footer>

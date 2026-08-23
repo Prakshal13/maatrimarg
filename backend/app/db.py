@@ -255,6 +255,27 @@ class AshaWorker(Base):
 
 
 # ---------------------------
+# USER & CLINICIAN AUTH
+# ---------------------------
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    salt = Column(String, nullable=False)
+    full_name = Column(String, nullable=False)
+    role = Column(String, default="asha")  # asha | hospital_staff | dho_command | admin
+    phone = Column(String, nullable=True)
+    asha_id = Column(String, nullable=True)
+    state = Column(String, default="Maharashtra")
+    district = Column(String, default="Gadchiroli")
+    subcentre_or_facility = Column(String, default="Bhamragad Sub-Centre")
+    created_at = Column(DateTime, default=utcnow)
+    updated_at = Column(DateTime, default=utcnow, onupdate=utcnow)
+
+
+# ---------------------------
 # ALERT
 # ---------------------------
 class Alert(Base):
