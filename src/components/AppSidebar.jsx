@@ -8,9 +8,10 @@ import {
   ActivitySquare, 
   Hospital, 
   Activity, 
+  BarChart3,
+  ShieldCheck,
   Home, 
   LogOut, 
-  ShieldCheck,
   Building2
 } from 'lucide-react';
 
@@ -25,38 +26,70 @@ const AppSidebar = () => {
     navigate('/login');
   };
 
-  const navItems = [
+  const userRole = user?.role || 'dho_command';
+
+  // Master definition of all possible navigation items with authorized roles
+  const ALL_NAV_ITEMS = [
     {
+      id: 'dashboard',
       label: t('dashboard'),
       path: '/command-center',
       icon: Activity,
-      symbol: 'hub'
+      symbol: 'hub',
+      allowedRoles: ['dho_command']
     },
     {
+      id: 'hospitals',
       label: t('hospitals'),
       path: '/hospital',
       icon: Hospital,
-      symbol: 'domain'
+      symbol: 'domain',
+      allowedRoles: ['hospital_staff', 'dho_command']
     },
     {
+      id: 'analytics',
+      label: t('analytics'),
+      path: '/analytics',
+      icon: BarChart3,
+      symbol: 'monitoring',
+      allowedRoles: ['hospital_staff', 'dho_command']
+    },
+    {
+      id: 'admin',
+      label: t('admin_governance'),
+      path: '/admin',
+      icon: ShieldCheck,
+      symbol: 'admin_panel_settings',
+      allowedRoles: ['dho_command']
+    },
+    {
+      id: 'maternal',
       label: t('maternal_portal'),
       path: '/asha/maternal',
       icon: HeartPulse,
-      symbol: 'clinical_notes'
+      symbol: 'clinical_notes',
+      allowedRoles: ['asha', 'hospital_staff', 'dho_command']
     },
     {
+      id: 'child',
       label: t('child_portal'),
       path: '/asha/child',
       icon: Baby,
-      symbol: 'child_care'
+      symbol: 'child_care',
+      allowedRoles: ['asha', 'dho_command']
     },
     {
+      id: 'chronic',
       label: t('chronic_portal'),
       path: '/asha/chronic',
       icon: ActivitySquare,
-      symbol: 'ecg_heart'
+      symbol: 'ecg_heart',
+      allowedRoles: ['asha', 'dho_command']
     }
   ];
+
+  // Filter items specifically based on logged-in user persona
+  const navItems = ALL_NAV_ITEMS.filter(item => item.allowedRoles.includes(userRole));
 
   return (
     <aside className="w-[260px] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-xs hidden md:flex flex-col shrink-0 h-screen sticky top-0 text-left select-none transition-colors">
@@ -78,10 +111,13 @@ const AppSidebar = () => {
         </Link>
       </div>
 
-      {/* Main Navigation Items (All 5 Modules) */}
+      {/* Main Navigation Items (Filtered by Role) */}
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        <div className="px-3 pb-2 text-[10px] uppercase font-extrabold text-slate-400 dark:text-slate-500 tracking-widest">
-          {t('core_system_portals')}
+        <div className="px-3 pb-2 text-[10px] uppercase font-extrabold text-slate-400 dark:text-slate-500 tracking-widest flex items-center justify-between">
+          <span>{t('core_system_portals')}</span>
+          <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-teal-600 dark:text-teal-400 font-bold uppercase">
+            {userRole === 'asha' ? 'ASHA' : userRole === 'hospital_staff' ? 'CMO' : 'DHO'}
+          </span>
         </div>
 
         {navItems.map((item) => {

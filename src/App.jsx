@@ -13,6 +13,8 @@ import ChildPortal from './pages/ChildPortal';
 import ChronicPortal from './pages/ChronicPortal';
 import HospitalDashboard from './pages/HospitalDashboard';
 import CommandCenter from './pages/CommandCenter';
+import MaternalHealthAnalytics from './pages/MaternalHealthAnalytics';
+import AdminGovernanceCenter from './pages/AdminGovernanceCenter';
 
 // Protected Route Guard
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -48,7 +50,7 @@ function App() {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginPage />} />
 
-                {/* Protected Frontline ASHA Portals */}
+                {/* Frontline ASHA Portals */}
                 <Route 
                   path="/asha/maternal" 
                   element={
@@ -60,7 +62,7 @@ function App() {
                 <Route 
                   path="/asha/child" 
                   element={
-                    <ProtectedRoute allowedRoles={['asha', 'dho_command', 'hospital_staff']}>
+                    <ProtectedRoute allowedRoles={['asha', 'dho_command']}>
                       <ChildPortal />
                     </ProtectedRoute>
                   } 
@@ -68,13 +70,13 @@ function App() {
                 <Route 
                   path="/asha/chronic" 
                   element={
-                    <ProtectedRoute allowedRoles={['asha', 'dho_command', 'hospital_staff']}>
+                    <ProtectedRoute allowedRoles={['asha', 'dho_command']}>
                       <ChronicPortal />
                     </ProtectedRoute>
                   } 
                 />
 
-                {/* Protected Hospital Staff Dashboard */}
+                {/* Hospital Staff Dashboard */}
                 <Route 
                   path="/hospital" 
                   element={
@@ -84,12 +86,32 @@ function App() {
                   } 
                 />
 
-                {/* Protected DHO District Command Center */}
+                {/* Regional Health Analytics & Heatmap (CMO & DHO) */}
+                <Route 
+                  path="/analytics" 
+                  element={
+                    <ProtectedRoute allowedRoles={['hospital_staff', 'dho_command']}>
+                      <MaternalHealthAnalytics />
+                    </ProtectedRoute>
+                  } 
+                />
+
+                {/* DHO District Command Center */}
                 <Route 
                   path="/command-center" 
                   element={
                     <ProtectedRoute allowedRoles={['dho_command']}>
                       <CommandCenter />
+                    </ProtectedRoute>
+                  } 
+                />
+
+                {/* Admin & Governance Center (DHO / State Admin) */}
+                <Route 
+                  path="/admin" 
+                  element={
+                    <ProtectedRoute allowedRoles={['dho_command']}>
+                      <AdminGovernanceCenter />
                     </ProtectedRoute>
                   } 
                 />
