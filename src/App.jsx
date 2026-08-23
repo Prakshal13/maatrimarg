@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 
@@ -35,12 +36,13 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 
 function App() {
   return (
-    <LanguageProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <div className="min-h-screen bg-[#f6fafe] flex flex-col font-sans">
-            <Navbar />
-            <main className="flex-1">
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <div className="min-h-screen bg-[#f6fafe] dark:bg-slate-950 text-[#191c1e] dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
+              <Navbar />
+              <main className="flex-1">
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<LandingPage />} />
@@ -100,6 +102,7 @@ function App() {
         </BrowserRouter>
       </AuthProvider>
     </LanguageProvider>
+    </ThemeProvider>
   );
 }
 

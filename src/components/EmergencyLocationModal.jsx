@@ -31,16 +31,19 @@ export function calculateDistanceKm(lat1, lon1, lat2, lon2) {
 }
 
 // Format duration into readable string
-export function formatEta(mins) {
-  if (mins < 60) return `${mins} mins`;
+export function formatEta(mins, lang = 'en') {
+  const hrLabel = lang === 'mr' ? 'तास' : lang === 'hi' ? 'घंटे' : lang === 'ta' ? 'மணி' : 'hrs';
+  const minLabel = lang === 'mr' ? 'मि' : lang === 'hi' ? 'मिनट' : lang === 'ta' ? 'நிமி' : 'mins';
+
+  if (mins < 60) return `${mins} ${minLabel}`;
   const hrs = Math.floor(mins / 60);
   const remMins = mins % 60;
-  if (remMins === 0) return `${hrs} hrs`;
-  return `${hrs} hrs ${remMins} mins`;
+  if (remMins === 0) return `${hrs} ${hrLabel}`;
+  return `${hrs} ${hrLabel} ${remMins} ${minLabel}`;
 }
 
 const EmergencyLocationModal = ({ isOpen, onClose }) => {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const [hospitals, setHospitals] = useState([]);
   const [coords, setCoords] = useState(null);
   const [isLocating, setIsLocating] = useState(false);
@@ -70,7 +73,6 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
     setLocationError(null);
 
     if (!navigator.geolocation) {
-      // Default fallback: Solapur / Gadchiroli
       const fallback = { lat: 17.6599, lng: 75.9064 };
       setCoords(fallback);
       processLocation(fallback.lat, fallback.lng, hospitals);
@@ -89,7 +91,6 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
       },
       (err) => {
         console.warn('GPS location error:', err);
-        // Default fallback to Solapur / Central Maharashtra
         const fallback = { lat: 17.6599, lng: 75.9064 };
         setCoords(fallback);
         setLocationError('GPS permission denied or timeout. Using central emergency coordinates.');
@@ -169,26 +170,26 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
       />
 
       {/* Modal Card matching Screenshot 2 */}
-      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-200/80 p-6 sm:p-7 z-10 animate-reveal overflow-hidden text-left font-sans">
+      <div className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200/80 dark:border-slate-800 p-6 sm:p-7 z-10 animate-reveal overflow-hidden text-left font-sans transition-colors">
         
-        {/* Top Header matching Screenshot */}
-        <div className="flex items-start justify-between pb-4 border-b border-slate-100">
+        {/* Top Header */}
+        <div className="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-[#cb4646] shadow-2xs">
+            <div className="w-11 h-11 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-100 dark:border-rose-900/50 flex items-center justify-center text-[#cb4646] shadow-2xs">
               <span className="material-symbols-outlined text-[22px]">location_on</span>
             </div>
             <div>
-              <h3 className="text-base font-black text-slate-900 font-['Plus_Jakarta_Sans']">
-                Fastest Route from Home to Hospital
+              <h3 className="text-base font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">
+                {lang === 'mr' ? 'घरून थेट रुग्णालयाचा सर्वात वेगवान मार्ग' : lang === 'hi' ? 'घर से अस्पताल का सबसे तेज़ मार्ग' : lang === 'ta' ? 'வீட்டிலிருந்து மருத்துவமனைக்கு விரைவான பாதை' : 'Fastest Route from Home to Hospital'}
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Search home address or use live GPS to launch Google Maps navigation
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                {lang === 'mr' ? 'थेट GPS द्वारे गुगल मॅप्स नेव्हिगेशन सुरू करा' : lang === 'hi' ? 'लाइव GPS द्वारा गूगल मैप्स नेविगेशन शुरू करें' : lang === 'ta' ? 'நேரடி ஜிபிஎஸ் மூலம் கூகிள் மேப்ஸ் வழிகாட்டலைத் தொடங்குக' : 'Search home address or use live GPS to launch Google Maps navigation'}
               </p>
             </div>
           </div>
           <button 
             onClick={onClose} 
-            className="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+            className="text-slate-400 hover:text-slate-700 dark:hover:text-white p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -198,8 +199,8 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
           
           {/* Starting Home Address Section */}
           <div className="space-y-2">
-            <label className="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider">
-              STARTING HOME ADDRESS:
+            <label className="block text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+              {lang === 'mr' ? 'आरंभ स्थान / घर:' : lang === 'hi' ? 'आरंभिक स्थान / घर:' : lang === 'ta' ? 'தொடக்க இடம் / வீடு:' : 'STARTING HOME ADDRESS:'}
             </label>
             
             <div className="relative">
@@ -211,17 +212,17 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
                 value={searchAddress}
                 onChange={(e) => setSearchAddress(e.target.value)}
                 placeholder="Search starting location..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:ring-2 focus:ring-[#006b5f] transition-all"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] transition-all"
               />
             </div>
 
             {/* GPS Fetch Capsule from Screenshot */}
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+            <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold text-slate-800 block">
-                  Live Device GPS Location
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
+                  {lang === 'mr' ? 'थेट डिव्हाइस GPS स्थान' : lang === 'hi' ? 'लाइव डिवाइस जीपीएस स्थान' : lang === 'ta' ? 'நேரடி சாதன ஜிபிஎஸ் இருப்பிடம்' : 'Live Device GPS Location'}
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">
+                <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
                   {coords ? `Coordinates: ${coords.lat.toFixed(4)}° N, ${coords.lng.toFixed(4)}° E` : 'Locating device position...'}
                 </span>
               </div>
@@ -229,9 +230,9 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
               <button
                 onClick={handleGetLocation}
                 disabled={isLocating}
-                className="px-3 py-1.5 bg-slate-200/80 hover:bg-slate-300 text-slate-800 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-2xs"
+                className="px-3 py-1.5 bg-slate-200/80 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer"
               >
-                <Crosshair className={`w-3.5 h-3.5 text-slate-700 ${isLocating ? 'animate-spin' : ''}`} />
+                <Crosshair className={`w-3.5 h-3.5 text-slate-700 dark:text-teal-400 ${isLocating ? 'animate-spin' : ''}`} />
                 <span>{isLocating ? 'Locating...' : 'Fetch GPS'}</span>
               </button>
             </div>
@@ -239,14 +240,14 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
 
           {/* Select Destination Hospital Dropdown */}
           <div className="space-y-1.5">
-            <label className="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider">
-              SELECT DESTINATION HOSPITAL:
+            <label className="block text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+              {lang === 'mr' ? 'गंतव्य रुग्णालय निवडा:' : lang === 'hi' ? 'गंतव्य अस्पताल चुनें:' : lang === 'ta' ? 'இலக்கு மருத்துவமனையைத் தேர்ந்தெடுக்கவும்:' : 'SELECT DESTINATION HOSPITAL:'}
             </label>
             
             <select
               value={selectedHospitalId || ''}
               onChange={(e) => handleDestinationChange(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-[#006b5f] cursor-pointer"
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] cursor-pointer"
             >
               {hospitals.map((h) => (
                 <option key={h.id} value={h.id}>
@@ -258,51 +259,51 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
 
           {/* Destination Hospital Details Card from Screenshot */}
           {bestMatch && (
-            <div className="p-4 rounded-2xl bg-teal-50/50 border border-teal-200/80 space-y-3">
+            <div className="p-4 rounded-2xl bg-teal-50/50 dark:bg-teal-950/30 border border-teal-200/80 dark:border-teal-800 space-y-3">
               
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#006b5f] block">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#006b5f] dark:text-teal-400 block">
                     DESTINATION HOSPITAL DETAILS
                   </span>
-                  <h4 className="text-sm font-black text-slate-900 font-['Plus_Jakarta_Sans'] mt-0.5">
+                  <h4 className="text-sm font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans'] mt-0.5">
                     {bestMatch.hospital.name}
                   </h4>
-                  <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 leading-relaxed">
                     {bestMatch.hospital.district}, {bestMatch.hospital.state || 'Maharashtra'} • {bestMatch.hospital.address || 'Civil District Hospital Campus'}
                   </p>
                 </div>
 
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase tracking-wider border border-emerald-200 shrink-0">
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-[10px] font-extrabold uppercase tracking-wider border border-emerald-200 dark:border-emerald-800 shrink-0">
                   READY
                 </span>
               </div>
 
               {/* 3 Metric Cards Grid (ETA, Distance, ICU Beds) */}
-              <div className="grid grid-cols-3 gap-2 py-2 border-y border-teal-200/60 text-center bg-white/70 rounded-xl p-2">
+              <div className="grid grid-cols-3 gap-2 py-2 border-y border-teal-200/60 dark:border-teal-800/60 text-center bg-white/70 dark:bg-slate-900/70 rounded-xl p-2">
                 <div>
-                  <span className="text-[10px] font-bold text-slate-400 block uppercase">
+                  <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block uppercase">
                     ETA
                   </span>
-                  <strong className="text-xs sm:text-sm font-black text-[#006b5f] font-mono">
-                    {formatEta(bestMatch.estimatedMinutes)}
+                  <strong className="text-xs sm:text-sm font-black text-[#006b5f] dark:text-teal-400 font-mono">
+                    {formatEta(bestMatch.estimatedMinutes, lang)}
                   </strong>
                 </div>
 
                 <div>
-                  <span className="text-[10px] font-bold text-slate-400 block uppercase">
+                  <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block uppercase">
                     Distance
                   </span>
-                  <strong className="text-xs sm:text-sm font-black text-slate-900 font-mono">
+                  <strong className="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-mono">
                     {bestMatch.distanceKm} km
                   </strong>
                 </div>
 
                 <div>
-                  <span className="text-[10px] font-bold text-slate-400 block uppercase">
+                  <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block uppercase">
                     ICU Beds
                   </span>
-                  <strong className="text-xs sm:text-sm font-black text-emerald-700 font-mono">
+                  <strong className="text-xs sm:text-sm font-black text-emerald-700 dark:text-emerald-400 font-mono">
                     {bestMatch.hospital.nicu_beds_available ?? 4} Beds
                   </strong>
                 </div>
@@ -310,16 +311,16 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
 
               {/* Bottom Hospital Status Bar */}
               <div className="flex items-center justify-between text-xs pt-1">
-                <span className="flex items-center gap-1 text-[#006b5f] font-bold">
+                <span className="flex items-center gap-1 text-[#006b5f] dark:text-teal-400 font-bold">
                   <span className="text-base leading-none">✱</span>
                   <span>Labor OT Standby</span>
                 </span>
 
                 <a
                   href={`tel:${bestMatch.hospital.contact_phone || '+91-217-2749401'}`}
-                  className="text-slate-700 font-mono font-bold hover:text-[#006b5f] flex items-center gap-1 transition-colors"
+                  className="text-slate-700 dark:text-slate-300 font-mono font-bold hover:text-[#006b5f] flex items-center gap-1 transition-colors"
                 >
-                  <Phone className="w-3.5 h-3.5 text-[#006b5f]" />
+                  <Phone className="w-3.5 h-3.5 text-[#006b5f] dark:text-teal-400" />
                   <span>{bestMatch.hospital.contact_phone || '+91-217-2749401'}</span>
                 </a>
               </div>
@@ -330,11 +331,13 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
           {/* Action Button: Open Fastest Route in Google Maps */}
           <button
             onClick={handleOpenGoogleMaps}
-            className="w-full py-3.5 px-5 rounded-2xl bg-[#091426] hover:bg-[#1e293b] text-white font-bold text-xs sm:text-sm shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 group"
+            className="w-full py-3.5 px-5 rounded-2xl bg-[#091426] dark:bg-teal-500 hover:bg-[#1e293b] dark:hover:bg-teal-600 text-white dark:text-slate-950 font-bold text-xs sm:text-sm shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 group cursor-pointer"
           >
-            <Navigation className="w-4 h-4 text-[#2dd4bf]" />
-            <span>Open Fastest Route in Google Maps</span>
-            <ExternalLink className="w-3.5 h-3.5 text-slate-300 group-hover:translate-x-0.5 transition-transform" />
+            <Navigation className="w-4 h-4 text-[#2dd4bf] dark:text-slate-950" />
+            <span>
+              {lang === 'mr' ? 'गुगल मॅप्सवर सर्वात वेगवान मार्ग उघडा' : lang === 'hi' ? 'गूगल मैप्स पर सबसे तेज़ मार्ग खोलें' : lang === 'ta' ? 'கூகிள் மேப்ஸில் வேகமான வழியைத் திறக்கவும்' : 'Open Fastest Route in Google Maps'}
+            </span>
+            <ExternalLink className="w-3.5 h-3.5 text-slate-300 dark:text-slate-900 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
         </div>
