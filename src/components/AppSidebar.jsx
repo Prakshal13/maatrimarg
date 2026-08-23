@@ -100,11 +100,11 @@ const AppSidebar = () => {
         {/* Brand Header */}
         <div className="p-6 border-b border-slate-200 dark:border-slate-800">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-lg bg-[#006b5f] dark:bg-teal-500 flex items-center justify-center text-white dark:text-slate-950 font-black text-base shadow-sm group-hover:scale-105 transition-transform">
-              M
+            <div className="w-8 h-8 rounded-lg bg-[#091426] dark:bg-teal-500 flex items-center justify-center text-[#2dd4bf] dark:text-slate-950 shadow-sm group-hover:scale-105 transition-transform">
+              <span className="material-symbols-outlined text-[20px]">hub</span>
             </div>
             <div>
-              <h1 className="text-base font-extrabold text-slate-900 dark:text-white leading-tight font-['Plus_Jakarta_Sans']">
+              <h1 className="text-base font-extrabold text-slate-900 dark:text-white leading-tight font-['Plus_Jakarta_Sans'] uppercase">
                 {t('app_title')}
               </h1>
               <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">

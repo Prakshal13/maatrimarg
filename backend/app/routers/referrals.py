@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
-from app.db import Alert, AuditLog, Mother, get_db, log_audit_event
+from app.db import Alert, AuditLog, Mother, get_db, log_audit_event, AshaWorker, Hospital, User
 from app.services.referrals import (
     ACTIVE_STATUSES,
     VALID_STATUSES,
@@ -102,14 +102,42 @@ def get_audit_logs(
     if target_type:
         query = query.filter(AuditLog.target_type == target_type)
     logs = query.order_by(AuditLog.timestamp.desc()).limit(limit).all()
+    
+    # Pre-fetch lookup tables for fast O(1) matching
+    asha_dict = {a.id: a.name for a in db.query(AshaWorker).all()}
+    asha_by_asha_id = {a.asha_id: a.name for a in db.query(AshaWorker).all()}
+    hospital_dict = {h.id: h.name for h in db.query(Hospital).all()}
+    
+    # We will assume CMOs are identified by their username or hospital_id. 
+    # Let's check users. We don't have user table linked directly to actor_id, but if actor_type is hospital_staff, we can just say "Hospital CMO" if we can't find a name.
+    
+    def get_actor_name(actor_type, actor_id):
+        if actor_type == 'asha' and actor_id in asha_by_asha_id:
+            return asha_by_asha_id[actor_id]
+        if actor_type == 'hospital_staff':
+            # Could look up user by username if actor_id is the username
+            user = db.query(User).filter(User.username == str(actor_id)).first()
+            if user: return f"CMO {user.full_name}"
+            return "Hospital CMO"
+        return None
+
+    def get_target_name(target_type, target_id):
+        if target_type == 'asha_worker' and target_id in asha_dict:
+            return f"ASHA {asha_dict[target_id]} (Field Unit)"
+        if target_type == 'hospital' and target_id in hospital_dict:
+            return hospital_dict[target_id]
+        return None
+
     return [{
         "id": l.id,
         "timestamp": l.timestamp.isoformat() if l.timestamp else None,
         "actor_type": l.actor_type,
         "actor_id": l.actor_id,
+        "actor_name": get_actor_name(l.actor_type, l.actor_id),
         "action": l.action,
         "target_type": l.target_type,
         "target_id": l.target_id,
+        "target_name": get_target_name(l.target_type, l.target_id),
         "details": json.loads(l.details or "{}"),
     } for l in logs]
 

@@ -111,15 +111,17 @@ const AdminGovernanceCenter = () => {
     try {
       const res = await api.getAuditLogs();
       if (res.data && res.data.length > 0) {
-        const mappedLogs = res.data.map(l => ({
-          id: `LOG-${l.id.toString().padStart(4, '0')}`,
-          time: l.timestamp ? new Date(l.timestamp).toLocaleTimeString() : 'N/A',
-          clinician: formatClinician(l),
-          clinicianId: l.actor_id ? `ID: ${l.actor_id}` : l.actor_type.toUpperCase(),
-          action: formatAction(l.action),
-          targetFacility: formatFacility(l),
-          severity: getSeverity(l.action),
-          details: formatDetails(l.action, l.details)
+        const mappedLogs = res.data
+          .filter(l => l.action !== 'location_updated') // Hide telemetry spam
+          .map(l => ({
+            id: `LOG-${l.id.toString().padStart(4, '0')}`,
+            time: (l.timestamp && typeof l.timestamp === 'string') ? new Date(l.timestamp.endsWith('Z') ? l.timestamp : l.timestamp + 'Z').toLocaleTimeString() : 'N/A',
+            clinician: l.actor_name || formatClinician(l),
+            clinicianId: l.actor_id ? `ID: ${l.actor_id}` : l.actor_type.toUpperCase(),
+            action: formatAction(l.action),
+            targetFacility: l.target_name || formatFacility(l),
+            severity: getSeverity(l.action),
+            details: formatDetails(l.action, l.details)
         }));
         setAuditLogs(mappedLogs);
       } else {
@@ -146,11 +148,33 @@ const AdminGovernanceCenter = () => {
        if (l.details?.hospital_id) return `${t('assigned_hospital')} #${l.details.hospital_id}`;
        return `${t('referral_link')} #${l.target_id}`;
     }
+    if (l.target_type === 'asha_worker') {
+       return `Field Responder #${l.target_id}`;
+    }
     return `${t('target_label')}: ${l.target_type} #${l.target_id}`;
   };
 
   const formatDetails = (action, details) => {
     if (!details) return t('no_additional_details');
+    
+    if (action === 'emergency_sos_beacon_triggered') {
+       if (details.lat && details.lng) {
+          return (
+             <span className="flex items-center gap-2">
+               SOS beacon activated at coordinates: {details.lat.toFixed(4)}, {details.lng.toFixed(4)}
+               <a 
+                 href={`https://maps.google.com/?q=${details.lat},${details.lng}`}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="inline-flex items-center gap-1 px-2 py-0.5 ml-2 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 rounded text-[10px] font-bold uppercase transition-colors"
+               >
+                 <span className="material-symbols-outlined text-[12px]">location_on</span>
+                 View on Maps ↗
+               </a>
+             </span>
+          );
+       }
+    }
     
     if (action === 'referral_created') {
        return `${t('detail_initiated')} ${details.tier || t('dispatch_label')} ${t('detail_referral_patient')} (#${details.mother_id || t('unknown_label')})`;
@@ -195,8 +219,8 @@ const AdminGovernanceCenter = () => {
   };
 
   const getSeverity = (action) => {
-    if (action === 'referral_created' || action === 'emergency_sos_beacon_triggered') return 'WARNING';
-    if (action === 'referral_escalated') return 'CRITICAL';
+    if (action === 'referral_created') return 'WARNING';
+    if (action === 'referral_escalated' || action === 'emergency_sos_beacon_triggered') return 'CRITICAL';
     return 'INFO';
   };
 

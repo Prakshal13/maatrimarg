@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { HelpCircle, Phone, X, ShieldAlert, Mail } from 'lucide-react';
+import { HelpCircle, Phone, X, ShieldAlert, Mail, ChevronDown } from 'lucide-react';
+
+
+
+const FAQAccordion = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 overflow-hidden transition-all shadow-sm">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+      >
+        <span className="font-bold text-slate-900 dark:text-white text-xs">{question}</span>
+        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="px-4 pb-4 pt-1 text-xs text-slate-500 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/50">
+          {answer}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const SupportModal = ({ isOpen, onClose }) => {
   const { t } = useLanguage();
@@ -73,6 +95,18 @@ const SupportModal = ({ isOpen, onClose }) => {
               </button>
             </div>
           </div>
+
+          <div className="pt-2">
+            <h4 className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">
+              {t('faq_title')}
+            </h4>
+            <div className="flex flex-col gap-2">
+              <FAQAccordion question={t('faq_q1')} answer={t('faq_a1')} />
+              <FAQAccordion question={t('faq_q2')} answer={t('faq_a2')} />
+              <FAQAccordion question={t('faq_q3')} answer={t('faq_a3')} />
+            </div>
+          </div>
+
         </div>
 
       </div>
