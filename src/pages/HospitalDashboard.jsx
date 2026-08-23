@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../api/endpoints';
 import { useLanguage } from '../context/LanguageContext';
+import { useAuth } from '../context/AuthContext';
+import UserProfileDropdown from '../components/UserProfileDropdown';
 import { 
   Hospital, 
   Search, 
@@ -20,6 +22,7 @@ import {
 
 const HospitalDashboard = () => {
   const { t } = useLanguage();
+  const { logout } = useAuth();
   const [hospitals, setHospitals] = useState([]);
   const [filteredHospitals, setFilteredHospitals] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -187,12 +190,19 @@ const HospitalDashboard = () => {
 
         <div className="p-4 border-t border-slate-200">
           <Link
-            to="/login"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-700 text-xs font-bold transition-all"
+            to="/"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 text-xs font-bold transition-all mb-1"
+          >
+            <span className="material-symbols-outlined text-[18px]">home</span>
+            <span>Back to Home</span>
+          </Link>
+          <button
+            onClick={() => { logout(); }}
+            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-700 text-xs font-bold transition-all"
           >
             <span className="material-symbols-outlined text-[18px]">logout</span>
             <span>Log Out</span>
-          </Link>
+          </button>
         </div>
       </aside>
 
@@ -215,9 +225,7 @@ const HospitalDashboard = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 font-bold text-xs">
-              CMO
-            </div>
+            <UserProfileDropdown />
           </div>
         </header>
 
