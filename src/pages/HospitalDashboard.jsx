@@ -272,9 +272,9 @@ const HospitalDashboard = () => {
                   }}
                   className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none focus:ring-2 focus:ring-[#006b5f] cursor-pointer"
                 >
-                  <option value="">{t('all_states')} ({uniqueStates.length})</option>
+                  <option value="">{t('all_states')}</option>
                   {uniqueStates.map((s) => (
-                    <option key={s} value={s}>{s}</option>
+                    <option key={s} value={s}>{t(`state_${s}`) || s}</option>
                   ))}
                 </select>
 
@@ -285,7 +285,7 @@ const HospitalDashboard = () => {
                 >
                   <option value="">{t('all_districts')} ({uniqueDistricts.length})</option>
                   {uniqueDistricts.map((d) => (
-                    <option key={d} value={d}>{d}</option>
+                    <option key={d} value={d}>{t(`district_${d}`) || d}</option>
                   ))}
                 </select>
               </div>

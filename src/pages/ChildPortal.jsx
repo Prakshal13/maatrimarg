@@ -185,7 +185,7 @@ const ChildPortal = () => {
                   >
                     {childrenList.map((c) => (
                       <option key={c.id} value={c.id}>
-                        {c.name} ({c.age_months}m, {c.village || 'Village'})
+                        {c.name} ({c.age_months}{t('age_months')}, {t(`district_${c.village}`) || c.village || t('village_fallback')})
                       </option>
                     ))}
                   </select>

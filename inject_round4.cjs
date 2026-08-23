@@ -1,0 +1,102 @@
+const fs = require('fs');
+
+const newKeys = {
+  en: {
+    no_additional_details: "No additional details provided",
+    detail_initiated: "Initiated",
+    dispatch_label: "dispatch",
+    detail_referral_patient: "referral for patient (Mother ID:",
+    unknown_label: "Unknown",
+    detail_escalated_new_referral: "System auto-escalated to new Referral",
+    detail_excluded_overloaded: "Excluded previous overloaded/unresponsive facilities.",
+    detail_ambulance: "Ambulance",
+    detail_dispatched: "dispatched",
+    detail_changed_status: "Changed status from",
+    detail_to: "to",
+    detail_acknowledged_referral: "Acknowledged incoming emergency referral at destination facility.",
+    detail_sos_beacon: "SOS beacon activated at coordinates:",
+    detail_gps_synced: "Live GPS synced at coordinates:",
+    detail_sms_dispatched: "Dispatched alert SMS to",
+    staff_label: "staff",
+    detail_updated_capacity: "Updated capacity",
+    detail_general_beds: "General Beds",
+    detail_surgeon_active: "Surgeon Active",
+    detail_no_surgeon: "No Surgeon",
+  },
+  hi: {
+    no_additional_details: "कोई अतिरिक्त विवरण उपलब्ध नहीं",
+    detail_initiated: "शुरू किया",
+    dispatch_label: "प्रेषण",
+    detail_referral_patient: "रेफरल रोगी के लिए (माता आयडी:",
+    unknown_label: "अज्ञात",
+    detail_escalated_new_referral: "सिस्टम स्वचालित रूप से नए रेफरल पर एस्केलेट हुआ",
+    detail_excluded_overloaded: "पूर्व अत्यधिक लोड/अनुत्तरदायी सुविधाओं को छोड़ा गया।",
+    detail_ambulance: "एम्बुलेंस",
+    detail_dispatched: "भेजी गई",
+    detail_changed_status: "स्थिति बदली",
+    detail_to: "से",
+    detail_acknowledged_referral: "गंतव्य सुविधा पर आपातकालीन रेफरल स्वीकृत।",
+    detail_sos_beacon: "निर्देशांकों पर SOS बीकन सक्रिय:",
+    detail_gps_synced: "निर्देशांकों पर लाइव GPS सिंक:",
+    detail_sms_dispatched: "को अलर्ट SMS भेजा गया",
+    staff_label: "कर्मचारी",
+    detail_updated_capacity: "क्षमता अपडेट",
+    detail_general_beds: "सामान्य बेड",
+    detail_surgeon_active: "सर्जन सक्रिय",
+    detail_no_surgeon: "सर्जन उपलब्ध नहीं",
+  },
+  mr: {
+    no_additional_details: "कोणतेही अतिरिक्त तपशील उपलब्ध नाही",
+    detail_initiated: "सुरू केले",
+    dispatch_label: "प्रेषण",
+    detail_referral_patient: "रेफरल रुग्णासाठी (माता आयडी:",
+    unknown_label: "अज्ञात",
+    detail_escalated_new_referral: "सिस्टमने आपोआप नव्या रेफरलवर एस्केलेट केले",
+    detail_excluded_overloaded: "पूर्वीच्या अतिभारित/प्रतिसाद न देणाऱ्या सुविधा वगळल्या.",
+    detail_ambulance: "रुग्णवाहिका",
+    detail_dispatched: "पाठवली",
+    detail_changed_status: "स्थिती बदलली",
+    detail_to: "वरून",
+    detail_acknowledged_referral: "गंतव्य सुविधेत आपत्कालीन रेफरल मान्य केले.",
+    detail_sos_beacon: "निर्देशांकांवर SOS बीकन सक्रिय:",
+    detail_gps_synced: "निर्देशांकांवर थेट GPS सिंक:",
+    detail_sms_dispatched: "यांना अलर्ट SMS पाठवला",
+    staff_label: "कर्मचारी",
+    detail_updated_capacity: "क्षमता अपडेट",
+    detail_general_beds: "सामान्य बेड",
+    detail_surgeon_active: "सर्जन सक्रिय",
+    detail_no_surgeon: "सर्जन उपलब्ध नाही",
+  },
+  ta: {
+    no_additional_details: "கூடுதல் விவரங்கள் இல்லை",
+    detail_initiated: "தொடங்கப்பட்டது",
+    dispatch_label: "அனுப்புதல்",
+    detail_referral_patient: "பரிந்துரை நோயாளிக்கு (தாய் ஐடி:",
+    unknown_label: "தெரியாத",
+    detail_escalated_new_referral: "கணினி புதிய பரிந்துரைக்கு தானியங்கி தீவிரமாக்கியது",
+    detail_excluded_overloaded: "முந்தைய அதிக சுமை/பதிலளிக்காத வசதிகள் விலக்கப்பட்டன.",
+    detail_ambulance: "ஆம்புலன்ஸ்",
+    detail_dispatched: "அனுப்பப்பட்டது",
+    detail_changed_status: "நிலை மாற்றப்பட்டது",
+    detail_to: "இலிருந்து",
+    detail_acknowledged_referral: "இலக்கு வசதியில் அவசர பரிந்துரை ஏற்கப்பட்டது.",
+    detail_sos_beacon: "ஆயத்தலைகளில் SOS பிரகாசம் செயல்படுத்தப்பட்டது:",
+    detail_gps_synced: "ஆயத்தலைகளில் நேரடி GPS ஒத்திசைவு:",
+    detail_sms_dispatched: "க்கு எச்சரிக்கை SMS அனுப்பப்பட்டது",
+    staff_label: "ஊழியர்",
+    detail_updated_capacity: "திறன் புதுப்பிக்கப்பட்டது",
+    detail_general_beds: "பொது படுக்கைகள்",
+    detail_surgeon_active: "அறுவை சிகிச்சையாளர் செயலில்",
+    detail_no_surgeon: "அறுவை சிகிச்சையாளர் இல்லை",
+  }
+};
+
+let code = fs.readFileSync('src/context/LanguageContext.jsx', 'utf8');
+
+['en', 'mr', 'hi', 'ta'].forEach(lang => {
+  const keyStr = Object.entries(newKeys[lang]).map(([k, v]) => `    ${k}: ${JSON.stringify(v)},`).join('\n');
+  code = code.replace(`${lang}: {`, `${lang}: {\n${keyStr}`);
+});
+
+fs.writeFileSync('src/context/LanguageContext.jsx', code);
+console.log('Audit details translation keys injected!');

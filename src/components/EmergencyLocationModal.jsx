@@ -47,10 +47,17 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
   const [hospitals, setHospitals] = useState([]);
   const [coords, setCoords] = useState(null);
   const [isLocating, setIsLocating] = useState(false);
-  const [searchAddress, setSearchAddress] = useState('📍 Live Device GPS Location');
+  const [searchAddress, setSearchAddress] = useState(`📍 ${t('live_device_gps_input') || 'Live Device GPS Location'}`);
   const [selectedHospitalId, setSelectedHospitalId] = useState(null);
   const [bestMatch, setBestMatch] = useState(null);
   const [locationError, setLocationError] = useState(null);
+
+  // Update search address when language changes if it's still the default
+  useEffect(() => {
+    if (searchAddress.startsWith('📍')) {
+      setSearchAddress(`📍 ${t('live_device_gps_input') || 'Live Device GPS Location'}`);
+    }
+  }, [lang]);
 
   // Fetch all 165 hospitals from backend database
   useEffect(() => {
@@ -85,7 +92,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
         const userLat = pos.coords.latitude;
         const userLng = pos.coords.longitude;
         setCoords({ lat: userLat, lng: userLng });
-        setSearchAddress('📍 Live Device GPS Location');
+        setSearchAddress(`📍 ${t('live_device_gps_input') || 'Live Device GPS Location'}`);
         processLocation(userLat, userLng, hospitals);
         setIsLocating(false);
       },
@@ -93,7 +100,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
         console.warn('GPS location error:', err);
         const fallback = { lat: 17.6599, lng: 75.9064 };
         setCoords(fallback);
-        setLocationError('GPS permission denied or timeout. Using central emergency coordinates.');
+        setLocationError(t('gps_error') || 'GPS permission denied or timeout. Using central emergency coordinates.');
         processLocation(fallback.lat, fallback.lng, hospitals);
         setIsLocating(false);
       },
@@ -223,7 +230,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
                   {lang === 'mr' ? 'थेट डिव्हाइस GPS स्थान' : lang === 'hi' ? 'लाइव डिवाइस जीपीएस स्थान' : lang === 'ta' ? 'நேரடி சாதன ஜிபிஎஸ் இருப்பிடம்' : 'Live Device GPS Location'}
                 </span>
                 <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
-                  {coords ? `Coordinates: ${coords.lat.toFixed(4)}° N, ${coords.lng.toFixed(4)}° E` : 'Locating device position...'}
+                  {coords ? `${t('coordinates_label') || 'Coordinates'}: ${coords.lat.toFixed(4)}° N, ${coords.lng.toFixed(4)}° E` : t('locating_device') || 'Locating device position...'}
                 </span>
               </div>
 
@@ -251,7 +258,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
             >
               {hospitals.map((h) => (
                 <option key={h.id} value={h.id}>
-                  {h.name} ({h.district}) • {h.nicu_beds_available ?? 3} ICU • {h.beds_available ?? 12} Beds
+                  {h.name} ({h.district}) • {h.nicu_beds_available ?? 3} {t('icu_label') || 'ICU'} • {h.beds_available ?? 12} {t('beds_label') || 'Beds'}
                 </option>
               ))}
             </select>
@@ -270,7 +277,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
                     {bestMatch.hospital.name}
                   </h4>
                   <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 leading-relaxed">
-                    {bestMatch.hospital.district}, {bestMatch.hospital.state || 'Maharashtra'} • {bestMatch.hospital.address || 'Civil District Hospital Campus'}
+                    {bestMatch.hospital.district}, {bestMatch.hospital.state || t('state_maharashtra') || 'Maharashtra'} • {bestMatch.hospital.address || t('default_hospital_campus') || 'Civil District Hospital Campus'}
                   </p>
                 </div>
 

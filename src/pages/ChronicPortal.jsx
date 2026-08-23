@@ -191,7 +191,7 @@ const ChronicPortal = () => {
                   >
                     {patientsList.map((p) => (
                       <option key={p.id} value={p.id}>
-                        {p.name} ({p.age_years}y, {p.village || 'Village'})
+                        {p.name} ({p.age_years}{t('age_years')}, {t(`district_${p.village}`) || p.village || t('village_fallback')})
                       </option>
                     ))}
                   </select>
@@ -336,7 +336,7 @@ const ChronicPortal = () => {
                         {t('cvd_scorecard')}
                       </span>
                       <h3 className="text-2xl font-black font-['Plus_Jakarta_Sans'] mt-0.5">
-                        {result.risk_level}
+                        {result.risk_level === 'High Risk' ? t('high_risk') : result.risk_level === 'Moderate Risk' ? t('moderate_risk') : t('low_risk')}
                       </h3>
                       <p className="text-xs opacity-80 mt-1">
                         {t('cvd_probability')}: <strong>{result.probability_percentage}</strong>
@@ -346,7 +346,7 @@ const ChronicPortal = () => {
                     <span className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${
                       result.risk_level === 'High Risk' ? 'bg-rose-600 text-white' : result.risk_level === 'Moderate Risk' ? 'bg-amber-600 text-white' : 'bg-emerald-600 text-white'
                     }`}>
-                      {result.risk_level}
+                      {result.risk_level === 'High Risk' ? t('high_risk') : result.risk_level === 'Moderate Risk' ? t('moderate_risk') : t('low_risk')}
                     </span>
                   </div>
 
@@ -356,7 +356,13 @@ const ChronicPortal = () => {
                       <span>{t('clinical_guidance')}</span>
                     </div>
                     <p className="opacity-90 leading-relaxed font-medium">
-                      {result.clinical_recommendation}
+                      {result.clinical_recommendation.split(', ').map(factor => {
+                        if (factor.includes('blood pressure')) return t('factor_elevated_bp');
+                        if (factor.includes('cholesterol')) return t('factor_elevated_chol');
+                        if (factor.includes('glucose')) return t('factor_elevated_gluc');
+                        if (factor.includes('Smoking')) return t('factor_smoking');
+                        return factor;
+                      }).join(', ')}
                     </p>
                   </div>
                 </div>

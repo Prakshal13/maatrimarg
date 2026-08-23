@@ -1,0 +1,404 @@
+{
+  "search_starting_location": {
+    "en": "Search starting location...",
+    "hi": "प्रारंभिक स्थान खोजें...",
+    "mr": "प्रारंभिक स्थान शोधा...",
+    "ta": "தொடக்க இடத்தைத் தேடுங்கள்..."
+  },
+  "locating_ellipsis": {
+    "en": "Locating...",
+    "hi": "पता लगाया जा रहा है...",
+    "mr": "शोधत आहे...",
+    "ta": "இடமறியப்படுகிறது..."
+  },
+  "fetch_gps": {
+    "en": "Fetch GPS",
+    "hi": "जीपीएस प्राप्त करें",
+    "mr": "जीपीएस मिळवा",
+    "ta": "GPS பெறுக"
+  },
+  "eta": {
+    "en": "ETA",
+    "hi": "अनुमानित समय",
+    "mr": "अंदाजित वेळ",
+    "ta": "மதிப்பிடப்பட்ட நேரம்"
+  },
+  "icu_beds": {
+    "en": "ICU Beds",
+    "hi": "आईसीयू बेड",
+    "mr": "आयसीयू बेड",
+    "ta": "ICU படுக்கைகள்"
+  },
+  "beds": {
+    "en": "Beds",
+    "hi": "बेड",
+    "mr": "बेड",
+    "ta": "படுக்கைகள்"
+  },
+  "auth_required_portals": {
+    "en": "Authentication Required for All Portals",
+    "hi": "सभी पोर्टल्स के लिए प्रमाणीकरण आवश्यक है",
+    "mr": "सर्व पोर्टल्ससाठी प्रमाणीकरण आवश्यक आहे",
+    "ta": "அனைத்து இணையதளங்களுக்கும் அங்கீகாரம் தேவை"
+  },
+  "maternal_analytics_subtitle": {
+    "en": "Epidemiological metrics, risk distributions, transit velocities, and facility capacity trends.",
+    "hi": "महामारी विज्ञान मीट्रिक, जोखिम वितरण, पारगमन वेग, और सुविधा क्षमता प्रवृत्तियाँ।",
+    "mr": "रोगराईचे मेट्रिक्स, जोखीम वितरण, पारगमन वेग आणि सुविधा क्षमता ट्रेंड.",
+    "ta": "தொற்றுநோயியல் அளவீடுகள், ஆபத்து விநியோகங்கள் மற்றும் வசதி திறன் போக்குகள்."
+  },
+  "patient_routing_funnel": {
+    "en": "Patient Routing Funnel",
+    "hi": "रोगी रूटिंग फ़नल",
+    "mr": "रुग्ण मार्गक्रमण फनेल",
+    "ta": "நோயாளியை வழிநடத்தும் புனல்"
+  },
+  "rural_screenings": {
+    "en": "Rural Screenings",
+    "hi": "ग्रामीण जांच",
+    "mr": "ग्रामीण तपासणी",
+    "ta": "கிராமப்புற திரையிடல்கள்"
+  },
+  "high_risk_detected": {
+    "en": "High Risk Detected",
+    "hi": "उच्च जोखिम का पता चला",
+    "mr": "उच्च जोखीम आढळली",
+    "ta": "அதிக ஆபத்து கண்டறியப்பட்டது"
+  },
+  "ambulances_dispatched": {
+    "en": "Ambulances Dispatched",
+    "hi": "एम्बुलेंस भेजी गईं",
+    "mr": "रुग्णवाहिका पाठवल्या",
+    "ta": "ஆம்புலன்ஸ்கள் அனுப்பப்பட்டன"
+  },
+  "safe_admissions": {
+    "en": "Safe Admissions",
+    "hi": "सुरक्षित प्रवेश",
+    "mr": "सुरक्षित प्रवेश",
+    "ta": "பாதுகாப்பான சேர்க்கைகள்"
+  },
+  "predictive_demand_matrix": {
+    "en": "Predictive Demand Matrix",
+    "hi": "पूर्वानुमानित मांग मैट्रिक्स",
+    "mr": "अंदाज मागणी मॅट्रिक्स",
+    "ta": "கணிப்பு தேவை மேட்ரிக்ஸ்"
+  },
+  "expected_demand": {
+    "en": "Expected Demand",
+    "hi": "अपेक्षित मांग",
+    "mr": "अपेक्षित मागणी",
+    "ta": "எதிர்பார்க்கப்படும் தேவை"
+  },
+  "actual_recorded": {
+    "en": "Actual Recorded",
+    "hi": "वास्तविक दर्ज की गई",
+    "mr": "प्रत्यक्ष नोंदवलेली",
+    "ta": "உண்மையில் பதிவு செய்யப்பட்டது"
+  },
+  "regional_triage_distribution": {
+    "en": "Regional Triage Distribution",
+    "hi": "क्षेत्रीय ट्राइएज वितरण",
+    "mr": "प्रादेशिक ट्रायज वितरण",
+    "ta": "பிராந்திய டிரிஜ் விநியோகம்"
+  },
+  "interactive_drill_down_region": {
+    "en": "Interactive Drill-down: Click a region",
+    "hi": "इंटरैक्टिव ड्रिल-डाउन: किसी क्षेत्र पर क्लिक करें",
+    "mr": "परस्परसंवादी ड्रिल-डाउन: एखाद्या प्रदेशावर क्लिक करा",
+    "ta": "ஊடாடும் தேர்வு: ஒரு பகுதியை கிளிக் செய்யவும்"
+  },
+  "ai_override_rate": {
+    "en": "AI Override Rate",
+    "hi": "AI ओवरराइड दर",
+    "mr": "AI ओव्हरराइड दर",
+    "ta": "AI மேலெழுதும் விகிதம்"
+  },
+  "critical_cases": {
+    "en": "Critical Cases",
+    "hi": "गंभीर मामले",
+    "mr": "गंभीर प्रकरणे",
+    "ta": "சிக்கலான வழக்குகள்"
+  },
+  "stable_cases": {
+    "en": "Stable Cases",
+    "hi": "स्थिर मामले",
+    "mr": "स्थिर प्रकरणे",
+    "ta": "நிலையான வழக்குகள்"
+  },
+  "physiological_triggers": {
+    "en": "Physiological triggers",
+    "hi": "शारीरिक ट्रिगर",
+    "mr": "शारीरिक ट्रिगर्स",
+    "ta": "உடலியல் தூண்டுதல்கள்"
+  },
+  "closed_loop_tracking_subtitle": {
+    "en": "Closed loop tracking of patient transfers from initial AI assessment to clinical arrival.",
+    "hi": "प्रारंभिक AI मूल्यांकन से क्लिनिकल आगमन तक रोगी स्थानान्तरण की क्लोज्ड लूप ट्रैकिंग।",
+    "mr": "प्राथमिक AI मूल्यांकनापासून क्लिनिकल आगमनापर्यंत रुग्ण हस्तांतरणाचा क्लोज्ड लूप ट्रॅकिंग.",
+    "ta": "ஆரம்ப AI மதிப்பீட்டிலிருந்து மருத்துவ வருகை வரை நோயாளி இடமாற்றங்களின் மூடிய லூப் கண்காணிப்பு."
+  },
+  "auto_syncing": {
+    "en": "AUTO-SYNCING",
+    "hi": "ऑटो-सिंकिंग",
+    "mr": "ऑटो-सिंकिंग",
+    "ta": "தானியங்கி ஒத்திசைவு"
+  },
+  "admin_governance_subtitle": {
+    "en": "System telemetry diagnostics, master audit trail, and regional routing governance.",
+    "hi": "सिस्टम टेलीमेट्री डायग्नोस्टिक्स, मास्टर ऑडिट ट्रेल, और क्षेत्रीय रूटिंग गवर्नेंस।",
+    "mr": "सिस्टम टेलिमेट्री डायग्नोस्टिक्स, मास्टर ऑडिट ट्रेल आणि प्रादेशिक राउटिंग गव्हर्नन्स.",
+    "ta": "கணினி டெலிமெட்ரி, முதன்மை தணிக்கை மற்றும் பிராந்திய ரூட்டிங்."
+  },
+  "severity_all_desc": {
+    "en": "Showing all telemetry and system routing events.",
+    "hi": "सभी टेलीमेट्री और सिस्टम रूटिंग ईवेंट दिखा रहा है।",
+    "mr": "सर्व टेलिमेट्री आणि सिस्टम राउटिंग इव्हेंट दर्शवित आहे.",
+    "ta": "அனைத்து டெலிமெட்ரி நிகழ்வுகளையும் காட்டுகிறது."
+  },
+  "severity_critical_desc": {
+    "en": "Showing high-priority urgent events, system escalations, and overrides.",
+    "hi": "उच्च-प्राथमिकता वाले तत्काल ईवेंट, सिस्टम एस्केलेशन और ओवरराइड दिखा रहा है।",
+    "mr": "उच्च-प्राधान्य तातडीचे इव्हेंट्स, सिस्टम एस्केलेशन आणि ओव्हरराइड्स दर्शवित आहे.",
+    "ta": "அதிக முன்னுரிமை அவசர நிகழ்வுகளைக் காட்டுகிறது."
+  },
+  "severity_warning_desc": {
+    "en": "Showing important dispatch events and distress beacon activations.",
+    "hi": "महत्वपूर्ण प्रेषण ईवेंट और संकट बीकन सक्रियण दिखा रहा है।",
+    "mr": "महत्त्वपूर्ण डिस्पॅच इव्हेंट्स आणि डिस्ट्रेस बीकन सक्रियकरण दर्शवित आहे.",
+    "ta": "முக்கியமான அனுப்புதல் நிகழ்வுகளைக் காட்டுகிறது."
+  },
+  "severity_info_desc": {
+    "en": "Showing routine background telemetry, GPS syncs, and automated tracking.",
+    "hi": "नियमित बैकग्राउंड टेलीमेट्री, जीपीएस सिंक और स्वचालित ट्रैकिंग दिखा रहा है।",
+    "mr": "नियमित पार्श्वभूमी टेलिमेट्री, GPS सिंक आणि स्वयंचलित ट्रॅकिंग दर्शवित आहे.",
+    "ta": "வழக்கமான பின்னணி டெலிமெட்ரியைக் காட்டுகிறது."
+  },
+  "log_id_time": {
+    "en": "LOG ID & TIME",
+    "hi": "लॉग आईडी और समय",
+    "mr": "लॉग आयडी आणि वेळ",
+    "ta": "பதிவு ஐடி & நேரம்"
+  },
+  "clinician": {
+    "en": "CLINICIAN",
+    "hi": "क्लिनिशियन",
+    "mr": "क्लिनिशियन",
+    "ta": "மருத்துவர்"
+  },
+  "action_executed": {
+    "en": "ACTION EXECUTED",
+    "hi": "कार्रवाई निष्पादित",
+    "mr": "कृती अंमलात आणली",
+    "ta": "செயல் நிறைவேற்றப்பட்டது"
+  },
+  "target_facility": {
+    "en": "TARGET FACILITY",
+    "hi": "लक्ष्य सुविधा",
+    "mr": "लक्ष्य सुविधा",
+    "ta": "இலக்கு வசதி"
+  },
+  "severity": {
+    "en": "SEVERITY",
+    "hi": "गंभीरता",
+    "mr": "तीव्रता",
+    "ta": "தீவிரம்"
+  },
+  "audit_details": {
+    "en": "AUDIT DETAILS",
+    "hi": "ऑडिट विवरण",
+    "mr": "ऑडिट तपशील",
+    "ta": "தணிக்கை விவரங்கள்"
+  },
+  "landing_maatri_marg": {
+    "en": "MaatriMarg",
+    "hi": "मातृमार्ग",
+    "mr": "मातृमार्ग",
+    "ta": "மாத்ரிமார்க்"
+  },
+  "landing_description": {
+    "en": " unifies predictive clinical intelligence and spatial routing to eliminate maternal and pediatric care delays across the state.",
+    "hi": " पूरे राज्य में मातृ और बाल चिकित्सा देखभाल में देरी को खत्म करने के लिए पूर्वानुमानित क्लिनिकल इंटेलिजेंस और स्थानिक रूटिंग को जोड़ता है।",
+    "mr": " राज्यभरात माता आणि बालरोग काळजीतील विलंब दूर करण्यासाठी भविष्यसूचक क्लिनिकल बुद्धिमत्ता आणि अवकाशीय राउटिंग एकत्रित करते.",
+    "ta": " மாநிலம் முழுவதும் தாய் மற்றும் குழந்தை பராமரிப்பு தாமதங்களை அகற்ற மருத்துவ நுண்ணறிவு மற்றும் ரூட்டிங் ஆகியவற்றை ஒருங்கிணைக்கிறது."
+  },
+  "mapped_facilities": {
+    "en": "Mapped Clinical Facilities",
+    "hi": "मैप की गई क्लिनिकल सुविधाएं",
+    "mr": "मॅप केलेल्या क्लिनिकल सुविधा",
+    "ta": "மேப் செய்யப்பட்ட மருத்துவ வசதிகள்"
+  },
+  "terms_alert": {
+    "en": "Terms of Service: MaatriMarg Clinical AI & Regional Health Protocol (Ayushman Bharat / DISHA Compliant)",
+    "hi": "सेवा की शर्तें: मातृमार्ग क्लिनिकल एआई और क्षेत्रीय स्वास्थ्य प्रोटोकॉल (आयुष्मान भारत / DISHA अनुपालन)",
+    "mr": "सेवा अटी: मातृमार्ग क्लिनिकल एआय आणि प्रादेशिक आरोग्य प्रोटोकॉल (आयुष्मान भारत / DISHA अनुपालन)",
+    "ta": "சேவை விதிமுறைகள்: மாத்ரிமார்க் மருத்துவ AI & பிராந்திய சுகாதார நெறிமுறை (ஆயுஷ்மான் பாரத் / DISHA இணக்கம்)"
+  },
+  "privacy_alert": {
+    "en": "Data Privacy: End-to-End Encrypted Patient Telemetry & Anonymized PHI Storage",
+    "hi": "डेटा गोपनीयता: एंड-टू-एंड एन्क्रिप्टेड रोगी टेलीमेट्री और अनाम PHI संग्रहण",
+    "mr": "डेटा गोपनीयता: एंड-टू-एंड एनक्रिप्टेड पेशंट टेलिमेट्री आणि अज्ञात PHI स्टोरेज",
+    "ta": "தரவு தனியுரிமை: என்க்ரிப்ட் செய்யப்பட்ட நோயாளி டெலிமெட்ரி"
+  },
+  "admin_alert": {
+    "en": "System Admin: Contact District Health Command HQ (DHO Technical Operations)",
+    "hi": "सिस्टम व्यवस्थापक: जिला स्वास्थ्य कमान मुख्यालय (डीएचओ तकनीकी संचालन) से संपर्क करें",
+    "mr": "सिस्टम प्रशासक: जिल्हा आरोग्य कमांड मुख्यालयाशी (डीएचओ तांत्रिक ऑपरेशन्स) संपर्क साधा",
+    "ta": "கணினி நிர்வாகி: மாவட்ட சுகாதார கட்டளை தலைமையகத்தை தொடர்பு கொள்ளவும் (DHO)"
+  },
+  "hosp_type_general": {
+    "en": "General Government",
+    "hi": "सामान्य सरकारी",
+    "mr": "सामान्य सरकारी",
+    "ta": "பொது அரசு"
+  },
+  "hosp_node": {
+    "en": "Node #",
+    "hi": "नोड #",
+    "mr": "नोड #",
+    "ta": "முனை #"
+  },
+  "hosp_type": {
+    "en": "Type",
+    "hi": "प्रकार",
+    "mr": "प्रकार",
+    "ta": "வகை"
+  },
+  "hosp_network": {
+    "en": "Network",
+    "hi": "नेटवर्क",
+    "mr": "नेटवर्क",
+    "ta": "பிணையம்"
+  },
+  "hosp_contact": {
+    "en": "Primary Contact",
+    "hi": "प्राथमिक संपर्क",
+    "mr": "प्राथमिक संपर्क",
+    "ta": "முதன்மை தொடர்பு"
+  },
+  "hosp_search_placeholder": {
+    "en": "Search facility name, district...",
+    "hi": "सुविधा का नाम, जिला खोजें...",
+    "mr": "सुविधेचे नाव, जिल्हा शोधा...",
+    "ta": "வசதி பெயர், மாவட்டத்தை தேடுங்கள்..."
+  },
+  "hosp_facility_details": {
+    "en": "Facility Details",
+    "hi": "सुविधा का विवरण",
+    "mr": "सुविधा तपशील",
+    "ta": "வசதி விவரங்கள்"
+  },
+  "hosp_blood_bank": {
+    "en": "Blood Bank Reserves (Units)",
+    "hi": "ब्लड बैंक रिज़र्व (यूनिट्स)",
+    "mr": "ब्लड बँक रिझर्व्ह (युनिट्स)",
+    "ta": "ரத்த வங்கி இருப்பு (அலகுகள்)"
+  },
+  "hosp_update_error": {
+    "en": "Could not update facility: ",
+    "hi": "सुविधा को अपडेट नहीं किया जा सका: ",
+    "mr": "सुविधा अपडेट करू शकलो नाही: ",
+    "ta": "வசதியை புதுப்பிக்க முடியவில்லை: "
+  },
+  "portal_header_sos_title": {
+    "en": "Open Live 108 Emergency Route on Google Maps",
+    "hi": "Google Maps पर लाइव 108 आपातकालीन मार्ग खोलें",
+    "mr": "Google Maps वर थेट 108 आपत्कालीन मार्ग उघडा",
+    "ta": "Google Maps இல் நேரடி 108 அவசர வழியைத் திறக்கவும்"
+  },
+  "portal_header_light_mode": {
+    "en": "Switch to Light Mode",
+    "hi": "लाइट मोड में स्विच करें",
+    "mr": "लाईट मोडवर स्विच करा",
+    "ta": "ஒளி முறைக்கு மாறுங்கள்"
+  },
+  "portal_header_dark_mode": {
+    "en": "Switch to Dark Mode",
+    "hi": "डार्क मोड में स्विच करें",
+    "mr": "डार्क मोडवर स्विच करा",
+    "ta": "இருண்ட முறைக்கு மாறுங்கள்"
+  },
+  "portal_header_sos": {
+    "en": "SOS",
+    "hi": "एसओएस",
+    "mr": "एसओएस",
+    "ta": "SOS"
+  },
+  "lang_en_label": {
+    "en": "English (EN)",
+    "hi": "अंग्रेज़ी (EN)",
+    "mr": "इंग्रजी (EN)",
+    "ta": "ஆங்கிலம் (EN)"
+  },
+  "lang_mr_label": {
+    "en": "मराठी (MR)",
+    "hi": "मराठी (MR)",
+    "mr": "मराठी (MR)",
+    "ta": "மராத்தி (MR)"
+  },
+  "lang_ta_label": {
+    "en": "தமிழ் (TA)",
+    "hi": "तमिल (TA)",
+    "mr": "तमिळ (TA)",
+    "ta": "தமிழ் (TA)"
+  },
+  "lang_hi_label": {
+    "en": "हिन्दी (HI)",
+    "hi": "हिन्दी (HI)",
+    "mr": "हिंदी (HI)",
+    "ta": "இந்தி (HI)"
+  },
+  "state_national": {
+    "en": "National",
+    "hi": "राष्ट्रीय",
+    "mr": "राष्ट्रीय",
+    "ta": "தேசிய"
+  },
+  "state_mh": {
+    "en": "Maharashtra",
+    "hi": "महाराष्ट्र",
+    "mr": "महाराष्ट्र",
+    "ta": "மகாராஷ்டிரா"
+  },
+  "state_tn": {
+    "en": "Tamil Nadu",
+    "hi": "तमिलनाडु",
+    "mr": "तामिळनाडू",
+    "ta": "தமிழ்நாடு"
+  },
+  "sos_route_short": {
+    "en": "SOS Route",
+    "hi": "एसओएस मार्ग",
+    "mr": "एसओएस मार्ग",
+    "ta": "SOS வழி"
+  },
+  "sidebar_asha": {
+    "en": "ASHA",
+    "hi": "आशा",
+    "mr": "आशा",
+    "ta": "ஆஷா"
+  },
+  "sidebar_cmo": {
+    "en": "CMO",
+    "hi": "सीएमओ",
+    "mr": "सीएमओ",
+    "ta": "CMO"
+  },
+  "sidebar_dho": {
+    "en": "DHO",
+    "hi": "डीएचओ",
+    "mr": "डीएचओ",
+    "ta": "DHO"
+  },
+  "support_alert": {
+    "en": "Emergency Support: Dial 108 Emergency Dispatch or Contact District CMO Command HQ",
+    "hi": "आपातकालीन सहायता: 108 आपातकालीन प्रेषण डायल करें या जिला सीएमओ कमांड मुख्यालय से संपर्क करें",
+    "mr": "आपत्कालीन समर्थन: 108 आपत्कालीन डिस्पॅच डायल करा किंवा जिल्हा CMO कमांड मुख्यालयाशी संपर्क साधा",
+    "ta": "அவசர ஆதரவு: 108 அவசர அனுப்புதலை அழைக்கவும் அல்லது மாவட்ட CMO ஐ தொடர்பு கொள்ளவும்"
+  },
+  "error_boundary_title": {
+    "en": "Something went wrong.",
+    "hi": "कुछ गलत हो गया।",
+    "mr": "काहीतरी चूक झाली.",
+    "ta": "ஏதோ தவறு நடந்துவிட்டது."
+  }
+}
