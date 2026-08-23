@@ -224,7 +224,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
               className="px-2.5 py-1 rounded-lg bg-teal-50 dark:bg-teal-950/70 hover:bg-teal-100 dark:hover:bg-teal-900 border border-teal-200 dark:border-teal-500/40 text-[#006b5f] dark:text-[#2dd4bf] text-[11px] font-bold transition-all flex items-center gap-1 shrink-0 cursor-pointer shadow-2xs"
             >
               <Crosshair className={`w-3 h-3 ${isLocating ? 'animate-spin' : ''}`} />
-              <span>{isLocating ? 'Locating...' : 'Device GPS'}</span>
+              <span>{isLocating ? t('evaluating_model') : t('device_gps')}</span>
             </button>
           </div>
 
@@ -325,7 +325,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
                 className="py-2.5 px-3 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs"
               >
                 <Navigation className="w-3.5 h-3.5 text-[#006b5f] dark:text-[#2dd4bf]" />
-                <span>Google Maps</span>
+                <span>{t("google_maps")}</span>
                 <ExternalLink className="w-3 h-3 text-slate-400" />
               </button>
 
@@ -337,7 +337,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
                 <span className="material-symbols-outlined text-[16px]">
                   ambulance
                 </span>
-                <span>{dispatchStatus === 'dispatching' ? 'Dispatching...' : t('dispatch_ambulance')}</span>
+                <span>{dispatchStatus === 'dispatching' ? t('evaluating_model') : t('dispatch_ambulance')}</span>
               </button>
 
             </div>

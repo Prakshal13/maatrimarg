@@ -72,7 +72,7 @@ const AppSidebar = () => {
               {t('app_title')}
             </h1>
             <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-              Clinical Platform
+              {t('clinical_platform')}
             </p>
           </div>
         </Link>
@@ -81,7 +81,7 @@ const AppSidebar = () => {
       {/* Main Navigation Items (All 5 Modules) */}
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         <div className="px-3 pb-2 text-[10px] uppercase font-extrabold text-slate-400 dark:text-slate-500 tracking-widest">
-          Core System Portals
+          {t('core_system_portals')}
         </div>
 
         {navItems.map((item) => {
@@ -108,7 +108,7 @@ const AppSidebar = () => {
         })}
 
         <div className="pt-4 px-3 pb-1 text-[10px] uppercase font-extrabold text-slate-400 dark:text-slate-500 tracking-widest">
-          System & Support
+          {t('system_support')}
         </div>
 
         <button

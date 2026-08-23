@@ -140,7 +140,7 @@ const HospitalDashboard = () => {
         <PortalHeader 
           title={t('hosp_title')} 
           subtitle={t('hosp_subtitle')} 
-          badgeText="165 Active Facilities" 
+          badgeText={`165 ${t("total_facilities")}`} 
         />
 
         {/* Content Body */}
@@ -189,7 +189,7 @@ const HospitalDashboard = () => {
                 </span>
                 <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold text-xs">
                   <TrendingUp className="w-3.5 h-3.5" />
-                  <span>+12% capacity</span>
+                  <span>{t('capacity_increase')}</span>
                 </div>
               </div>
             </div>
@@ -202,7 +202,7 @@ const HospitalDashboard = () => {
                 </span>
                 <div className="flex items-center gap-1 text-slate-400 font-bold text-xs">
                   <Droplet className="w-3.5 h-3.5 text-rose-500" />
-                  <span>Live synced</span>
+                  <span>{t('live_synced')}</span>
                 </div>
               </div>
             </div>
@@ -229,7 +229,7 @@ const HospitalDashboard = () => {
                   }}
                   className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none focus:ring-2 focus:ring-[#006b5f]"
                 >
-                  <option value="">All States ({uniqueStates.length})</option>
+                  <option value="">{t('all_states')} ({uniqueStates.length})</option>
                   {uniqueStates.map((s) => (
                     <option key={s} value={s}>{s}</option>
                   ))}
@@ -240,7 +240,7 @@ const HospitalDashboard = () => {
                   onChange={(e) => setSelectedDistrict(e.target.value)}
                   className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none focus:ring-2 focus:ring-[#006b5f]"
                 >
-                  <option value="">All Districts ({uniqueDistricts.length})</option>
+                  <option value="">{t('all_districts')} ({uniqueDistricts.length})</option>
                   {uniqueDistricts.map((d) => (
                     <option key={d} value={d}>{d}</option>
                   ))}
@@ -267,14 +267,14 @@ const HospitalDashboard = () => {
                     <tr key={h.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                       <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">
                         <div>{h.name}</div>
-                        <div className="text-[10px] text-slate-400 font-normal">{h.village_area || 'Government Hospital Campus'}</div>
+                        <div className="text-[10px] text-slate-400 font-normal">{h.village_area || t('clinical_platform')}</div>
                       </td>
                       <td className="py-3.5 px-4 font-medium">
                         {h.district}, {h.state}
                       </td>
                       <td className="py-3.5 px-4">
                         <span className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-400 font-black text-[10px] uppercase">
-                          ONLINE
+                          {t('status_online')}
                         </span>
                       </td>
                       <td className="py-3.5 px-4 text-center font-mono font-bold">
@@ -285,9 +285,9 @@ const HospitalDashboard = () => {
                       </td>
                       <td className="py-3.5 px-4 text-center">
                         {h.surgeon_on_duty ? (
-                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">● Active</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">{t('status_active')}</span>
                         ) : (
-                          <span className="text-slate-400">Standby</span>
+                          <span className="text-slate-400">{t('status_standby')}</span>
                         )}
                       </td>
                       <td className="py-3.5 px-4 text-right">
@@ -333,7 +333,7 @@ const HospitalDashboard = () => {
               <form onSubmit={handleSaveCapacity} className="space-y-4 pt-2">
                 <div>
                   <label className="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">
-                    Available General Beds
+                    {t('avail_gen_beds')}
                   </label>
                   <input
                     type="number"
@@ -345,7 +345,7 @@ const HospitalDashboard = () => {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">
-                    NICU / ICU Units Available
+                    {t('nicu_icu_units')}
                   </label>
                   <input
                     type="number"
@@ -358,7 +358,7 @@ const HospitalDashboard = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">
-                      O+ Blood Stock
+                      {t('o_pos_blood')}
                     </label>
                     <input
                       type="number"
@@ -369,7 +369,7 @@ const HospitalDashboard = () => {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">
-                      O- Blood Reserve
+                      {t('o_neg_blood')}
                     </label>
                     <input
                       type="number"
@@ -381,7 +381,7 @@ const HospitalDashboard = () => {
                 </div>
 
                 <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Surgeon On Duty</span>
+                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{t('surgeon_on_duty')}</span>
                   <input
                     type="checkbox"
                     checked={drawerForm.surgeon_on_duty}
@@ -395,7 +395,7 @@ const HospitalDashboard = () => {
                   disabled={saving}
                   className="w-full py-3 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 font-bold rounded-xl text-xs shadow-md cursor-pointer mt-4"
                 >
-                  {saving ? 'Saving...' : 'Confirm Live Capacity Update'}
+                  {saving ? t('saving') : t('confirm_capacity_update')}
                 </button>
               </form>
             </div>

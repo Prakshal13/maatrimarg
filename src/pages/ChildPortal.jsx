@@ -107,7 +107,7 @@ const ChildPortal = () => {
         {/* Top Header */}
         <PortalHeader 
           title={t('child_portal')} 
-          subtitle="Pediatric VIPER Triage Engine • 0 - 60 Months" 
+          subtitle={t('child_subtitle')} 
           badgeText="VIPER Clinical Rules" 
         />
 
@@ -119,13 +119,13 @@ const ChildPortal = () => {
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 border border-teal-500/30 text-teal-200 text-xs font-bold">
                 <Baby className="w-3.5 h-3.5" />
-                <span>Pediatric VIPER Triage & Child Health Hub</span>
+                <span>{t('child_banner_tag')}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black font-['Plus_Jakarta_Sans']">
-                Pediatric Triage & Longitudinal Vitals
+                {t('child_title')}
               </h1>
               <p className="text-xs sm:text-sm text-slate-200 dark:text-slate-300 max-w-xl">
-                Age-banded pediatric triage engine evaluating Respiratory Rate, Heart Rate, SpO2, and Core Temperature against VIPER clinical rules.
+                {t('child_subtitle')}
               </p>
             </div>
 
@@ -134,7 +134,7 @@ const ChildPortal = () => {
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold transition-all self-start md:self-auto cursor-pointer shadow-xs"
             >
               <UserPlus className="w-4 h-4 text-teal-300" />
-              <span>+ Register Child</span>
+              <span>{t('register_child')}</span>
             </button>
           </div>
 
@@ -148,7 +148,7 @@ const ChildPortal = () => {
                     <Activity className="w-5 h-5 text-[#006b5f] dark:text-teal-400" />
                     Pediatric Vitals Entry
                   </h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Record infant vitals (0 to 60 months)</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{t('child_form_sub')}</p>
                 </div>
 
                 {childrenList.length > 0 && (
@@ -174,7 +174,7 @@ const ChildPortal = () => {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Age in Months</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_age_months')}</label>
                     <input
                       type="number"
                       value={vitals.age_months}
@@ -187,7 +187,7 @@ const ChildPortal = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">SpO2 Level (%)</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_spo2')}</label>
                     <input
                       type="number"
                       value={vitals.spo2}
@@ -202,7 +202,7 @@ const ChildPortal = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Respiratory Rate (bpm)</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_rr')}</label>
                     <input
                       type="number"
                       value={vitals.respiratory_rate}
@@ -213,7 +213,7 @@ const ChildPortal = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Heart Rate (bpm)</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_hr_child')}</label>
                     <input
                       type="number"
                       value={vitals.heart_rate}
@@ -225,7 +225,7 @@ const ChildPortal = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Body Temperature (°C)</label>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_temp_c')}</label>
                   <input
                     type="number"
                     step="0.1"
@@ -242,7 +242,7 @@ const ChildPortal = () => {
                   className="w-full py-3.5 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer mt-2"
                 >
                   <ShieldCheck className="w-4 h-4" />
-                  <span>{loading ? 'Evaluating VIPER Engine...' : 'Run VIPER Pediatric Triage'}</span>
+                  <span>{loading ? t('evaluating_viper') : t('btn_run_viper')}</span>
                 </button>
 
               </form>
@@ -261,13 +261,13 @@ const ChildPortal = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-wider block">
-                        VIPER TRIAGE OUTCOME
+                        {t('viper_outcome')}
                       </span>
                       <h3 className="text-2xl font-black font-['Plus_Jakarta_Sans'] mt-0.5">
                         {triageResult.triage_category}
                       </h3>
                       <p className="text-xs opacity-80 mt-1">
-                        Pediatric Shock / Sepsis Index: <strong>{(triageResult.shock_index || 0).toFixed(2)}</strong>
+                        {t('shock_index')}: <strong>{(triageResult.shock_index || 0).toFixed(2)}</strong>
                       </p>
                     </div>
 
@@ -281,7 +281,7 @@ const ChildPortal = () => {
                   <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-current/20 space-y-2 text-xs">
                     <div className="font-bold flex items-center gap-1.5">
                       <span className="material-symbols-outlined text-[18px]">local_hospital</span>
-                      <span>Action Protocol</span>
+                      <span>{t('action_protocol')}</span>
                     </div>
                     <p className="opacity-90 leading-relaxed font-medium">
                       {triageResult.action_required || 'Immediate pediatric triage referral.'}
@@ -294,10 +294,10 @@ const ChildPortal = () => {
                     <Baby className="w-6 h-6" />
                   </div>
                   <h4 className="text-sm font-bold text-slate-800 dark:text-white">
-                    Awaiting Pediatric Vitals
+                    {t('awaiting_peds')}
                   </h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
-                    Select a child and enter vitals to evaluate against the VIPER pediatric triage engine.
+                    {t('awaiting_peds_desc')}
                   </p>
                 </div>
               )}
@@ -314,10 +314,10 @@ const ChildPortal = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs" onClick={() => setShowRegModal(false)} />
           <div className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 z-10 space-y-4 text-left">
-            <h3 className="text-base font-black text-slate-900 dark:text-white">Register Pediatric Patient</h3>
+            <h3 className="text-base font-black text-slate-900 dark:text-white">{t('register_ped_patient')}</h3>
             <form onSubmit={handleRegisterChild} className="space-y-3">
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Child Name</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('child_name')}</label>
                 <input
                   type="text"
                   required
@@ -330,7 +330,7 @@ const ChildPortal = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Age in Months</label>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_age_months')}</label>
                   <input
                     type="number"
                     required
@@ -353,7 +353,7 @@ const ChildPortal = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Parent / Guardian Name</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('parent_guardian')}</label>
                 <input
                   type="text"
                   required

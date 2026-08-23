@@ -351,7 +351,7 @@ const CommandCenter = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
               <div>
                 <h3 className="font-extrabold text-slate-900 dark:text-white text-base font-['Plus_Jakarta_Sans']">
-                  {t('telemetry_table_title')} ({filteredHospitals.length} Active Nodes)
+                  {t('telemetry_table_title')} ({filteredHospitals.length} {t('active_nodes')})
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   {t('hosp_subtitle')}
@@ -364,7 +364,7 @@ const CommandCenter = () => {
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer w-fit shadow-2xs"
               >
                 <RefreshCw className={`w-3.5 h-3.5 text-[#006b5f] dark:text-[#2dd4bf] ${watchdogRunning ? 'animate-spin' : ''}`} />
-                <span>{watchdogRunning ? 'Scanning Grid...' : t('cmd_header_title')}</span>
+                <span>{watchdogRunning ? t('scanning_grid') : t('audit_grid')}</span>
               </button>
             </div>
 
@@ -390,15 +390,15 @@ const CommandCenter = () => {
 
                   <div className="grid grid-cols-3 gap-2 text-center bg-white dark:bg-slate-950/70 p-2 rounded-xl border border-slate-200 dark:border-slate-800/60 text-[10px]">
                     <div>
-                      <span className="text-slate-400 dark:text-slate-500 block">Total Beds</span>
+                      <span className="text-slate-400 dark:text-slate-500 block">{t('total_beds')}</span>
                       <strong className="text-slate-800 dark:text-white font-mono">{h.beds_available ?? 24}</strong>
                     </div>
                     <div>
-                      <span className="text-slate-400 dark:text-slate-500 block">ICU / NICU</span>
+                      <span className="text-slate-400 dark:text-slate-500 block">{t('icu_nicu')}</span>
                       <strong className="text-[#006b5f] dark:text-[#2dd4bf] font-mono">{h.nicu_beds_available ?? 4}</strong>
                     </div>
                     <div>
-                      <span className="text-slate-400 dark:text-slate-500 block">Blood Units</span>
+                      <span className="text-slate-400 dark:text-slate-500 block">{t('blood_units')}</span>
                       <strong className="text-rose-600 dark:text-rose-400 font-mono">{h.blood_units_available ?? 12}</strong>
                     </div>
                   </div>

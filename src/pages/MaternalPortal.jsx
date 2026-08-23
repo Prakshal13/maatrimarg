@@ -172,17 +172,17 @@ const MaternalPortal = () => {
                   }`}
                 >
                   <span className={`w-2 h-2 rounded-full ${isOnDuty ? 'bg-emerald-600 animate-pulse' : 'bg-slate-400'}`}></span>
-                  <span>{isOnDuty ? '🟢 On Field Duty' : '⚪ Standby Mode'}</span>
+                  <span>{isOnDuty ? '🟢 ' + t('on_field_duty') : '⚪ ' + t('standby_mode')}</span>
                 </button>
 
                 <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 font-medium">
                   <Navigation className="w-3.5 h-3.5 text-[#006b5f] dark:text-teal-400" />
-                  <span>GPS Geotag:</span>
+                  <span>{t('gps_geotag')}:</span>
                   <span className="font-mono font-bold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded text-[11px]">
                     {ashaGps.lat.toFixed(4)}, {ashaGps.lng.toFixed(4)}
                   </span>
                   <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/50 px-1.5 py-0.5 rounded">
-                    Auto-Geotag Active
+                    {t('auto_geotag_active')}
                   </span>
                 </div>
               </div>
@@ -197,7 +197,7 @@ const MaternalPortal = () => {
                   }`}
                 >
                   <span className="material-symbols-outlined text-[16px]">crisis_alert</span>
-                  <span>{sosActive ? '🚨 SOS BEACON BROADCASTING' : '🆘 Trigger Emergency SOS'}</span>
+                  <span>{sosActive ? '🚨 ' + t('sos_broadcasting') : '🆘 ' + t('trigger_sos')}</span>
                 </button>
               </div>
             </div>
@@ -210,13 +210,13 @@ const MaternalPortal = () => {
                 </span>
                 <div>
                   <div className="text-xs font-extrabold flex items-center gap-2">
-                    <span>District Command Supervisory & Clinical Protocol Review</span>
+                    <span>{t('dho_oversight')}</span>
                     <span className="bg-teal-100 dark:bg-teal-500/20 text-teal-800 dark:text-teal-300 text-[9px] font-mono px-2 py-0.5 rounded border border-teal-300 dark:border-teal-400/40 uppercase">
-                      Executive Mode
+                      {t('executive_mode')}
                     </span>
                   </div>
                   <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                    Logged in as <strong>{user?.name || 'DHO Command Director'}</strong> • Accessing AI inference engine.
+                    {t('logged_in_as')} <strong>{user?.name || 'DHO Command Director'}</strong> • Accessing AI inference engine.
                   </div>
                 </div>
               </div>
@@ -225,7 +225,7 @@ const MaternalPortal = () => {
                 to="/command-center"
                 className="px-3 py-1.5 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 text-xs font-bold rounded-xl transition-all shadow-2xs flex items-center gap-1.5"
               >
-                <span>Return to Live GIS Matrix</span>
+                <span>{t('return_gis')}</span>
                 <span>➔</span>
               </Link>
             </div>
@@ -238,13 +238,13 @@ const MaternalPortal = () => {
                 </span>
                 <div>
                   <div className="text-xs font-extrabold flex items-center gap-2">
-                    <span>Tertiary Hospital Inpatient & Emergency Triage Evaluation</span>
+                    <span>{t('hospital_triage')}</span>
                     <span className="bg-teal-100 dark:bg-teal-500/30 text-teal-800 dark:text-teal-200 text-[9px] font-mono px-2 py-0.5 rounded uppercase">
-                      Clinical Specialist
+                      {t('clinical_specialist')}
                     </span>
                   </div>
                   <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                    Logged in as <strong>{user?.name || 'Hospital CMO'}</strong> • Verifying admission criteria.
+                    {t('logged_in_as')} <strong>{user?.name || 'Hospital CMO'}</strong> • Verifying admission criteria.
                   </div>
                 </div>
               </div>
@@ -253,7 +253,7 @@ const MaternalPortal = () => {
                 to="/hospital"
                 className="px-3 py-1.5 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 text-xs font-bold rounded-xl transition-all shadow-2xs"
               >
-                Hospital Directory ➔
+                {t('hospital_dir_link')} ➔
               </Link>
             </div>
           )}
@@ -428,7 +428,7 @@ const MaternalPortal = () => {
                   className="w-full py-3.5 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Activity className="w-4 h-4" />
-                  <span>{loading ? 'Evaluating Model...' : t('btn_predict_risk')}</span>
+                  <span>{loading ? t('evaluating_model') : t('btn_predict_risk')}</span>
                 </button>
 
               </form>
@@ -450,13 +450,13 @@ const MaternalPortal = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-wider block">
-                        CLINICAL TRIAGE OUTCOME
+                        {t('clinical_triage_outcome')}
                       </span>
                       <h4 className="text-2xl font-black font-['Plus_Jakarta_Sans'] mt-0.5">
                         {prediction.risk_level === 'High Risk' ? t('risk_high') : prediction.risk_level === 'Mid Risk' ? t('risk_mid') : t('risk_low')}
                       </h4>
                       <p className="text-xs opacity-80 mt-1">
-                        Confidence Score: <strong>{(prediction.confidence * 100).toFixed(1)}%</strong> via Ensemble ML
+                        {t('confidence_score')}: <strong>{(prediction.confidence * 100).toFixed(1)}%</strong> via Ensemble ML
                       </p>
                     </div>
 
@@ -485,10 +485,10 @@ const MaternalPortal = () => {
                     <div className="p-3 rounded-2xl bg-rose-600 text-white text-xs font-bold flex items-center justify-between shadow-sm">
                       <span className="flex items-center gap-1.5">
                         <span className="material-symbols-outlined text-[18px]">ambulance</span>
-                        <span>Auto-Priority: 108 Emergency Route Locked</span>
+                        <span>{t('auto_priority_108')}</span>
                       </span>
                       <Link to="/command-center" className="underline hover:opacity-80">
-                        View Matrix ➔
+                        {t('view_matrix')} ➔
                       </Link>
                     </div>
                   )}
@@ -500,10 +500,10 @@ const MaternalPortal = () => {
                     <HeartPulse className="w-6 h-6" />
                   </div>
                   <h4 className="text-sm font-bold text-slate-800 dark:text-white">
-                    Awaiting Clinical Input
+                    {t('awaiting_clinical')}
                   </h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
-                    Fill the vitals form on the left or click "Load Sample Data" to run real-time inference.
+                    {t('awaiting_clinical_desc')}
                   </p>
                 </div>
               )}

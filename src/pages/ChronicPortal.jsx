@@ -121,7 +121,7 @@ const ChronicPortal = () => {
         {/* Top Header */}
         <PortalHeader 
           title={t('chronic_portal')} 
-          subtitle="Non-Communicable Disease & Cardiovascular AI Risk Screening" 
+          subtitle={t('chronic_subtitle')} 
           badgeText="NCD ML Engine" 
         />
 
@@ -133,13 +133,13 @@ const ChronicPortal = () => {
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 border border-teal-500/30 text-teal-300 text-xs font-bold">
                 <HeartPulse className="w-3.5 h-3.5" />
-                <span>Cardiovascular & NCD Screening Network</span>
+                <span>{t('chronic_banner_tag')}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black font-['Plus_Jakarta_Sans']">
-                Cardiovascular Disease ML Risk Calculator
+                {t('chronic_title')}
               </h1>
               <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-                Rural NCD risk assessment evaluating BMI, BP stages, cholesterol, and lifestyle risk factors against trained clinical models.
+                {t('chronic_subtitle')}
               </p>
             </div>
 
@@ -148,7 +148,7 @@ const ChronicPortal = () => {
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold transition-all self-start md:self-auto cursor-pointer"
             >
               <UserPlus className="w-4 h-4 text-teal-300" />
-              <span>+ Register Patient</span>
+              <span>{t('register_patient')}</span>
             </button>
           </div>
 
@@ -160,9 +160,9 @@ const ChronicPortal = () => {
                 <div>
                   <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <ActivitySquare className="w-5 h-5 text-[#006b5f] dark:text-teal-400" />
-                    Biometrics & Lifestyle Input
+                    {t('chronic_form_title')}
                   </h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Adult NCD risk screening parameters</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{t('chronic_form_sub')}</p>
                 </div>
 
                 {patientsList.length > 0 && (
@@ -184,7 +184,7 @@ const ChronicPortal = () => {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Height (cm)</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_height')}</label>
                     <input
                       type="number"
                       value={cardioVitals.height_cm}
@@ -195,7 +195,7 @@ const ChronicPortal = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Weight (kg)</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_weight')}</label>
                     <input
                       type="number"
                       value={cardioVitals.weight_kg}
@@ -208,7 +208,7 @@ const ChronicPortal = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Systolic BP (mmHg)</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_sbp')} (mmHg)</label>
                     <input
                       type="number"
                       value={cardioVitals.systolic_bp}
@@ -219,7 +219,7 @@ const ChronicPortal = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Diastolic BP (mmHg)</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_dbp')} (mmHg)</label>
                     <input
                       type="number"
                       value={cardioVitals.diastolic_bp}
@@ -232,28 +232,28 @@ const ChronicPortal = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Cholesterol Level</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_cholesterol')}</label>
                     <select
                       value={cardioVitals.cholesterol}
                       onChange={(e) => setCardioVitals({ ...cardioVitals, cholesterol: Number(e.target.value) })}
                       className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-semibold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f]"
                     >
-                      <option value="1">1 - Normal (&lt; 200 mg/dL)</option>
-                      <option value="2">2 - Above Normal (200-239)</option>
-                      <option value="3">3 - Well Above Normal (≥ 240)</option>
+                      <option value="1">{t('chol_normal')}</option>
+                      <option value="2">{t('chol_above')}</option>
+                      <option value="3">{t('chol_high')}</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Glucose Level</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('input_glucose')}</label>
                     <select
                       value={cardioVitals.glucose}
                       onChange={(e) => setCardioVitals({ ...cardioVitals, glucose: Number(e.target.value) })}
                       className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-semibold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f]"
                     >
-                      <option value="1">1 - Normal (&lt; 140 mg/dL)</option>
-                      <option value="2">2 - Above Normal (140-199)</option>
-                      <option value="3">3 - Well Above Normal (≥ 200)</option>
+                      <option value="1">{t('gluc_normal')}</option>
+                      <option value="2">{t('gluc_above')}</option>
+                      <option value="3">{t('gluc_high')}</option>
                     </select>
                   </div>
                 </div>
@@ -266,7 +266,7 @@ const ChronicPortal = () => {
                       onChange={(e) => setCardioVitals({ ...cardioVitals, smoke: e.target.checked })}
                       className="rounded text-[#006b5f]"
                     />
-                    <span>Tobacco</span>
+                    <span>{t('tobacco')}</span>
                   </label>
 
                   <label className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
@@ -276,7 +276,7 @@ const ChronicPortal = () => {
                       onChange={(e) => setCardioVitals({ ...cardioVitals, alcohol: e.target.checked })}
                       className="rounded text-[#006b5f]"
                     />
-                    <span>Alcohol</span>
+                    <span>{t('alcohol')}</span>
                   </label>
 
                   <label className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
@@ -286,7 +286,7 @@ const ChronicPortal = () => {
                       onChange={(e) => setCardioVitals({ ...cardioVitals, physically_active: e.target.checked })}
                       className="rounded text-[#006b5f]"
                     />
-                    <span>Active</span>
+                    <span>{t('physically_active')}</span>
                   </label>
                 </div>
 
@@ -296,7 +296,7 @@ const ChronicPortal = () => {
                   className="w-full py-3.5 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer mt-2"
                 >
                   <ShieldCheck className="w-4 h-4" />
-                  <span>{loading ? 'Evaluating Model...' : 'Calculate Cardiovascular Risk'}</span>
+                  <span>{loading ? t('evaluating_model') : t('btn_calc_cvd')}</span>
                 </button>
 
               </form>
@@ -315,13 +315,13 @@ const ChronicPortal = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-wider block">
-                        CARDIOVASCULAR SCORECARD
+                        {t('cvd_scorecard')}
                       </span>
                       <h3 className="text-2xl font-black font-['Plus_Jakarta_Sans'] mt-0.5">
                         {result.risk_level}
                       </h3>
                       <p className="text-xs opacity-80 mt-1">
-                        CVD Risk Probability: <strong>{result.probability_percentage}</strong>
+                        {t('cvd_probability')}: <strong>{result.probability_percentage}</strong>
                       </p>
                     </div>
 
@@ -335,7 +335,7 @@ const ChronicPortal = () => {
                   <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-current/20 space-y-2 text-xs">
                     <div className="font-bold flex items-center gap-1.5">
                       <span className="material-symbols-outlined text-[18px]">local_hospital</span>
-                      <span>Clinical Management Guidance</span>
+                      <span>{t('clinical_guidance')}</span>
                     </div>
                     <p className="opacity-90 leading-relaxed font-medium">
                       {result.clinical_recommendation}
@@ -348,10 +348,10 @@ const ChronicPortal = () => {
                     <ActivitySquare className="w-6 h-6" />
                   </div>
                   <h4 className="text-sm font-bold text-slate-800 dark:text-white">
-                    Awaiting Cardiovascular Inputs
+                    {t('awaiting_cvd')}
                   </h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
-                    Fill the form on the left to calculate CVD probability percentage and recommended clinical protocols.
+                    {t('awaiting_cvd_desc')}
                   </p>
                 </div>
               )}
@@ -368,10 +368,10 @@ const ChronicPortal = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs" onClick={() => setShowRegModal(false)} />
           <div className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 z-10 space-y-4 text-left">
-            <h3 className="text-base font-black text-slate-900 dark:text-white">Register NCD Patient</h3>
+            <h3 className="text-base font-black text-slate-900 dark:text-white">{t('register_ncd_patient')}</h3>
             <form onSubmit={handleRegisterPatient} className="space-y-3">
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Patient Full Name</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('patient_full_name')}</label>
                 <input
                   type="text"
                   required
@@ -384,7 +384,7 @@ const ChronicPortal = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Age in Years</label>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('age_years')}</label>
                   <input
                     type="number"
                     required
@@ -394,20 +394,20 @@ const ChronicPortal = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Gender</label>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('gender')}</label>
                   <select
                     value={newPatient.gender}
                     onChange={(e) => setNewPatient({ ...newPatient, gender: e.target.value })}
                     className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-900 dark:text-white"
                   >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="male">{t('male')}</option>
+                    <option value="female">{t('female')}</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Village / Ward</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{t('village_ward')}</label>
                 <input
                   type="text"
                   required
@@ -421,7 +421,7 @@ const ChronicPortal = () => {
                 type="submit"
                 className="w-full py-3 bg-[#006b5f] hover:bg-[#005047] text-white font-bold rounded-xl text-xs shadow-md cursor-pointer mt-2"
               >
-                Register Patient for Screening
+                {t('register_for_screening')}
               </button>
             </form>
           </div>
