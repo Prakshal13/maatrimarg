@@ -4,7 +4,7 @@ import { api } from '../api/endpoints';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 import AppSidebar from '../components/AppSidebar';
-import UserProfileDropdown from '../components/UserProfileDropdown';
+import PortalHeader from '../components/PortalHeader';
 import { 
   Hospital, 
   Search, 
@@ -22,8 +22,8 @@ import {
 } from 'lucide-react';
 
 const HospitalDashboard = () => {
-  const { t } = useLanguage();
-  const { logout } = useAuth();
+  const { lang, t } = useLanguage();
+  const { user, logout } = useAuth();
   const [hospitals, setHospitals] = useState([]);
   const [filteredHospitals, setFilteredHospitals] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -101,17 +101,23 @@ const HospitalDashboard = () => {
     setDrawerOpen(true);
   };
 
-  const handleSaveDrawer = async (e) => {
+  const handleSaveCapacity = async (e) => {
     e.preventDefault();
     if (!selectedHospital) return;
     setSaving(true);
     try {
-      await api.updateHospitalCapacity(selectedHospital.id, drawerForm);
+      await api.updateHospitalCapacity(selectedHospital.id, {
+        beds_available: Number(drawerForm.beds_available),
+        nicu_beds_available: Number(drawerForm.nicu_beds_available),
+        surgeon_on_duty: Boolean(drawerForm.surgeon_on_duty),
+        ambulance_available: Boolean(drawerForm.ambulance_available),
+        stock_o_pos: Number(drawerForm.stock_o_pos),
+        stock_o_neg: Number(drawerForm.stock_o_neg),
+      });
       await fetchData();
       setDrawerOpen(false);
-      alert(`Capacity updated for ${selectedHospital.name}`);
     } catch (err) {
-      alert('Save failed: ' + (err.response?.data?.detail || err.message));
+      alert('Could not update facility: ' + (err.response?.data?.detail || err.message));
     } finally {
       setSaving(false);
     }
@@ -122,44 +128,31 @@ const HospitalDashboard = () => {
   const totalONeg = hospitals.reduce((acc, h) => acc + (h.stock_o_neg || 0), 0);
 
   return (
-    <div className="flex min-h-screen bg-[#f6fafe] text-[#171c1f] font-sans antialiased">
+    <div className="flex min-h-screen bg-[#f7f9fb] dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased transition-colors duration-200">
       
       {/* Left Sidebar */}
       <AppSidebar />
 
       {/* Main Canvas */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#f7f9fb] dark:bg-slate-950">
         
         {/* Top Header */}
-        <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-30">
-          <div className="relative w-72">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">
-              search
-            </span>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search facilities or districts..."
-              className="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium outline-none focus:ring-2 focus:ring-[#006b5f]"
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <UserProfileDropdown />
-          </div>
-        </header>
+        <PortalHeader 
+          title={t('hosp_title')} 
+          subtitle={t('hosp_subtitle')} 
+          badgeText="165 Active Facilities" 
+        />
 
         {/* Content Body */}
         <main className="p-6 sm:p-8 space-y-6 flex-1 overflow-y-auto text-left">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h2 className="text-2xl font-black text-slate-900 font-['Plus_Jakarta_Sans']">
-                Hospitals Directory
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">
+                {t('hosp_title')}
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Manage and monitor health infrastructure across Maharashtra & Tamil Nadu districts.
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                {t('hosp_subtitle')}
               </p>
             </div>
 
@@ -167,44 +160,44 @@ const HospitalDashboard = () => {
               onClick={() => {
                 if (hospitals.length > 0) openDrawer(hospitals[0]);
               }}
-              className="px-4 py-2 bg-[#006b5f] hover:bg-[#005047] text-white text-xs font-bold rounded-lg shadow-xs transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <Edit3 className="w-3.5 h-3.5" />
-              <span>Update Facility Capacity</span>
+              <span>{t('btn_update_capacity')}</span>
             </button>
           </div>
 
-          {/* 3 Summary Cards (Stitch Screen 6 Tokens) */}
+          {/* 3 Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="p-5 border border-slate-200 rounded-2xl bg-white shadow-2xs flex flex-col justify-between">
-              <span className="text-xs font-bold text-slate-500">Total Facilities</span>
+            <div className="p-5 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900 shadow-sm flex flex-col justify-between transition-colors">
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">{t('total_facilities')}</span>
               <div className="mt-3 flex items-end justify-between">
-                <span className="text-3xl font-black text-slate-900 font-['Plus_Jakarta_Sans']">
+                <span className="text-3xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">
                   {hospitals.length}
                 </span>
-                <span className="material-symbols-outlined text-[#006b5f] text-[28px]">
+                <span className="material-symbols-outlined text-[#006b5f] dark:text-teal-400 text-[28px]">
                   domain
                 </span>
               </div>
             </div>
 
-            <div className="p-5 border border-slate-200 rounded-2xl bg-white shadow-2xs flex flex-col justify-between">
-              <span className="text-xs font-bold text-slate-500">ICU & NICU Beds Available</span>
+            <div className="p-5 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900 shadow-sm flex flex-col justify-between transition-colors">
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">{t('icu_nicu_beds')}</span>
               <div className="mt-3 flex items-end justify-between">
-                <span className="text-3xl font-black text-teal-700 font-['Plus_Jakarta_Sans']">
+                <span className="text-3xl font-black text-teal-700 dark:text-teal-400 font-['Plus_Jakarta_Sans']">
                   {totalNicu}
                 </span>
-                <div className="flex items-center gap-1 text-emerald-600 font-bold text-xs">
+                <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold text-xs">
                   <TrendingUp className="w-3.5 h-3.5" />
                   <span>+12% capacity</span>
                 </div>
               </div>
             </div>
 
-            <div className="p-5 border border-slate-200 rounded-2xl bg-white shadow-2xs flex flex-col justify-between">
-              <span className="text-xs font-bold text-slate-500">Blood Units (O- Negative Reserve)</span>
+            <div className="p-5 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900 shadow-sm flex flex-col justify-between transition-colors">
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">{t('blood_units_o_neg')}</span>
               <div className="mt-3 flex items-end justify-between">
-                <span className="text-3xl font-black text-rose-600 font-['Plus_Jakarta_Sans']">
+                <span className="text-3xl font-black text-rose-600 dark:text-rose-400 font-['Plus_Jakarta_Sans']">
                   {totalONeg}
                 </span>
                 <div className="flex items-center gap-1 text-slate-400 font-bold text-xs">
@@ -215,85 +208,94 @@ const HospitalDashboard = () => {
             </div>
           </div>
 
-          {/* Directory Toolbar & Table (Stitch Screen 6) */}
-          <div className="border border-slate-200 rounded-2xl bg-white shadow-2xs overflow-hidden">
+          {/* Directory Toolbar & Table */}
+          <div className="border border-slate-200 dark:border-slate-800 rounded-3xl bg-white dark:bg-slate-900 shadow-sm overflow-hidden transition-colors">
             
-            {/* Toolbar */}
-            <div className="p-4 border-b border-slate-200 flex flex-col sm:flex-row gap-3 justify-between items-center bg-white">
-              <div className="relative w-full sm:w-80">
-                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">
-                  search
+            {/* Filter Bar */}
+            <div className="p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <Filter className="w-4 h-4 text-slate-400" />
+                <span className="text-xs font-black uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                  Filters
                 </span>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search facilities or districts..."
-                  className="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium outline-none focus:ring-2 focus:ring-[#006b5f]"
-                />
               </div>
 
-              <div className="flex gap-2 w-full sm:w-auto">
+              <div className="flex flex-wrap items-center gap-3">
                 <select
                   value={selectedState}
-                  onChange={(e) => { setSelectedState(e.target.value); setSelectedDistrict(''); }}
-                  className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-700 outline-none"
+                  onChange={(e) => {
+                    setSelectedState(e.target.value);
+                    setSelectedDistrict('');
+                  }}
+                  className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none focus:ring-2 focus:ring-[#006b5f]"
                 >
-                  <option value="">All States</option>
-                  {uniqueStates.map(s => <option key={s} value={s}>{s}</option>)}
+                  <option value="">All States ({uniqueStates.length})</option>
+                  {uniqueStates.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
                 </select>
 
                 <select
                   value={selectedDistrict}
                   onChange={(e) => setSelectedDistrict(e.target.value)}
-                  className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-700 outline-none"
+                  className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none focus:ring-2 focus:ring-[#006b5f]"
                 >
-                  <option value="">All Districts</option>
-                  {uniqueDistricts.map(d => <option key={d} value={d}>{d}</option>)}
+                  <option value="">All Districts ({uniqueDistricts.length})</option>
+                  {uniqueDistricts.map((d) => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
                 </select>
               </div>
             </div>
 
             {/* Table */}
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-extrabold uppercase text-[10px] tracking-wider">
-                  <tr>
-                    <th className="p-4">Facility Name</th>
-                    <th className="p-4">District & State</th>
-                    <th className="p-4 text-center">Status</th>
-                    <th className="p-4 text-center">Gen Beds</th>
-                    <th className="p-4 text-center">NICU Beds</th>
-                    <th className="p-4 text-center">Surgeon</th>
-                    <th className="p-4 text-right">Actions</th>
+              <table className="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr className="border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-extrabold uppercase tracking-wider text-[10px]">
+                    <th className="py-3.5 px-4">{t('col_facility')}</th>
+                    <th className="py-3.5 px-4">{t('col_district')}</th>
+                    <th className="py-3.5 px-4">{t('col_status')}</th>
+                    <th className="py-3.5 px-4 text-center">{t('col_gen_beds')}</th>
+                    <th className="py-3.5 px-4 text-center">{t('col_nicu_beds')}</th>
+                    <th className="py-3.5 px-4 text-center">{t('col_surgeon')}</th>
+                    <th className="py-3.5 px-4 text-right">{t('col_actions')}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
-                  {filteredHospitals.slice(0, 30).map((h) => (
-                    <tr key={h.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="p-4 font-bold text-slate-900">{h.name}</td>
-                      <td className="p-4 text-slate-500">{h.district}, {h.state}</td>
-                      <td className="p-4 text-center">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase bg-teal-50 text-[#006b5f] border border-teal-200">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#006b5f]"></span>
-                          Operational
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                  {filteredHospitals.map((h) => (
+                    <tr key={h.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                      <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">
+                        <div>{h.name}</div>
+                        <div className="text-[10px] text-slate-400 font-normal">{h.village_area || 'Government Hospital Campus'}</div>
+                      </td>
+                      <td className="py-3.5 px-4 font-medium">
+                        {h.district}, {h.state}
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-400 font-black text-[10px] uppercase">
+                          ONLINE
                         </span>
                       </td>
-                      <td className="p-4 text-center font-bold text-slate-900">{h.beds_available}</td>
-                      <td className="p-4 text-center font-bold text-teal-700">{h.nicu_beds_available}</td>
-                      <td className="p-4 text-center">
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                          h.surgeon_on_duty ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'
-                        }`}>
-                          {h.surgeon_on_duty ? 'YES' : 'NO'}
-                        </span>
+                      <td className="py-3.5 px-4 text-center font-mono font-bold">
+                        {h.beds_available ?? 12}
                       </td>
-                      <td className="p-4 text-right">
+                      <td className="py-3.5 px-4 text-center font-mono font-bold text-teal-700 dark:text-teal-400">
+                        {h.nicu_beds_available ?? 3}
+                      </td>
+                      <td className="py-3.5 px-4 text-center">
+                        {h.surgeon_on_duty ? (
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">● Active</span>
+                        ) : (
+                          <span className="text-slate-400">Standby</span>
+                        )}
+                      </td>
+                      <td className="py-3.5 px-4 text-right">
                         <button
                           onClick={() => openDrawer(h)}
-                          className="px-3 py-1.5 bg-slate-100 hover:bg-[#006b5f] hover:text-white rounded-lg text-xs font-bold transition-colors"
+                          className="px-3 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-[#006b5f] hover:text-white dark:hover:bg-teal-500 dark:hover:text-slate-950 rounded-lg font-bold text-xs transition-colors cursor-pointer"
                         >
-                          Edit Live Capacity
+                          {t('btn_edit_capacity')}
                         </button>
                       </td>
                     </tr>
@@ -305,127 +307,98 @@ const HospitalDashboard = () => {
           </div>
 
         </main>
+
       </div>
 
-      {/* Slide-over Detail Drawer (Exact Stitch Screen 6) */}
+      {/* Edit Capacity Drawer Modal */}
       {drawerOpen && selectedHospital && (
-        <div className="fixed inset-0 z-50 flex justify-end">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs" onClick={() => setDrawerOpen(false)} />
-          
-          <div className="relative w-full max-w-md bg-white h-full shadow-2xl border-l border-slate-200 flex flex-col z-10 text-left">
-            
-            <div className="p-6 border-b border-slate-200 flex justify-between items-center bg-white">
-              <div>
-                <h3 className="text-lg font-bold text-slate-900 font-['Plus_Jakarta_Sans']">
-                  {selectedHospital.name}
-                </h3>
-                <p className="text-xs text-slate-500">{selectedHospital.district}, {selectedHospital.state}</p>
-              </div>
-              <button
-                onClick={() => setDrawerOpen(false)}
-                className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <form onSubmit={handleSaveDrawer} className="flex-1 overflow-y-auto p-6 space-y-6">
-              
-              <div className="flex items-center gap-3">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-bold bg-teal-50 text-[#006b5f] border border-teal-200">
-                  <span className="w-2 h-2 rounded-full bg-[#006b5f]"></span>
-                  <span>Operational</span>
-                </span>
-                <span className="text-xs text-slate-400">Last updated: Just now</span>
+        <div className="fixed inset-0 z-50 flex items-center justify-end">
+          <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs" onClick={() => setDrawerOpen(false)} />
+          <div className="relative w-full max-w-md bg-white dark:bg-slate-900 h-full shadow-2xl p-6 flex flex-col justify-between z-10 animate-reveal text-left overflow-y-auto">
+            <div className="space-y-4">
+              <div className="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                <div>
+                  <h3 className="font-black text-base text-slate-900 dark:text-white">
+                    {selectedHospital.name}
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    {selectedHospital.district}, {selectedHospital.state}
+                  </p>
+                </div>
+                <button onClick={() => setDrawerOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1">
+                  <X className="w-5 h-5" />
+                </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-3.5 border border-slate-200 rounded-xl bg-slate-50">
-                  <div className="text-[10px] font-bold uppercase text-slate-500 mb-1">Available General Beds</div>
+              <form onSubmit={handleSaveCapacity} className="space-y-4 pt-2">
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">
+                    Available General Beds
+                  </label>
                   <input
                     type="number"
                     value={drawerForm.beds_available}
-                    onChange={(e) => setDrawerForm({ ...drawerForm, beds_available: Number(e.target.value) })}
-                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-base font-black text-slate-900"
+                    onChange={(e) => setDrawerForm({ ...drawerForm, beds_available: e.target.value })}
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
                   />
                 </div>
 
-                <div className="p-3.5 border border-slate-200 rounded-xl bg-slate-50">
-                  <div className="text-[10px] font-bold uppercase text-slate-500 mb-1">Available NICU Beds</div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">
+                    NICU / ICU Units Available
+                  </label>
                   <input
                     type="number"
                     value={drawerForm.nicu_beds_available}
-                    onChange={(e) => setDrawerForm({ ...drawerForm, nicu_beds_available: Number(e.target.value) })}
-                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-base font-black text-teal-700"
+                    onChange={(e) => setDrawerForm({ ...drawerForm, nicu_beds_available: e.target.value })}
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
                   />
                 </div>
-              </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <label className="p-3 border border-slate-200 rounded-xl bg-slate-50 flex items-center gap-2 cursor-pointer">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">
+                      O+ Blood Stock
+                    </label>
+                    <input
+                      type="number"
+                      value={drawerForm.stock_o_pos}
+                      onChange={(e) => setDrawerForm({ ...drawerForm, stock_o_pos: e.target.value })}
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">
+                      O- Blood Reserve
+                    </label>
+                    <input
+                      type="number"
+                      value={drawerForm.stock_o_neg}
+                      onChange={(e) => setDrawerForm({ ...drawerForm, stock_o_neg: e.target.value })}
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Surgeon On Duty</span>
                   <input
                     type="checkbox"
                     checked={drawerForm.surgeon_on_duty}
                     onChange={(e) => setDrawerForm({ ...drawerForm, surgeon_on_duty: e.target.checked })}
-                    className="rounded text-[#006b5f]"
+                    className="h-4 w-4 text-[#006b5f] rounded"
                   />
-                  <span className="text-xs font-bold text-slate-700">Surgeon on Duty</span>
-                </label>
-
-                <label className="p-3 border border-slate-200 rounded-xl bg-slate-50 flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={drawerForm.ambulance_available}
-                    onChange={(e) => setDrawerForm({ ...drawerForm, ambulance_available: e.target.checked })}
-                    className="rounded text-[#006b5f]"
-                  />
-                  <span className="text-xs font-bold text-slate-700">Ambulance Ready</span>
-                </label>
-              </div>
-
-              <div className="space-y-3 pt-4 border-t border-slate-200">
-                <h4 className="text-xs font-bold uppercase text-slate-700">Blood Bank Reserves</h4>
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-500 mb-1">O+ Units</label>
-                    <input
-                      type="number"
-                      value={drawerForm.stock_o_pos}
-                      onChange={(e) => setDrawerForm({ ...drawerForm, stock_o_pos: Number(e.target.value) })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-500 mb-1">O- Units (Universal)</label>
-                    <input
-                      type="number"
-                      value={drawerForm.stock_o_neg}
-                      onChange={(e) => setDrawerForm({ ...drawerForm, stock_o_neg: Number(e.target.value) })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-rose-600"
-                    />
-                  </div>
                 </div>
-              </div>
 
-              <div className="p-4 border-t border-slate-200 flex justify-end gap-3 pt-6">
-                <button
-                  type="button"
-                  onClick={() => setDrawerOpen(false)}
-                  className="px-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-100"
-                >
-                  Cancel
-                </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2 bg-[#006b5f] hover:bg-[#005047] text-white rounded-lg text-xs font-bold shadow-xs transition-colors"
+                  className="w-full py-3 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 font-bold rounded-xl text-xs shadow-md cursor-pointer mt-4"
                 >
-                  {saving ? 'Saving...' : 'Save Live Changes'}
+                  {saving ? 'Saving...' : 'Confirm Live Capacity Update'}
                 </button>
-              </div>
-
-            </form>
-
+              </form>
+            </div>
           </div>
         </div>
       )}
