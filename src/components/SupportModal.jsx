@@ -1,0 +1,83 @@
+import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { HelpCircle, Phone, X, ShieldAlert, Mail } from 'lucide-react';
+
+const SupportModal = ({ isOpen, onClose }) => {
+  const { t } = useLanguage();
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Modal Card */}
+      <div className="relative bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        
+        {/* Header */}
+        <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/20">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400">
+              <HelpCircle className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-lg font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">
+                {t('support')}
+              </h3>
+              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                Help & Protocol Assistance
+              </p>
+            </div>
+          </div>
+          <button 
+            onClick={onClose}
+            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-6 space-y-4">
+          <div className="bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/30 rounded-2xl p-4 flex gap-3">
+            <ShieldAlert className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+            <div>
+              <h4 className="text-sm font-bold text-rose-900 dark:text-rose-300 mb-1">
+                Emergency Dispatch Protocol
+              </h4>
+              <p className="text-xs text-rose-700/80 dark:text-rose-400/80 leading-relaxed">
+                {t('support_alert') || "For critical maternal or pediatric emergencies, bypass standard routing and immediately dial the 108 Central Dispatch."}
+              </p>
+              <button className="mt-3 flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl transition-colors shadow-sm w-full justify-center">
+                <Phone className="w-4 h-4" />
+                Call 108 Emergency
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 flex gap-3">
+            <Mail className="w-5 h-5 text-slate-600 dark:text-slate-400 shrink-0 mt-0.5" />
+            <div>
+              <h4 className="text-sm font-bold text-slate-900 dark:text-slate-200 mb-1">
+                District CMO Command HQ
+              </h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                For administrative support, roster updates, or capacity management issues, contact your regional Command Center desk.
+              </p>
+              <button className="mt-3 px-4 py-2 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl transition-colors shadow-sm w-full">
+                Email Support Team
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+export default SupportModal;

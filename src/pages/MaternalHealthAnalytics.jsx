@@ -394,7 +394,7 @@ const MaternalHealthAnalytics = () => {
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={divisions} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#cbd5e1" opacity={0.3} />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} tickMargin={10} interval={0} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: '#64748b' }} tickMargin={5} interval={0} angle={-25} textAnchor="end" height={60} />
                       <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
                       <RechartsTooltip contentStyle={tooltipStyle} cursor={{fill: 'rgba(148, 163, 184, 0.1)'}} />
                       <Legend verticalAlign="bottom" height={20} iconType="circle" wrapperStyle={{ paddingTop: '10px', fontSize: '12px' }} />
