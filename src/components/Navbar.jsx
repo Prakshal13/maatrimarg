@@ -49,20 +49,22 @@ const Navbar = () => {
     <>
       <header className="sticky top-0 z-50 bg-[#f7f9fb]/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center w-full h-16">
             
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-lg bg-[#091426] dark:bg-teal-500 flex items-center justify-center text-[#2dd4bf] dark:text-slate-950 shadow-sm group-hover:scale-105 transition-transform">
-                <span className="material-symbols-outlined text-[20px]">hub</span>
-              </div>
-              <span className="font-extrabold text-sm tracking-wider text-[#091426] dark:text-white uppercase font-['Plus_Jakarta_Sans']">
-                {t('app_title')}
-              </span>
-            </Link>
+            {/* Logo (Forced Left) */}
+            <div className="flex-shrink-0 flex items-center">
+              <Link to="/" className="flex items-center gap-2.5 group">
+                <div className="w-8 h-8 rounded-lg bg-[#091426] dark:bg-teal-500 flex items-center justify-center text-[#2dd4bf] dark:text-slate-950 shadow-sm group-hover:scale-105 transition-transform">
+                  <span className="material-symbols-outlined text-[20px]">hub</span>
+                </div>
+                <span className="font-extrabold text-sm tracking-wider text-[#091426] dark:text-white uppercase font-['Plus_Jakarta_Sans']">
+                  {t('app_title')}
+                </span>
+              </Link>
+            </div>
 
-            {/* Right Action Items */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            {/* Right Action Items (Forced Right) */}
+            <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3 ml-auto">
               
               {/* 1. Home SOS Route (Google Maps) Button */}
               <button
