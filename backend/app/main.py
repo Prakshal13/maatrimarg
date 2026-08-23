@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.db import init_db
-from app.routers import assessments, auth, command_center, hospitals, mothers, notifications, referrals, risk, routing
+from app.routers import assessments, auth, command_center, hospitals, mothers, notifications, referrals, risk, routing, asha_workers
 
 
 @asynccontextmanager
@@ -38,3 +38,4 @@ app.include_router(referrals.router)
 app.include_router(command_center.router)
 app.include_router(assessments.router)
 app.include_router(notifications.router)
+app.include_router(asha_workers.router)

@@ -50,4 +50,9 @@ export const api = {
   getCommandCenterSummary: () => apiClient.get('/command-center/summary'),
   getNetworkHospitals: () => apiClient.get('/network/hospitals'),
   getModelInfo: (type) => apiClient.get(`/assessments/model-info/${type}`),
+
+  // ASHA Workers Live Tracking & Safety Gateway
+  getAshaWorkers: (params) => apiClient.get('/asha-workers', { params }),
+  updateAshaLocation: (id, data) => apiClient.post(`/asha-workers/${id}/location`, data),
+  triggerAshaSos: (id, data) => apiClient.post(`/asha-workers/${id}/sos`, data),
 };

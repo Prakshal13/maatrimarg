@@ -232,6 +232,29 @@ class Hospital(Base):
 
 
 # ---------------------------
+# ASHA WORKER
+# ---------------------------
+class AshaWorker(Base):
+    __tablename__ = "asha_workers"
+
+    id = Column(Integer, primary_key=True, index=True)
+    asha_id = Column(String, unique=True, index=True)  # e.g. "MH-GAD-402"
+    name = Column(String, nullable=False)
+    phone = Column(String, nullable=True)
+    village_area = Column(String)
+    district = Column(String)
+    state = Column(String)
+    lat = Column(Float)
+    lng = Column(Float)
+    status = Column(String, default="active_in_field")  # active_in_field | in_anc_visit | standby | emergency_sos
+    active_mothers_count = Column(Integer, default=4)
+    battery_level = Column(Integer, default=85)
+    last_checkin = Column(DateTime, default=utcnow)
+    created_at = Column(DateTime, default=utcnow)
+    updated_at = Column(DateTime, default=utcnow, onupdate=utcnow)
+
+
+# ---------------------------
 # ALERT
 # ---------------------------
 class Alert(Base):

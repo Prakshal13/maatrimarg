@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
+import { api } from '../api/endpoints';
 import { 
   MapPin, 
   Navigation, 
@@ -10,25 +11,55 @@ import {
   CheckCircle2, 
   RefreshCw,
   Flame,
-  Clock
+  Clock,
+  Phone,
+  Battery,
+  ShieldAlert,
+  UserCheck
 } from 'lucide-react';
 
 const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }) => {
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
-  const markersLayerRef = useRef(null);
+  const hospitalsLayerRef = useRef(null);
+  const ashaLayerRef = useRef(null);
+  const ambulanceLayerRef = useRef(null);
   const routeLayerRef = useRef(null);
   const userMarkerRef = useRef(null);
 
   const [mapMode, setMapMode] = useState('topography'); // topography | satellite
   const [userLocation, setUserLocation] = useState(null);
   const [geoStatus, setGeoStatus] = useState('prompting'); // prompting | granted | denied | unsupported
-  const [nearestHospital, setNearestHospital] = useState(null);
   const [isLocating, setIsLocating] = useState(false);
+  const [nearestHospital, setNearestHospital] = useState(null);
 
-  // Haversine distance calculator in KM
+  // Layer Visibility Toggles
+  const [showHospitals, setShowHospitals] = useState(true);
+  const [showAshaWorkers, setShowAshaWorkers] = useState(true);
+  const [showAmbulances, setShowAmbulances] = useState(true);
+
+  // ASHA Workers state
+  const [ashaWorkers, setAshaWorkers] = useState([]);
+
+  // Fetch ASHA workers from backend
+  const fetchAshaWorkers = async () => {
+    try {
+      const res = await api.getAshaWorkers();
+      if (res.data) {
+        setAshaWorkers(res.data);
+      }
+    } catch (e) {
+      console.warn('Could not fetch ASHA workers:', e);
+    }
+  };
+
+  useEffect(() => {
+    fetchAshaWorkers();
+  }, []);
+
+  // Distance calculator
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Earth radius in km
+    const R = 6371;
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
     const dLon = ((lon2 - lon1) * Math.PI) / 180;
     const a =
@@ -37,11 +68,10 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
         Math.cos((lat2 * Math.PI) / 180) *
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   };
 
-  // Request user's live browser location
+  // Browser Geolocation Prompt
   const requestUserLocation = () => {
     if (!navigator.geolocation) {
       setGeoStatus('unsupported');
@@ -75,11 +105,10 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
     );
   };
 
-  // 1. Initialize Map Instance
+  // 1. Initialize Map
   useEffect(() => {
     if (!mapContainerRef.current || mapInstanceRef.current) return;
 
-    // Default center on Central India / Maharashtra & Tamil Nadu
     const defaultCenter = [16.8, 77.5];
     const defaultZoom = 6;
 
@@ -89,15 +118,14 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
       zoomControl: false,
     });
 
-    // Custom Zoom controls at bottom right
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    markersLayerRef.current = L.layerGroup().addTo(map);
+    hospitalsLayerRef.current = L.layerGroup().addTo(map);
+    ashaLayerRef.current = L.layerGroup().addTo(map);
+    ambulanceLayerRef.current = L.layerGroup().addTo(map);
     routeLayerRef.current = L.layerGroup().addTo(map);
 
     mapInstanceRef.current = map;
-
-    // Auto-prompt location on initial load
     requestUserLocation();
 
     return () => {
@@ -106,12 +134,11 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
     };
   }, []);
 
-  // 2. Handle Tile Layer Switcher (Topography vs Satellite)
+  // 2. Switch Tile Layers
   useEffect(() => {
     if (!mapInstanceRef.current) return;
     const map = mapInstanceRef.current;
 
-    // Remove existing tile layers
     map.eachLayer((layer) => {
       if (layer instanceof L.TileLayer) {
         map.removeLayer(layer);
@@ -121,24 +148,17 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
     if (mapMode === 'satellite') {
       L.tileLayer(
         'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-        {
-          attribution: '&copy; Esri &mdash; Earthstar Geographics',
-          maxZoom: 19,
-        }
+        { attribution: '&copy; Esri &mdash; Earthstar Geographics', maxZoom: 19 }
       ).addTo(map);
     } else {
       L.tileLayer(
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        {
-          attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-          maxZoom: 19,
-          subdomains: 'abcd',
-        }
+        { attribution: '&copy; CARTO', maxZoom: 19, subdomains: 'abcd' }
       ).addTo(map);
     }
   }, [mapMode]);
 
-  // 3. Render User Location Pulsing Marker
+  // 3. User Marker
   useEffect(() => {
     if (!mapInstanceRef.current || !userLocation) return;
     const map = mapInstanceRef.current;
@@ -175,15 +195,13 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
     userMarkerRef.current = marker;
   }, [userLocation]);
 
-  // 4. Render Hospital Markers & Live Polylines
+  // 4. Render Hospitals Layer
   useEffect(() => {
-    if (!mapInstanceRef.current || !markersLayerRef.current) return;
-    const markersLayer = markersLayerRef.current;
-    const routeLayer = routeLayerRef.current;
-    markersLayer.clearLayers();
-    routeLayer.clearLayers();
+    if (!hospitalsLayerRef.current) return;
+    const layer = hospitalsLayerRef.current;
+    layer.clearLayers();
 
-    if (!hospitals || hospitals.length === 0) return;
+    if (!showHospitals || !hospitals || hospitals.length === 0) return;
 
     let closest = null;
     let minDistance = Infinity;
@@ -252,7 +270,7 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
       `;
 
       const marker = L.marker([h.lat, h.lng], { icon: customHospitalIcon })
-        .addTo(markersLayer)
+        .addTo(layer)
         .bindPopup(popupContent);
 
       marker.on('popupopen', () => {
@@ -265,39 +283,199 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
 
     setNearestHospital(closest);
 
-    // If user location exists and we found a nearest hospital, draw glowing polyline
-    if (userLocation && closest) {
-      const latlngs = [
-        [userLocation.lat, userLocation.lng],
-        [closest.lat, closest.lng],
-      ];
-      L.polyline(latlngs, {
-        color: '#006b5f',
-        weight: 3.5,
-        dashArray: '8, 8',
-        opacity: 0.85,
-      }).addTo(routeLayer);
+    // Draw route if closest hospital exists
+    if (routeLayerRef.current) {
+      routeLayerRef.current.clearLayers();
+      if (userLocation && closest) {
+        L.polyline([[userLocation.lat, userLocation.lng], [closest.lat, closest.lng]], {
+          color: '#006b5f',
+          weight: 3.5,
+          dashArray: '8, 8',
+          opacity: 0.85,
+        }).addTo(routeLayerRef.current);
+      }
     }
-  }, [hospitals, userLocation]);
+  }, [hospitals, userLocation, showHospitals]);
+
+  // 5. Render ASHA Workers Layer (👩‍⚕️)
+  useEffect(() => {
+    if (!ashaLayerRef.current) return;
+    const layer = ashaLayerRef.current;
+    layer.clearLayers();
+
+    if (!showAshaWorkers || !ashaWorkers || ashaWorkers.length === 0) return;
+
+    ashaWorkers.forEach((worker) => {
+      if (!worker.lat || !worker.lng) return;
+
+      const isSos = worker.status === 'emergency_sos';
+      const isInVisit = worker.status === 'in_anc_visit';
+      const bgColor = isSos ? '#e11d48' : isInVisit ? '#f59e0b' : '#7c3aed';
+
+      const ashaIconHtml = `
+        <div class="relative group cursor-pointer flex flex-col items-center">
+          ${isSos ? '<span class="absolute w-10 h-10 rounded-full bg-rose-500/50 animate-ping"></span>' : ''}
+          <div style="background-color: ${bgColor};" class="w-8 h-8 rounded-full border-2 border-white shadow-md flex items-center justify-center text-white hover:scale-110 transition-transform">
+            <span class="text-sm font-bold">👩‍⚕️</span>
+          </div>
+          <span class="text-[9px] font-extrabold bg-purple-950/90 text-purple-200 border border-purple-400/40 px-1.5 py-0.5 rounded shadow-sm mt-0.5 whitespace-nowrap">
+            ASHA: ${worker.name.split(' ')[0]}
+          </span>
+        </div>
+      `;
+
+      const customAshaIcon = L.divIcon({
+        html: ashaIconHtml,
+        className: 'custom-asha-marker',
+        iconSize: [36, 44],
+        iconAnchor: [18, 22],
+      });
+
+      const popupContent = `
+        <div style="font-family: sans-serif; font-size: 12px; width: 230px; line-height: 1.4; padding: 2px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <strong style="color: #6b21a8; font-size: 13px;">${worker.name}</strong>
+            <span style="background: ${isSos ? '#ffe4e6' : '#f3e8ff'}; color: ${isSos ? '#be123c' : '#7e22ce'}; padding: 2px 6px; border-radius: 999px; font-size: 9px; font-weight: 800; text-transform: uppercase;">
+              ${worker.status.replace(/_/g, ' ')}
+            </span>
+          </div>
+
+          <div style="font-size: 11px; color: #475569; margin-bottom: 6px;">
+            <strong>ID:</strong> ${worker.asha_id} • ${worker.village_area} (${worker.district})
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #faf5ff; padding: 6px; border-radius: 8px; border: 1px solid #e9d5ff; margin-bottom: 8px; font-size: 11px;">
+            <div>
+              <span style="font-size: 10px; color: #6b21a8; font-weight: 700;">ACTIVE MOTHERS</span><br/>
+              <strong style="color: #1e1b4b; font-size: 12px;">${worker.active_mothers_count} Assigned</strong>
+            </div>
+            <div>
+              <span style="font-size: 10px; color: #6b21a8; font-weight: 700;">DEVICE BATTERY</span><br/>
+              <strong style="color: #16a34a; font-size: 12px;">🔋 ${worker.battery_level}%</strong>
+            </div>
+          </div>
+
+          <div style="font-size: 11px; color: #64748b; margin-bottom: 8px;">
+            <strong>Phone:</strong> ${worker.phone}
+          </div>
+
+          <a 
+            href="tel:${worker.phone}" 
+            style="width: 100%; box-sizing: border-box; background: #6b21a8; color: white; text-decoration: none; border-radius: 6px; padding: 6px; font-weight: 700; font-size: 11px; text-align: center; display: block;"
+          >
+            📞 Contact ASHA Worker
+          </a>
+        </div>
+      `;
+
+      L.marker([worker.lat, worker.lng], { icon: customAshaIcon })
+        .addTo(layer)
+        .bindPopup(popupContent);
+    });
+  }, [ashaWorkers, showAshaWorkers]);
+
+  // 6. Render 108 Ambulances Layer (🚑)
+  useEffect(() => {
+    if (!ambulanceLayerRef.current) return;
+    const layer = ambulanceLayerRef.current;
+    layer.clearLayers();
+
+    if (!showAmbulances) return;
+
+    const sampleAmbulances = [
+      { id: '108-MH-34', lat: 19.395, lng: 80.221, name: '108 Unit MH-34', eta: '4 min', status: 'En Route', patient: 'Severe Pre-Eclampsia' },
+      { id: '108-MH-27', lat: 21.398, lng: 77.291, name: '108 Unit MH-27', eta: '14 min', status: 'Dispatched', patient: 'ANC Complication' },
+      { id: '108-TN-01', lat: 13.045, lng: 80.245, name: '108 Unit TN-01', eta: '8 min', status: 'En Route', patient: 'Fetal Distress' }
+    ];
+
+    sampleAmbulances.forEach((amb) => {
+      const ambIconHtml = `
+        <div class="relative group cursor-pointer flex flex-col items-center">
+          <span class="absolute w-8 h-8 rounded-full bg-rose-500/40 animate-ping"></span>
+          <div class="w-8 h-8 rounded-full bg-rose-600 border-2 border-white shadow-lg flex items-center justify-center text-white text-xs hover:scale-110 transition-transform">
+            🚑
+          </div>
+          <span class="text-[9px] font-extrabold bg-rose-950 text-rose-200 border border-rose-500/40 px-1.5 py-0.5 rounded shadow-sm mt-0.5 whitespace-nowrap">
+            ${amb.name} (ETA ${amb.eta})
+          </span>
+        </div>
+      `;
+
+      const customAmbIcon = L.divIcon({
+        html: ambIconHtml,
+        className: 'custom-amb-marker',
+        iconSize: [36, 44],
+        iconAnchor: [18, 22],
+      });
+
+      const popupContent = `
+        <div style="font-family: sans-serif; font-size: 12px; width: 200px; line-height: 1.4;">
+          <strong style="color: #e11d48; font-size: 13px;">🚨 ${amb.name}</strong><br/>
+          <span style="color: #475569; font-size: 11px;">Status: <strong>${amb.status}</strong> • ETA: <strong>${amb.eta}</strong></span><br/>
+          <div style="margin-top: 6px; padding: 4px 6px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; font-size: 10px; color: #9f1239;">
+            Case: <strong>${amb.patient}</strong>
+          </div>
+        </div>
+      `;
+
+      L.marker([amb.lat, amb.lng], { icon: customAmbIcon })
+        .addTo(layer)
+        .bindPopup(popupContent);
+    });
+  }, [showAmbulances]);
 
   return (
-    <div className="relative w-full h-full flex flex-col min-h-[380px] bg-slate-900 rounded-2xl overflow-hidden shadow-sm border border-slate-200">
+    <div className="relative w-full h-full flex flex-col min-h-[420px] bg-slate-900 rounded-2xl overflow-hidden shadow-sm border border-slate-200">
       
-      {/* Top Map Toolbar */}
-      <div className="p-3.5 border-b border-slate-200 bg-white/95 backdrop-blur-md z-[400] flex flex-wrap justify-between items-center gap-2">
+      {/* Top Map Toolbar with Layer Controls */}
+      <div className="p-3.5 border-b border-slate-200 bg-white/95 backdrop-blur-md z-[400] flex flex-wrap justify-between items-center gap-2.5">
+        
+        {/* Left Title & Facilities Badge */}
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
           <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 font-['Plus_Jakarta_Sans'] flex items-center gap-1.5">
             <Navigation className="w-4 h-4 text-[#006b5f]" />
-            <span>Live Regional Hospital GPS Grid</span>
+            <span>Live Regional Medical GIS Matrix</span>
           </h3>
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-[#006b5f]">
-            {hospitals.length} Facilities Live
-          </span>
         </div>
 
+        {/* Middle: Interactive Filter Layer Toggles */}
+        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold">
+          
+          <button
+            onClick={() => setShowHospitals(!showHospitals)}
+            className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1.5 ${
+              showHospitals ? 'bg-white text-teal-800 shadow-2xs font-black' : 'text-slate-400 hover:text-slate-700'
+            }`}
+          >
+            <span>🏥</span>
+            <span className="hidden sm:inline">Hospitals ({hospitals.length})</span>
+          </button>
+
+          <button
+            onClick={() => setShowAshaWorkers(!showAshaWorkers)}
+            className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1.5 ${
+              showAshaWorkers ? 'bg-white text-purple-800 shadow-2xs font-black' : 'text-slate-400 hover:text-slate-700'
+            }`}
+          >
+            <span>👩‍⚕️</span>
+            <span className="hidden sm:inline">ASHA Agents ({ashaWorkers.length})</span>
+          </button>
+
+          <button
+            onClick={() => setShowAmbulances(!showAmbulances)}
+            className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1.5 ${
+              showAmbulances ? 'bg-white text-rose-800 shadow-2xs font-black' : 'text-slate-400 hover:text-slate-700'
+            }`}
+          >
+            <span>🚑</span>
+            <span className="hidden sm:inline">108 Fleet (3)</span>
+          </button>
+
+        </div>
+
+        {/* Right Actions: Locate Me & Map Mode Switcher */}
         <div className="flex items-center gap-2">
-          {/* Locate Me GPS Button */}
           <button
             onClick={requestUserLocation}
             disabled={isLocating}
@@ -305,14 +483,13 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
             title="Locate My Live Position"
           >
             <LocateFixed className={`w-3.5 h-3.5 text-blue-600 ${isLocating ? 'animate-spin' : ''}`} />
-            <span className="hidden sm:inline">{isLocating ? 'Locating...' : 'Locate Me'}</span>
+            <span className="hidden md:inline">{isLocating ? 'Locating...' : 'Locate Me'}</span>
           </button>
 
-          {/* Topography vs Satellite Switcher */}
           <div className="flex bg-slate-100 rounded-lg p-0.5 border border-slate-200 text-xs font-bold">
             <button
               onClick={() => setMapMode('topography')}
-              className={`px-2.5 py-1 rounded-md transition-colors ${
+              className={`px-2 py-1 rounded-md transition-colors ${
                 mapMode === 'topography'
                   ? 'bg-white text-slate-900 shadow-2xs font-extrabold'
                   : 'text-slate-500 hover:text-slate-900'
@@ -322,7 +499,7 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
             </button>
             <button
               onClick={() => setMapMode('satellite')}
-              className={`px-2.5 py-1 rounded-md transition-colors ${
+              className={`px-2 py-1 rounded-md transition-colors ${
                 mapMode === 'satellite'
                   ? 'bg-white text-slate-900 shadow-2xs font-extrabold'
                   : 'text-slate-500 hover:text-slate-900'
@@ -332,6 +509,7 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
             </button>
           </div>
         </div>
+
       </div>
 
       {/* Geolocation Status Alert Bar */}
@@ -339,7 +517,7 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 text-[11px] font-bold text-amber-900 flex items-center justify-between z-[400]">
           <div className="flex items-center gap-2">
             <AlertCircle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-            <span>Location permission was blocked or unavailable. Viewing regional Maharashtra & Tamil Nadu grid.</span>
+            <span>Location permission was blocked. Viewing regional Maharashtra & Tamil Nadu grid.</span>
           </div>
           <button
             onClick={requestUserLocation}
@@ -365,8 +543,8 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
       {/* Actual Interactive Leaflet Map Container */}
       <div 
         ref={mapContainerRef} 
-        className="w-full flex-1 z-0 relative min-h-[320px]" 
-        style={{ minHeight: '340px' }}
+        className="w-full flex-1 z-0 relative min-h-[350px]" 
+        style={{ minHeight: '360px' }}
       />
 
     </div>

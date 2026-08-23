@@ -35,11 +35,64 @@ const MaternalPortal = () => {
   const [loading, setLoading] = useState(false);
   const [prediction, setPrediction] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
-  const [mothersList, setMothersList] = useState([]);
   const [selectedMotherId, setSelectedMotherId] = useState('');
   const [routingResult, setRoutingResult] = useState(null);
   const [showDispatchModal, setShowDispatchModal] = useState(false);
   const [notificationStatus, setNotificationStatus] = useState(null);
+
+  // ASHA Live Duty & Safety Tracking State
+  const [isOnDuty, setIsOnDuty] = useState(true);
+  const [ashaGps, setAshaGps] = useState({ lat: 19.3421, lng: 80.3524 });
+  const [sosActive, setSosActive] = useState(false);
+  const [sosAlertMessage, setSosAlertMessage] = useState('');
+
+  // Auto-capture GPS coordinates on mount
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setAshaGps({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          });
+        },
+        (err) => console.log('Using default PHC coordinates for ASHA geotag'),
+        { timeout: 5000 }
+      );
+    }
+  }, []);
+
+  const handleToggleDuty = async () => {
+    const nextState = !isOnDuty;
+    setIsOnDuty(nextState);
+    try {
+      await api.updateAshaLocation(1, {
+        lat: ashaGps.lat,
+        lng: ashaGps.lng,
+        status: nextState ? 'active_in_field' : 'standby',
+        battery_level: 85,
+      });
+    } catch (e) {
+      console.warn('Duty status sync:', e);
+    }
+  };
+
+  const handleTriggerSos = async () => {
+    const confirmSos = window.confirm('🚨 TRIGGER EMERGENCY SOS?\n\nThis will instantly broadcast a high-priority distress beacon with your live GPS location to the District Command Center.');
+    if (!confirmSos) return;
+
+    try {
+      const res = await api.triggerAshaSos(1, {
+        lat: ashaGps.lat,
+        lng: ashaGps.lng,
+        reason: 'ASHA lone-worker field emergency beacon triggered',
+      });
+      setSosActive(true);
+      setSosAlertMessage(res.data.alert);
+    } catch (e) {
+      alert('SOS broadcast failed: ' + (e.response?.data?.detail || e.message));
+    }
+  };
 
   const fetchMothers = async () => {
     try {
@@ -160,6 +213,59 @@ const MaternalPortal = () => {
         {/* Content Body (Grid from Stitch Screen 7) */}
         <main className="p-6 sm:p-8 space-y-6 flex-1 overflow-y-auto text-left">
           
+          {/* ASHA Live Duty & Safety SOS Bar */}
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+            
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleToggleDuty}
+                className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 ${
+                  isOnDuty 
+                    ? 'bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-2xs' 
+                    : 'bg-slate-100 text-slate-500 border border-slate-200'
+                }`}
+              >
+                <span className={`w-2 h-2 rounded-full ${isOnDuty ? 'bg-emerald-600 animate-pulse' : 'bg-slate-400'}`}></span>
+                <span>{isOnDuty ? '🟢 On Field Duty' : '⚪ Standby Mode'}</span>
+              </button>
+
+              <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+                <Navigation className="w-3.5 h-3.5 text-teal-600" />
+                <span>GPS Geotag:</span>
+                <span className="font-mono font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded text-[11px]">
+                  {ashaGps.lat.toFixed(4)}, {ashaGps.lng.toFixed(4)}
+                </span>
+                <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">
+                  Auto-Geotag Active
+                </span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleTriggerSos}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 shadow-sm ${
+                  sosActive 
+                    ? 'bg-rose-700 text-white animate-pulse' 
+                    : 'bg-rose-600 hover:bg-rose-700 text-white'
+                }`}
+              >
+                <span className="material-symbols-outlined text-[16px]">crisis_alert</span>
+                <span>{sosActive ? '🚨 SOS BEACON BROADCASTING' : '🆘 Trigger Emergency SOS'}</span>
+              </button>
+            </div>
+
+          </div>
+
+          {sosAlertMessage && (
+            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-300 text-rose-900 text-xs font-bold flex items-center justify-between">
+              <span>{sosAlertMessage}</span>
+              <span className="text-[10px] uppercase font-extrabold bg-rose-200 text-rose-900 px-2 py-0.5 rounded">
+                DHO Alerted
+              </span>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
             
             {/* Left Column: Clinical Data Entry Form (Exact Stitch Screen 7) */}
