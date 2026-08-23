@@ -545,6 +545,18 @@ export const TRANSLATIONS = {
     logout_session: "Log Out Session"
   },
 
+    // FAQ Section
+    faq_title: "Frequently Asked Questions",
+    faq_q1: "What is 'Regional Triage Distribution'?",
+    faq_a1: "This is our live command center metric. 'Triage' is the medical process of deciding the order of treatment based on urgency. This map shows District Health Officers exactly which villages have a high concentration of critical cases, allowing them to route ambulances intelligently.",
+    faq_q2: "How does the 'VIPER Pediatric Engine' work?",
+    faq_a2: "VIPER is our infant and child health assessment tool. ASHA workers input simple vitals like SpO2 (oxygen), heart rate, and temperature for children. The engine analyzes these inputs to instantly detect early signs of pediatric shock or sepsis, guiding the worker on what to do next.",
+    faq_q3: "What are 'Primary Risk Drivers' in maternal health?",
+    faq_a3: "These are the top physiological factors—like Gestational Hypertension (high blood pressure) or Gestational Diabetes—that our Machine Learning model has identified as the highest threats to a pregnant mother in a specific region.",
+    faq_q4: "Who is this platform built for?",
+    faq_a4: "MaatriMarg operates on three levels: ASHA Workers (for rural field data collection), Hospital CMOs (for preparing beds for incoming critical patients), and District Health Officers (for high-level governance and emergency routing).",
+    faq_q5: "Are the risk predictions fully automated?",
+    faq_a5: "Our ML models act as an assistive tool, not a replacement for doctors. We maintain an 'AI Override Rate' (meaning doctors can overrule the AI), ensuring clinical safety while vastly speeding up rural screenings.",
   mr: {
     "primary_risk_drivers": "प्राथमिक धोका घटक",
     "state_Maharashtra": "महाराष्ट्र",
@@ -1084,6 +1096,18 @@ export const TRANSLATIONS = {
     logout_session: "सत्र समाप्त करा (लॉगआउट)"
   },
 
+    // FAQ Section
+    faq_title: "वारंवार विचारले जाणारे प्रश्न (FAQ)",
+    faq_q1: "प्रादेशिक ट्रायज वितरण (Regional Triage Distribution) म्हणजे काय?",
+    faq_a1: "हे आमचे थेट कमांड सेंटर मेट्रिक आहे. 'ट्रायज' म्हणजे वैद्यकीय तातडीच्या आधारावर उपचाराचा क्रम ठरवण्याची प्रक्रिया. हा नकाशा जिल्हा आरोग्य अधिकाऱ्यांना कोणत्या गावात गंभीर रुग्णांचे प्रमाण जास्त आहे हे दाखवतो, ज्यामुळे ते रुग्णवाहिका योग्यरीत्या मार्गस्थ करू शकतात.",
+    faq_q2: "VIPER पेडियाट्रिक इंजिन कसे काम करते?",
+    faq_a2: "VIPER हे आमचे बाल आरोग्य मूल्यांकन साधन आहे. आशा कार्यकर्त्या लहान मुलांसाठी SpO2 (ऑक्सिजन), हृदय गती आणि तापमान यासारखी साधी माहिती भरतात. हे इंजिन या माहितीचे विश्लेषण करून बालकांमधील शॉक किंवा सेप्सिसची प्रारंभिक चिन्हे त्वरित शोधते आणि कार्यकर्त्यांना पुढे काय करावे याचे मार्गदर्शन करते.",
+    faq_q3: "माता आरोग्यामध्ये 'प्राथमिक धोका घटक' (Primary Risk Drivers) काय आहेत?",
+    faq_a3: "हे प्रमुख शारीरिक घटक आहेत—जसे की जेस्टेशनल हायपरटेन्शन (उच्च रक्तदाब) किंवा जेस्टेशनल डायबेटिस—ज्यांना आमच्या मशीन लर्निंग मॉडेलने एका विशिष्ट प्रदेशातील गरोदर मातेसाठी सर्वाधिक धोकादायक म्हणून ओळखले आहे.",
+    faq_q4: "हा प्लॅटफॉर्म कोणासाठी बनवला आहे?",
+    faq_a4: "मातृमार्ग (MaatriMarg) तीन स्तरांवर काम करते: आशा कार्यकर्त्या (ग्रामीण भागात डेटा गोळा करण्यासाठी), हॉस्पिटल CMOs (येणाऱ्या गंभीर रुग्णांसाठी बेड तयार ठेवण्यासाठी) आणि जिल्हा आरोग्य अधिकारी (उच्च-स्तरीय नियंत्रण आणि आपत्कालीन मार्गदर्शनासाठी).",
+    faq_q5: "धोका अंदाज पूर्णपणे स्वयंचलित (Automated) आहेत का?",
+    faq_a5: "आमचे ML मॉडेल एक सहाय्यक साधन म्हणून काम करते, डॉक्टरांना पर्याय म्हणून नाही. आम्ही 'AI ओव्हरराइड रेट' (म्हणजे डॉक्टर AI चा निर्णय बदलू शकतात) कायम ठेवतो, ज्यामुळे वैद्यकीय सुरक्षितता सुनिश्चित होते आणि ग्रामीण तपासणीला वेग येतो.",
   hi: {
     "primary_risk_drivers": "प्राथमिक जोखिम चालक",
     "state_Maharashtra": "महाराष्ट्र",
@@ -1623,6 +1647,18 @@ export const TRANSLATIONS = {
     logout_session: "लॉग आउट करें"
   },
 
+    // FAQ Section
+    faq_title: "अक्सर पूछे जाने वाले प्रश्न (FAQ)",
+    faq_q1: "क्षेत्रीय ट्राइएज वितरण (Regional Triage Distribution) क्या है?",
+    faq_a1: "यह हमारा लाइव कमांड सेंटर मेट्रिक है। 'ट्राइएज' चिकित्सा की वह प्रक्रिया है जिसमें तात्कालिकता के आधार पर उपचार का क्रम तय किया जाता है। यह नक्शा जिला स्वास्थ्य अधिकारियों (DHO) को दिखाता है कि किन गांवों में गंभीर मामलों की संख्या अधिक है, जिससे वे एम्बुलेंस को सही तरीके से रूट कर सकते हैं।",
+    faq_q2: "VIPER बाल रोग इंजन (Pediatric Engine) कैसे काम करता है?",
+    faq_a2: "VIPER शिशु और बाल स्वास्थ्य मूल्यांकन उपकरण है। आशा कार्यकर्ता बच्चों के लिए SpO2 (ऑक्सीजन), हृदय गति और तापमान जैसी सामान्य जानकारी दर्ज करती हैं। इंजन इन जानकारियों का विश्लेषण करके बाल चिकित्सा शॉक या सेप्सिस के शुरुआती लक्षणों का तुरंत पता लगाता है और कार्यकर्ता का मार्गदर्शन करता है।",
+    faq_q3: "मातृ स्वास्थ्य में 'प्राथमिक जोखिम कारक' (Primary Risk Drivers) क्या हैं?",
+    faq_a3: "ये वे प्रमुख शारीरिक कारक हैं—जैसे कि जेस्टेशनल हाइपरटेंशन (उच्च रक्तचाप) या जेस्टेशनल डायबिटीज—जिन्हें हमारे मशीन लर्निंग मॉडल ने किसी विशिष्ट क्षेत्र में गर्भवती माँ के लिए सबसे बड़े खतरे के रूप में पहचाना है।",
+    faq_q4: "यह प्लेटफॉर्म किसके लिए बनाया गया है?",
+    faq_a4: "मातृमार्ग (MaatriMarg) तीन स्तरों पर काम करता है: आशा कार्यकर्ता (ग्रामीण क्षेत्रों में डेटा एकत्र करने के लिए), अस्पताल CMO (आने वाले गंभीर रोगियों के लिए बिस्तर तैयार करने के लिए), और जिला स्वास्थ्य अधिकारी (उच्च-स्तरीय निगरानी और आपातकालीन रूटिंग के लिए)।",
+    faq_q5: "क्या जोखिम भविष्यवाणियां पूरी तरह से स्वचालित (Automated) हैं?",
+    faq_a5: "हमारे ML मॉडल एक सहायक उपकरण के रूप में कार्य करते हैं, न कि डॉक्टरों के विकल्प के रूप में। हम 'AI ओवरराइड रेट' (अर्थात डॉक्टर AI के फैसले को बदल सकते हैं) बनाए रखते हैं, जिससे नैदानिक सुरक्षा सुनिश्चित होती है और ग्रामीण जांच की गति काफी तेज होती है।",
   ta: {
     "primary_risk_drivers": "முதன்மையான ஆபத்து காரணிகள்",
     "state_Maharashtra": "மகாராஷ்டிரா",
