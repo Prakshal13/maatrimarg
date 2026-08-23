@@ -23,12 +23,23 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./maatrimarg.db")
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
-engine = create_engine(
-    DATABASE_URL,
-    connect_args=connect_args,
-    pool_pre_ping=True,  # Keeps Supabase idle connections alive
-)
+try:
+    if DATABASE_URL.startswith("sqlite"):
+        engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+    else:
+        # Test remote PostgreSQL with a 3-second connection timeout
+        engine = create_engine(
+            DATABASE_URL,
+            connect_args={"connect_timeout": 3},
+            pool_pre_ping=True,
+        )
+        with engine.connect() as test_conn:
+            pass
+except Exception as e:
+    print(f"[DB Warning] Remote database unreachable ({e}). Falling back to local SQLite: sqlite:///./maatrimarg.db")
+    DATABASE_URL = "sqlite:///./maatrimarg.db"
+    engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
