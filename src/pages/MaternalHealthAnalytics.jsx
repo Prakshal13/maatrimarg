@@ -436,14 +436,14 @@ const MaternalHealthAnalytics = () => {
                           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: driver.color }}></span>
                           <span className="text-xs font-bold text-slate-700 dark:text-slate-200">{t(driver.key) || driver.name}</span>
                         </div>
-                        <span className="text-sm font-black text-slate-900 dark:text-white">{driver.value}%</span>
+                        <span className="text-sm font-black text-slate-900 dark:text-white">{driver.pct}%</span>
                       </div>
                     ))}
                   </div>
                   <div className="w-[120px] h-[120px] shrink-0">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
-                        <Pie data={riskDrivers} innerRadius={35} outerRadius={55} paddingAngle={2} dataKey="value" stroke="none">
+                        <Pie data={riskDrivers} innerRadius={35} outerRadius={55} paddingAngle={2} dataKey="pct" stroke="none">
                           {riskDrivers.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.color} />
                           ))}
