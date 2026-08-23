@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { api } from '../api/endpoints';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
+import AppSidebar from '../components/AppSidebar';
 import UserProfileDropdown from '../components/UserProfileDropdown';
 import { 
   Hospital, 
@@ -123,88 +124,8 @@ const HospitalDashboard = () => {
   return (
     <div className="flex min-h-screen bg-[#f6fafe] text-[#171c1f] font-sans antialiased">
       
-      {/* Sidebar matching Stitch Screen 6 */}
-      <aside className="w-[260px] bg-white border-r border-slate-200 shadow-xs hidden md:flex flex-col shrink-0">
-        <div className="p-6 border-b border-slate-200">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#006b5f] flex items-center justify-center text-white font-black text-base shadow-sm">
-              <span className="material-symbols-outlined text-[18px]">local_hospital</span>
-            </div>
-            <div>
-              <h1 className="text-base font-extrabold text-slate-900 leading-tight font-['Plus_Jakarta_Sans']">
-                MaatriMarg
-              </h1>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                Command Center
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <nav className="flex-1 px-3 py-4 space-y-1 text-xs font-bold text-left">
-          <Link
-            to="/command-center"
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">hub</span>
-            <span>Network Command</span>
-          </Link>
-
-          <button
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-[#006b5f]/10 text-[#006b5f] font-extrabold transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">domain</span>
-            <span>Hospitals Directory</span>
-          </button>
-
-          <Link
-            to="/asha/maternal"
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">clinical_notes</span>
-            <span>Risk Assessment</span>
-          </Link>
-
-          <div className="pt-6 pb-2 px-3">
-            <span className="text-[10px] uppercase font-extrabold text-slate-400 tracking-widest">
-              System Modules
-            </span>
-          </div>
-
-          <Link
-            to="/asha/child"
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">child_care</span>
-            <span>Pediatric VIPER</span>
-          </Link>
-
-          <Link
-            to="/asha/chronic"
-            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">ecg_heart</span>
-            <span>Cardiovascular Risk</span>
-          </Link>
-        </nav>
-
-        <div className="p-4 border-t border-slate-200">
-          <Link
-            to="/"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-600 hover:bg-slate-100 text-xs font-bold transition-all mb-1"
-          >
-            <span className="material-symbols-outlined text-[18px]">home</span>
-            <span>Back to Home</span>
-          </Link>
-          <button
-            onClick={() => { logout(); }}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-700 text-xs font-bold transition-all"
-          >
-            <span className="material-symbols-outlined text-[18px]">logout</span>
-            <span>Log Out</span>
-          </button>
-        </div>
-      </aside>
+      {/* Left Sidebar */}
+      <AppSidebar />
 
       {/* Main Canvas */}
       <div className="flex-1 flex flex-col min-w-0">

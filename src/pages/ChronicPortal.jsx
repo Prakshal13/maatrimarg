@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../api/endpoints';
 import { useLanguage } from '../context/LanguageContext';
+import AppSidebar from '../components/AppSidebar';
+import UserProfileDropdown from '../components/UserProfileDropdown';
 import { ActivitySquare, UserPlus, HeartPulse, ShieldCheck, ChevronRight, Activity, Flame } from 'lucide-react';
 
 const ChronicPortal = () => {
@@ -105,228 +108,256 @@ const ChronicPortal = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-left">
+    <div className="flex min-h-screen bg-[#f8fafc] text-[#171c1f] font-sans antialiased">
       
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-6 sm:p-8 rounded-3xl text-white shadow-xl">
-        <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-bold">
-            <ActivitySquare className="w-3.5 h-3.5" />
-            <span>Cardiovascular Decision Support Engine</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black font-['Plus_Jakarta_Sans']">
-            {t('chronic_portal')} & Lifestyle Risk
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-            Trained on 70,000 patient records to screen for cardiovascular complications, computing BMI and hypertension risk stratification for rural health programs.
-          </p>
-        </div>
+      {/* Left Sidebar */}
+      <AppSidebar />
 
-        <button
-          onClick={() => setShowRegModal(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold transition-all self-start md:self-auto"
-        >
-          <UserPlus className="w-4 h-4 text-indigo-300" />
-          <span>+ Register Adult Patient</span>
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      {/* Main Canvas */}
+      <div className="flex-1 flex flex-col min-w-0">
         
-        <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <Activity className="w-5 h-5 text-indigo-600" />
-                Vitals & Lifestyle Input
-              </h2>
-              <p className="text-xs text-slate-500">Record biometrics and behavioral markers</p>
-            </div>
-
-            {patientsList.length > 0 && (
-              <select
-                value={selectedPatientId}
-                onChange={(e) => setSelectedPatientId(e.target.value)}
-                className="text-xs font-bold bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 outline-none"
-              >
-                {patientsList.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name} ({p.age_years}y, {p.village || 'Village'})
-                  </option>
-                ))}
-              </select>
-            )}
+        {/* Top Header */}
+        <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-30">
+          <div className="flex items-center gap-3">
+            <h2 className="text-base font-extrabold text-slate-900 font-['Plus_Jakarta_Sans']">
+              Cardiovascular Risk Screening
+            </h2>
+            <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-[10px] font-bold text-indigo-800 uppercase">
+              Adult Chronic Health
+            </span>
           </div>
 
-          <form onSubmit={handleScreenCardio} className="space-y-4">
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Height (cm)</label>
-                <input
-                  type="number"
-                  value={cardioVitals.height_cm}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, height_cm: Number(e.target.value) })}
-                  required
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
-                />
+          <div className="flex items-center gap-3">
+            <UserProfileDropdown />
+          </div>
+        </header>
+
+        {/* Content Body */}
+        <main className="p-6 sm:p-8 space-y-6 flex-1 overflow-y-auto text-left">
+          
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-6 sm:p-8 rounded-3xl text-white shadow-xl">
+            <div className="space-y-1.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-bold">
+                <ActivitySquare className="w-3.5 h-3.5" />
+                <span>Cardiovascular Decision Support Engine</span>
               </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Weight (kg)</label>
-                <input
-                  type="number"
-                  value={cardioVitals.weight_kg}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, weight_kg: Number(e.target.value) })}
-                  required
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Systolic BP (mmHg)</label>
-                <input
-                  type="number"
-                  value={cardioVitals.systolic_bp}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, systolic_bp: Number(e.target.value) })}
-                  required
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Diastolic BP (mmHg)</label>
-                <input
-                  type="number"
-                  value={cardioVitals.diastolic_bp}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, diastolic_bp: Number(e.target.value) })}
-                  required
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Cholesterol Level</label>
-                <select
-                  value={cardioVitals.cholesterol}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, cholesterol: Number(e.target.value) })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  <option value={1}>1 - Normal</option>
-                  <option value={2}>2 - Above Normal</option>
-                  <option value={3}>3 - Well Above Normal</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Glucose Level</label>
-                <select
-                  value={cardioVitals.glucose}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, glucose: Number(e.target.value) })}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  <option value={1}>1 - Normal</option>
-                  <option value={2}>2 - Above Normal</option>
-                  <option value={3}>3 - Well Above Normal</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 pt-2 text-xs font-bold">
-              <label className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={cardioVitals.smoke}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, smoke: e.target.checked })}
-                  className="rounded text-indigo-600"
-                />
-                <span>Smoker</span>
-              </label>
-
-              <label className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={cardioVitals.alcohol}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, alcohol: e.target.checked })}
-                  className="rounded text-indigo-600"
-                />
-                <span>Alcohol</span>
-              </label>
-
-              <label className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={cardioVitals.physically_active}
-                  onChange={(e) => setCardioVitals({ ...cardioVitals, physically_active: e.target.checked })}
-                  className="rounded text-indigo-600"
-                />
-                <span>Active</span>
-              </label>
+              <h1 className="text-2xl sm:text-3xl font-black font-['Plus_Jakarta_Sans']">
+                Cardiovascular Screening & Lifestyle Risk
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
+                Trained on 70,000 patient records to screen for cardiovascular complications, computing BMI and hypertension risk stratification for rural health programs.
+              </p>
             </div>
 
             <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3.5 bg-gradient-to-r from-indigo-700 to-slate-900 hover:from-indigo-800 hover:to-black text-white font-bold text-sm rounded-xl shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 mt-4"
+              onClick={() => setShowRegModal(true)}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold transition-all self-start md:self-auto"
             >
-              {loading ? <span>Evaluating Cardiovascular Risk...</span> : <span>Run Chronic Cardio Risk Screening</span>}
+              <UserPlus className="w-4 h-4 text-indigo-300" />
+              <span>+ Register Adult Patient</span>
             </button>
+          </div>
 
-          </form>
-        </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div>
+                  <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <Activity className="w-5 h-5 text-indigo-600" />
+                    Vitals & Lifestyle Input
+                  </h2>
+                  <p className="text-xs text-slate-500">Record biometrics and behavioral markers</p>
+                </div>
 
-        <div className="lg:col-span-6 space-y-6">
-          {result ? (
-            <div className={`p-6 rounded-3xl border shadow-sm text-left ${
-              result.screening_priority === 'priority_review' 
-                ? 'bg-rose-50 border-rose-200 text-rose-950' 
-                : result.screening_priority === 'clinical_review' 
-                ? 'bg-amber-50 border-amber-200 text-amber-950' 
-                : 'bg-emerald-50 border-emerald-200 text-emerald-950'
-            }`}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold uppercase tracking-wider">Screening Priority</span>
-                <span className={`px-3 py-1 rounded-full text-xs font-black uppercase ${
-                  result.screening_priority === 'priority_review' ? 'bg-rose-600 text-white' : result.screening_priority === 'clinical_review' ? 'bg-amber-500 text-white' : 'bg-emerald-600 text-white'
+                {patientsList.length > 0 && (
+                  <select
+                    value={selectedPatientId}
+                    onChange={(e) => setSelectedPatientId(e.target.value)}
+                    className="text-xs font-bold bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 outline-none"
+                  >
+                    {patientsList.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.name} ({p.age_years}y, {p.village || 'Village'})
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+
+              <form onSubmit={handleScreenCardio} className="space-y-4">
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Height (cm)</label>
+                    <input
+                      type="number"
+                      value={cardioVitals.height_cm}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, height_cm: Number(e.target.value) })}
+                      required
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Weight (kg)</label>
+                    <input
+                      type="number"
+                      value={cardioVitals.weight_kg}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, weight_kg: Number(e.target.value) })}
+                      required
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Systolic BP (mmHg)</label>
+                    <input
+                      type="number"
+                      value={cardioVitals.systolic_bp}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, systolic_bp: Number(e.target.value) })}
+                      required
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Diastolic BP (mmHg)</label>
+                    <input
+                      type="number"
+                      value={cardioVitals.diastolic_bp}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, diastolic_bp: Number(e.target.value) })}
+                      required
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Cholesterol Level</label>
+                    <select
+                      value={cardioVitals.cholesterol}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, cholesterol: Number(e.target.value) })}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      <option value={1}>1 - Normal</option>
+                      <option value={2}>2 - Above Normal</option>
+                      <option value={3}>3 - Well Above Normal</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Glucose Level</label>
+                    <select
+                      value={cardioVitals.glucose}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, glucose: Number(e.target.value) })}
+                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      <option value={1}>1 - Normal</option>
+                      <option value={2}>2 - Above Normal</option>
+                      <option value={3}>3 - Well Above Normal</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 pt-2 text-xs font-bold">
+                  <label className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={cardioVitals.smoke}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, smoke: e.target.checked })}
+                      className="rounded text-indigo-600"
+                    />
+                    <span>Smoker</span>
+                  </label>
+
+                  <label className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={cardioVitals.alcohol}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, alcohol: e.target.checked })}
+                      className="rounded text-indigo-600"
+                    />
+                    <span>Alcohol</span>
+                  </label>
+
+                  <label className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={cardioVitals.physically_active}
+                      onChange={(e) => setCardioVitals({ ...cardioVitals, physically_active: e.target.checked })}
+                      className="rounded text-indigo-600"
+                    />
+                    <span>Active</span>
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3.5 bg-gradient-to-r from-indigo-700 to-slate-900 hover:from-indigo-800 hover:to-black text-white font-bold text-sm rounded-xl shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 mt-4"
+                >
+                  {loading ? <span>Evaluating Cardiovascular Risk...</span> : <span>Run Chronic Cardio Risk Screening</span>}
+                </button>
+
+              </form>
+            </div>
+
+            <div className="lg:col-span-6 space-y-6">
+              {result ? (
+                <div className={`p-6 rounded-3xl border shadow-sm text-left ${
+                  result.screening_priority === 'priority_review' 
+                    ? 'bg-rose-50 border-rose-200 text-rose-950' 
+                    : result.screening_priority === 'clinical_review' 
+                    ? 'bg-amber-50 border-amber-200 text-amber-950' 
+                    : 'bg-emerald-50 border-emerald-200 text-emerald-950'
                 }`}>
-                  {result.screening_priority.replace('_', ' ')}
-                </span>
-              </div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-bold uppercase tracking-wider">Screening Priority</span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-black uppercase ${
+                      result.screening_priority === 'priority_review' ? 'bg-rose-600 text-white' : result.screening_priority === 'clinical_review' ? 'bg-amber-500 text-white' : 'bg-emerald-600 text-white'
+                    }`}>
+                      {result.screening_priority.replace('_', ' ')}
+                    </span>
+                  </div>
 
-              <div className="flex items-baseline gap-3 my-2">
-                <span className="text-4xl sm:text-5xl font-black font-['Plus_Jakarta_Sans']">
-                  {result.risk_score}%
-                </span>
-                <span className="text-xs font-bold text-slate-500">Predicted Complication Probability</span>
-              </div>
+                  <div className="flex items-baseline gap-3 my-2">
+                    <span className="text-4xl sm:text-5xl font-black font-['Plus_Jakarta_Sans']">
+                      {result.risk_score}%
+                    </span>
+                    <span className="text-xs font-bold text-slate-500">Predicted Complication Probability</span>
+                  </div>
 
-              <div className="my-3 inline-block px-3 py-1 bg-white/70 border border-slate-200 rounded-lg text-xs font-bold text-slate-800">
-                Calculated BMI: <strong>{result.bmi} kg/m²</strong>
-              </div>
+                  <div className="my-3 inline-block px-3 py-1 bg-white/70 border border-slate-200 rounded-lg text-xs font-bold text-slate-800">
+                    Calculated BMI: <strong>{result.bmi} kg/m²</strong>
+                  </div>
 
-              <div className="mt-4 pt-4 border-t border-slate-200 space-y-2">
-                <div className="text-xs font-bold">Identified Risk Factors:</div>
-                <ul className="space-y-1 text-xs font-medium pl-4 list-disc">
-                  {result.contributing_factors?.map((f, i) => (
-                    <li key={i}>{f}</li>
-                  ))}
-                </ul>
-              </div>
+                  <div className="mt-4 pt-4 border-t border-slate-200 space-y-2">
+                    <div className="text-xs font-bold">Identified Risk Factors:</div>
+                    <ul className="space-y-1 text-xs font-medium pl-4 list-disc">
+                      {result.contributing_factors?.map((f, i) => (
+                        <li key={i}>{f}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <div className="h-full min-h-[300px] rounded-3xl bg-slate-50 border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-8 text-center space-y-3 text-slate-400">
+                  <ActivitySquare className="w-12 h-12 text-slate-300" />
+                  <div className="text-sm font-bold text-slate-600">No Assessment Completed</div>
+                  <p className="text-xs max-w-xs text-slate-400">
+                    Enter biometric measurements and lifestyle flags to run the ML cardiovascular risk engine.
+                  </p>
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="h-full min-h-[300px] rounded-3xl bg-slate-50 border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-8 text-center space-y-3 text-slate-400">
-              <ActivitySquare className="w-12 h-12 text-slate-300" />
-              <div className="text-sm font-bold text-slate-600">No Assessment Completed</div>
-              <p className="text-xs max-w-xs text-slate-400">
-                Enter biometric measurements and lifestyle flags to run the ML cardiovascular risk engine.
-              </p>
-            </div>
-          )}
-        </div>
 
+          </div>
+
+        </main>
       </div>
 
       {/* Adult Patient Registration Modal */}
