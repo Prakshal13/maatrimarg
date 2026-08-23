@@ -42,7 +42,7 @@ def _prepare_chronic(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df["age_years"] = df["age"] / 365.25
     df["bmi"] = df["weight"] / (df["height"] / 100) ** 2
-    return df[
+    condition = (
         df["age_years"].between(18, 100)
         & df["height"].between(120, 230)
         & df["weight"].between(30, 250)
@@ -50,16 +50,17 @@ def _prepare_chronic(df: pd.DataFrame) -> pd.DataFrame:
         & df["ap_hi"].between(70, 250)
         & df["ap_lo"].between(40, 160)
         & (df["ap_hi"] > df["ap_lo"])
-    ]
+    )
+    return pd.DataFrame(df.loc[condition])
 
 
 def _metrics(y_true, predictions, probabilities, classes) -> dict:
     result = {
         "accuracy": round(float(accuracy_score(y_true, predictions)), 4),
         "balanced_accuracy": round(float(balanced_accuracy_score(y_true, predictions)), 4),
-        "macro_precision": round(float(precision_score(y_true, predictions, average="macro", zero_division=0)), 4),
-        "macro_recall": round(float(recall_score(y_true, predictions, average="macro", zero_division=0)), 4),
-        "macro_f1": round(float(f1_score(y_true, predictions, average="macro", zero_division=0)), 4),
+        "macro_precision": round(float(precision_score(y_true, predictions, average="macro", zero_division="warn")), 4),
+        "macro_recall": round(float(recall_score(y_true, predictions, average="macro", zero_division="warn")), 4),
+        "macro_f1": round(float(f1_score(y_true, predictions, average="macro", zero_division="warn")), 4),
     }
     if len(classes) == 2 and 2 in classes:
         high_index = list(classes).index(2)
