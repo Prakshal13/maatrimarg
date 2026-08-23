@@ -8,23 +8,27 @@ import {
   ShieldCheck, 
   Activity, 
   Hospital, 
-  Lock,
-  Globe,
-  ChevronDown,
-  CheckCircle2,
-  Cpu,
-  Navigation,
-  Sparkles,
-  BarChart3,
-  HeartPulse,
-  Share2,
-  Sliders
+  Lock, 
+  Globe, 
+  CheckCircle2, 
+  Cpu, 
+  Navigation, 
+  Sparkles, 
+  HeartPulse, 
+  Baby, 
+  ActivitySquare, 
+  Building2, 
+  ChevronRight,
+  TrendingUp,
+  Flame,
+  Clock
 } from 'lucide-react';
 
 const LandingPage = () => {
   const { lang, changeLanguage, t } = useLanguage();
   const navigate = useNavigate();
   const [summary, setSummary] = useState(null);
+  const [activeModuleTab, setActiveModuleTab] = useState('maternal'); // maternal | child | chronic | hospital | command
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -38,6 +42,91 @@ const LandingPage = () => {
     fetchSummary();
   }, []);
 
+  const modules = [
+    {
+      id: 'maternal',
+      title: 'Maternal AI Triage',
+      subtitle: 'Random Forest Risk Scoring & Dijkstra Emergency Dispatch',
+      icon: HeartPulse,
+      path: '/asha/maternal',
+      tag: 'Frontline ASHA / ANM',
+      color: 'from-rose-500/10 to-teal-500/10',
+      badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
+      metrics: [
+        { label: 'Model Accuracy', value: '96.3%' },
+        { label: 'Languages', value: 'MR / TA / HI / EN' },
+        { label: 'Triage Tiers', value: 'Watch / Prep / Dispatch' }
+      ],
+      description: 'Predictive clinical intelligence analyzing Systolic/Diastolic BP, blood glucose with mg/dL auto-normalization, and core temperature to triage high-risk mothers directly from sub-centres.'
+    },
+    {
+      id: 'child',
+      title: 'Pediatric VIPER Triage',
+      subtitle: 'Age-Banded Infant & Pediatric Emergency Stratification',
+      icon: Baby,
+      path: '/asha/child',
+      tag: '0 - 60 Months Health',
+      color: 'from-teal-500/10 to-emerald-500/10',
+      badgeColor: 'bg-teal-50 text-teal-700 border-teal-200',
+      metrics: [
+        { label: 'VIPER Rules', value: 'Active' },
+        { label: 'SpO2 Threshold', value: '< 92% Alert' },
+        { label: 'Resp Rate Triage', value: 'Age-Banded' }
+      ],
+      description: 'Frontline pediatric assessment tool utilizing VIPER clinical guidelines and Random Forest classification to detect neonatal respiratory distress and severe fever complications.'
+    },
+    {
+      id: 'chronic',
+      title: 'Chronic Cardio Screening',
+      subtitle: 'Cardiovascular Complication Screening for Adults',
+      icon: ActivitySquare,
+      path: '/asha/chronic',
+      tag: '70,000+ Records Model',
+      color: 'from-indigo-500/10 to-blue-500/10',
+      badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+      metrics: [
+        { label: 'Dataset Trained', value: '70,000 Rows' },
+        { label: 'Biometrics', value: 'BMI + BP + Sugar' },
+        { label: 'Priority Levels', value: 'Routine / Clinical / Priority' }
+      ],
+      description: 'Adult cardiovascular risk screening engine computing body mass index, stage 1/2 hypertension flags, and lifestyle factors to prevent chronic cardiac emergencies in rural districts.'
+    },
+    {
+      id: 'hospital',
+      title: 'Hospitals Capacity Matrix',
+      subtitle: 'Live Beds, NICU, Surgeon & Blood Bank Inventory',
+      icon: Hospital,
+      path: '/hospital',
+      tag: 'Tamil Nadu & Maharashtra',
+      color: 'from-teal-500/10 to-cyan-500/10',
+      badgeColor: 'bg-teal-50 text-teal-700 border-teal-200',
+      metrics: [
+        { label: 'Connected Facilities', value: `${summary?.hospital_count || 260}+` },
+        { label: 'Available Beds', value: `${summary?.total_available_beds || 1840}` },
+        { label: 'NICU Beds', value: `${summary?.total_nicu_beds || 420}` }
+      ],
+      description: 'Centralized hospital directory and live slide-over capacity manager allowing CMOs to update available ICU beds, surgeon shifts, and 8 blood group unit reserves in real time.'
+    },
+    {
+      id: 'command',
+      title: 'DHO Command Center',
+      subtitle: 'Autonomous Watchdog & Immutable ABDM Audit Trail',
+      icon: Activity,
+      path: '/command-center',
+      tag: 'District Operational HQ',
+      color: 'from-slate-900/10 to-indigo-900/10',
+      badgeColor: 'bg-slate-100 text-slate-800 border-slate-200',
+      metrics: [
+        { label: 'Active 108 Dispatches', value: `${summary?.active_dispatches || 8}` },
+        { label: 'Diversion Rate', value: '0.0%' },
+        { label: 'Overdue Watchdog', value: 'Autonomous' }
+      ],
+      description: 'Executive state/district command console featuring live hospital telemetry mesh, automated referral auto-escalation for unresponsive facilities, and full DISHA audit trail.'
+    }
+  ];
+
+  const currentModule = modules.find(m => m.id === activeModuleTab) || modules[0];
+
   return (
     <div className="flex flex-col min-h-screen bg-[#f7f9fb] text-[#191c1e] antialiased relative overflow-x-hidden font-sans">
       
@@ -48,7 +137,7 @@ const LandingPage = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="w-full flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 relative pt-6 pb-16 z-10 max-w-7xl mx-auto">
+      <section className="w-full flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 relative pt-6 pb-12 z-10 max-w-7xl mx-auto">
         
         {/* Three.js Background Canvas (Positioned behind central card) */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-80 min-h-[500px]">
@@ -159,8 +248,101 @@ const LandingPage = () => {
 
       </section>
 
-      {/* 4 Feature Capability Cards (Direct from Stitch Screen 1) */}
+      {/* Dedicated Interactive System Modules Hub Section */}
       <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-white border-t border-slate-200 relative z-10">
+        <div className="max-w-7xl mx-auto space-y-10">
+          
+          <div className="text-center max-w-3xl mx-auto space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-[#006b5f] text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Operational Clinical Modules</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 font-['Plus_Jakarta_Sans']">
+              Explore All 5 Core System Portals
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Select any clinical module below to inspect its AI models, telemetry feeds, and launch the live workflow.
+            </p>
+          </div>
+
+          {/* 5 Module Selector Tabs */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200/80">
+            {modules.map((m) => {
+              const Icon = m.icon;
+              const isActive = activeModuleTab === m.id;
+              return (
+                <button
+                  key={m.id}
+                  onClick={() => setActiveModuleTab(m.id)}
+                  className={`flex flex-col items-center text-center p-3.5 rounded-xl transition-all ${
+                    isActive 
+                      ? 'bg-white shadow-sm border border-slate-200/80 text-[#006b5f] font-extrabold scale-[1.02]' 
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/50 font-bold'
+                  }`}
+                >
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-1.5 ${
+                    isActive ? 'bg-[#006b5f]/10 text-[#006b5f]' : 'bg-slate-200/70 text-slate-500'
+                  }`}>
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold leading-tight">{m.title}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Module Detailed Showcase Card */}
+          <div className="bg-[#f7f9fb] border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-sm transition-all text-left">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              <div className="lg:col-span-7 space-y-4">
+                <div className="flex items-center gap-2.5">
+                  <span className={`px-3 py-1 rounded-full border text-[11px] font-extrabold uppercase tracking-wider ${currentModule.badgeColor}`}>
+                    {currentModule.tag}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-['Plus_Jakarta_Sans']">
+                  {currentModule.title}
+                </h3>
+                
+                <h4 className="text-sm font-bold text-[#006b5f]">
+                  {currentModule.subtitle}
+                </h4>
+
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xl">
+                  {currentModule.description}
+                </p>
+
+                <div className="pt-3">
+                  <Link
+                    to={currentModule.path}
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#091426] hover:bg-[#1e293b] text-white font-bold text-xs sm:text-sm shadow-md shadow-slate-900/15 hover:shadow-lg transition-all group"
+                  >
+                    <span>Launch {currentModule.title}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Side: Key Telemetry Highlights for selected module */}
+              <div className="lg:col-span-5 grid grid-cols-1 gap-3">
+                {currentModule.metrics.map((met, i) => (
+                  <div key={i} className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-500">{met.label}</span>
+                    <span className="text-sm font-black text-slate-900 font-mono">{met.value}</span>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4 Feature Capability Cards (Direct from Stitch Screen 1) */}
+      <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#f7f9fb] border-t border-slate-200 relative z-10">
         <div className="max-w-7xl mx-auto space-y-12">
           
           <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -174,10 +356,9 @@ const LandingPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             
-            {/* Card 1 */}
             <Link
               to="/asha/maternal"
-              className="p-6 rounded-2xl bg-[#f7f9fb] hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
+              className="p-6 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
             >
               <div className="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-[#006b5f] group-hover:scale-105 transition-transform">
                 <HeartPulse className="w-5 h-5" />
@@ -190,10 +371,9 @@ const LandingPage = () => {
               </p>
             </Link>
 
-            {/* Card 2 */}
             <Link
               to="/hospital"
-              className="p-6 rounded-2xl bg-[#f7f9fb] hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
+              className="p-6 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
             >
               <div className="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-[#006b5f] group-hover:scale-105 transition-transform">
                 <Hospital className="w-5 h-5" />
@@ -206,10 +386,9 @@ const LandingPage = () => {
               </p>
             </Link>
 
-            {/* Card 3 */}
             <Link
               to="/asha/maternal"
-              className="p-6 rounded-2xl bg-[#f7f9fb] hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
+              className="p-6 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
             >
               <div className="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-[#006b5f] group-hover:scale-105 transition-transform">
                 <Navigation className="w-5 h-5" />
@@ -222,10 +401,9 @@ const LandingPage = () => {
               </p>
             </Link>
 
-            {/* Card 4 */}
             <Link
               to="/command-center"
-              className="p-6 rounded-2xl bg-[#f7f9fb] hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
+              className="p-6 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-teal-500/50 hover:shadow-md transition-all space-y-3 group"
             >
               <div className="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-[#006b5f] group-hover:scale-105 transition-transform">
                 <Activity className="w-5 h-5" />
@@ -250,10 +428,11 @@ const LandingPage = () => {
             © 2026 MaatriMarg AI • Smart India Hackathon PS 26133
           </div>
           <div className="flex items-center gap-6 font-medium">
-            <Link to="/asha/maternal" className="hover:text-teal-700 transition-colors">ASHA Portal</Link>
+            <Link to="/asha/maternal" className="hover:text-teal-700 transition-colors">Maternal Health</Link>
+            <Link to="/asha/child" className="hover:text-teal-700 transition-colors">Pediatric VIPER</Link>
+            <Link to="/asha/chronic" className="hover:text-teal-700 transition-colors">Cardio Screening</Link>
             <Link to="/hospital" className="hover:text-teal-700 transition-colors">Hospital Matrix</Link>
             <Link to="/command-center" className="hover:text-teal-700 transition-colors">Command Center</Link>
-            <Link to="/login" className="hover:text-teal-700 transition-colors">Clinician Login</Link>
           </div>
         </div>
       </footer>
