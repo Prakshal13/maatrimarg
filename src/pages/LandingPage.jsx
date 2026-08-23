@@ -244,16 +244,14 @@ const LandingPage = () => {
 
       {/* Footer from Stitch Screen 1 */}
       <footer className="w-full bg-[#f0f4f8] border-t border-slate-200 py-6 px-4 sm:px-6 lg:px-8 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="font-bold text-slate-700">
-            © 2026 MaatriMarg AI • Smart India Hackathon PS 26133
+            © 2026 MaatriMarg AI. Clinical Precision, Human Care. • Smart India Hackathon PS 26133
           </div>
-          <div className="flex items-center gap-6 font-medium">
-            <Link to="/asha/maternal" className="hover:text-teal-700 transition-colors">Maternal Health</Link>
-            <Link to="/asha/child" className="hover:text-teal-700 transition-colors">Pediatric VIPER</Link>
-            <Link to="/asha/chronic" className="hover:text-teal-700 transition-colors">Cardio Screening</Link>
-            <Link to="/hospital" className="hover:text-teal-700 transition-colors">Hospital Matrix</Link>
-            <Link to="/command-center" className="hover:text-teal-700 transition-colors">Command Center</Link>
+          <div className="flex flex-wrap items-center justify-center gap-6 font-medium text-slate-600">
+            <a href="#" onClick={(e) => { e.preventDefault(); alert("Terms of Service: MaatriMarg Clinical AI & Regional Health Protocol (Ayushman Bharat / DISHA Compliant)"); }} className="hover:text-teal-700 transition-colors">Terms of Service</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); alert("Data Privacy: End-to-End Encrypted Patient Telemetry & Anonymized PHI Storage"); }} className="hover:text-teal-700 transition-colors">Data Privacy</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); alert("System Admin: Contact District Health Command HQ (DHO Technical Operations)"); }} className="hover:text-teal-700 transition-colors">Contact System Admin</a>
           </div>
         </div>
       </footer>
