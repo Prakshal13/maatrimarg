@@ -378,11 +378,15 @@ const LoginPage = () => {
                   </label>
                   <select
                     value={regForm.state}
-                    onChange={(e) => setRegForm({ ...regForm, state: e.target.value })}
+                    onChange={(e) => {
+                      const newState = e.target.value;
+                      const firstDist = newState === 'Maharashtra' ? 'Gadchiroli' : 'Coimbatore';
+                      setRegForm({ ...regForm, state: newState, district: firstDist });
+                    }}
                     className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] cursor-pointer"
                   >
-                    <option value="Maharashtra">Maharashtra</option>
-                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Maharashtra">Maharashtra (36 Districts)</option>
+                    <option value="Tamil Nadu">Tamil Nadu (38 Districts)</option>
                   </select>
                 </div>
 
@@ -396,22 +400,28 @@ const LoginPage = () => {
                     className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] cursor-pointer"
                   >
                     {regForm.state === 'Maharashtra' ? (
-                      <>
-                        <option value="Gadchiroli">Gadchiroli</option>
-                        <option value="Solapur">Solapur</option>
-                        <option value="Pune">Pune</option>
-                        <option value="Thane">Thane</option>
-                        <option value="Nashik">Nashik</option>
-                        <option value="Nagpur">Nagpur</option>
-                      </>
+                      [
+                        "Ahmednagar (Ahilyanagar)", "Akola", "Amravati", "Beed", "Bhandara", "Buldhana",
+                        "Chandrapur", "Chhatrapati Sambhajinagar", "Dhule", "Gadchiroli",
+                        "Gondia", "Hingoli", "Jalgaon", "Jalna", "Kolhapur", "Latur", "Mumbai City",
+                        "Mumbai Suburban", "Nagpur", "Nanded", "Nandurbar", "Nashik", "Dharashiv (Osmanabad)",
+                        "Palghar", "Parbhani", "Pune", "Raigad", "Ratnagiri", "Sangli", "Satara",
+                        "Sindhudurg", "Solapur", "Thane", "Wardha", "Washim", "Yavatmal"
+                      ].map(d => (
+                        <option key={d} value={d}>{d}</option>
+                      ))
                     ) : (
-                      <>
-                        <option value="Coimbatore">Coimbatore</option>
-                        <option value="Chennai">Chennai</option>
-                        <option value="Madurai">Madurai</option>
-                        <option value="Salem">Salem</option>
-                        <option value="Tiruchirappalli">Tiruchirappalli</option>
-                      </>
+                      [
+                        "Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore", "Dharmapuri",
+                        "Dindigul", "Erode", "Kallakurichi", "Kanchipuram", "Kanyakumari", "Karur",
+                        "Krishnagiri", "Madurai", "Mayiladuthurai", "Nagapattinam", "Namakkal", "Nilgiris",
+                        "Perambalur", "Pudukkottai", "Ramanathapuram", "Ranipet", "Salem", "Sivaganga",
+                        "Tenkasi", "Thanjavur", "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli",
+                        "Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur", "Vellore",
+                        "Viluppuram", "Virudhunagar"
+                      ].map(d => (
+                        <option key={d} value={d}>{d}</option>
+                      ))
                     )}
                   </select>
                 </div>
