@@ -101,11 +101,19 @@ const MaternalHealthAnalytics = () => {
   const [activeTab, setActiveTab] = useState('maternal'); // 'maternal' | 'pediatric'
   const [timeHorizon, setTimeHorizon] = useState('30d'); // '24h' | '7d' | '30d' | 'ytd'
   const [selectedDivision, setSelectedDivision] = useState('all');
+  const [timeframe, setTimeframe] = useState('24H');
 
   const divisions = activeTab === 'maternal' ? MATERNAL_DIVISIONS : PEDIATRIC_DIVISIONS;
   const riskDrivers = activeTab === 'maternal' ? MATERNAL_RISK_DRIVERS : PEDIATRIC_RISK_DRIVERS;
   const recentCases = activeTab === 'maternal' ? MATERNAL_RECENT_CASES : PEDIATRIC_RECENT_CASES;
-  const predictiveData = activeTab === 'maternal' ? PREDICTIVE_DEMAND_MATERNAL : PREDICTIVE_DEMAND_PEDIATRIC;
+  
+  const getPredictiveData = () => {
+    let base = activeTab === 'maternal' ? PREDICTIVE_DEMAND_MATERNAL : PREDICTIVE_DEMAND_PEDIATRIC;
+    if (timeframe === '7D') return base.map((d, i) => ({ ...d, time: `Day ${i+1}`, actual: d.actual ? d.actual * 4 : null, expected: d.expected * 4 }));
+    if (timeframe === '1M') return base.map((d, i) => ({ ...d, time: `Wk ${i+1}`, actual: d.actual ? d.actual * 12 : null, expected: d.expected * 12 }));
+    return base;
+  };
+  const predictiveData = getPredictiveData();
 
   const tooltipStyle = {
     backgroundColor: '#0b1528',
@@ -318,7 +326,11 @@ const MaternalHealthAnalytics = () => {
                 <h3 className="text-xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">{t('predictive_demand_matrix')}</h3>
                 <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
                   {['24H', '7D', '1M'].map(time => (
-                    <button key={time} className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${time === '24H' ? 'bg-white dark:bg-slate-700 shadow text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'}`}>
+                    <button 
+                      key={time} 
+                      onClick={() => setTimeframe(time)}
+                      className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${timeframe === time ? 'bg-white dark:bg-slate-700 shadow text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'}`}
+                    >
                       {time}
                     </button>
                   ))}
@@ -380,9 +392,9 @@ const MaternalHealthAnalytics = () => {
                 
                 <div className="flex-1 w-full min-h-[220px]">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={divisions} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
+                    <BarChart data={divisions} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#cbd5e1" opacity={0.3} />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} dy={10} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} tickMargin={10} interval={0} />
                       <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
                       <RechartsTooltip contentStyle={tooltipStyle} cursor={{fill: 'rgba(148, 163, 184, 0.1)'}} />
                       <Legend verticalAlign="bottom" height={20} iconType="circle" wrapperStyle={{ paddingTop: '10px', fontSize: '12px' }} />
@@ -408,33 +420,38 @@ const MaternalHealthAnalytics = () => {
               </div>
 
               {/* Risk Drivers Pie Chart */}
-              <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm transition-colors flex items-center justify-between h-[160px]">
-                <div className="flex-1 h-full flex flex-col justify-center">
-                  <h3 className="text-base font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">{t('primary_risk_drivers')}</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 mb-2">{t('physiological_triggers')}</p>
-                  <ul className="space-y-1.5 overflow-y-auto pr-2 max-h-[80px]">
-                    {riskDrivers.map(driver => (
-                      <li key={driver.name} className="flex items-center justify-between text-xs font-bold text-slate-600 dark:text-slate-300">
-                        <div className="flex items-center gap-2 truncate">
-                          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: driver.color }} />
-                          <span className="truncate">{driver.name}</span>
-                        </div>
-                        <span className="text-slate-900 dark:text-white">{driver.pct}%</span>
-                      </li>
-                    ))}
-                  </ul>
+              <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h3 className="text-base font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">{t('primary_risk_drivers')}</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{t('physiological_triggers')}</p>
+                  </div>
                 </div>
-                <div className="w-[120px] h-full flex-shrink-0">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie data={riskDrivers} dataKey="pct" cx="50%" cy="50%" innerRadius={35} outerRadius={50} paddingAngle={2} stroke="none">
-                        {riskDrivers.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <RechartsTooltip contentStyle={tooltipStyle} formatter={(value) => `${value}%`} />
-                    </PieChart>
-                  </ResponsiveContainer>
+
+                <div className="flex-1 flex items-center justify-between min-h-[160px]">
+                  <div className="space-y-3 flex-1 pr-4">
+                    {riskDrivers.map((driver, idx) => (
+                      <div key={idx} className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: driver.color }}></span>
+                          <span className="text-xs font-bold text-slate-700 dark:text-slate-200">{t(driver.key) || driver.name}</span>
+                        </div>
+                        <span className="text-sm font-black text-slate-900 dark:text-white">{driver.value}%</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="w-[120px] h-[120px] shrink-0">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie data={riskDrivers} innerRadius={35} outerRadius={55} paddingAngle={2} dataKey="value" stroke="none">
+                          {riskDrivers.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <RechartsTooltip contentStyle={tooltipStyle} wrapperStyle={{ zIndex: 100 }} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
                 </div>
               </div>
 

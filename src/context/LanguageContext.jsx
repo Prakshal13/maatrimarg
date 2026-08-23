@@ -4,6 +4,7 @@ const LanguageContext = createContext();
 
 export const TRANSLATIONS = {
   en: {
+    "primary_risk_drivers": "Primary Risk Drivers",
     "state_Maharashtra": "Maharashtra",
     "state_Tamil Nadu": "Tamil Nadu",
     district_Ahmednagar: "Ahmednagar",
@@ -545,6 +546,7 @@ export const TRANSLATIONS = {
   },
 
   mr: {
+    "primary_risk_drivers": "प्राथमिक धोका घटक",
     "state_Maharashtra": "महाराष्ट्र",
     "state_Tamil Nadu": "तमिळनाडू",
     district_Ahmednagar: "अहमदनगर",
@@ -1083,6 +1085,7 @@ export const TRANSLATIONS = {
   },
 
   hi: {
+    "primary_risk_drivers": "प्राथमिक जोखिम चालक",
     "state_Maharashtra": "महाराष्ट्र",
     "state_Tamil Nadu": "तमिलनाडु",
     district_Ahmednagar: "अहमदनगर",
@@ -1621,6 +1624,7 @@ export const TRANSLATIONS = {
   },
 
   ta: {
+    "primary_risk_drivers": "முதன்மையான ஆபத்து காரணிகள்",
     "state_Maharashtra": "மகாராஷ்டிரா",
     "state_Tamil Nadu": "தமிழ்நாடு",
     district_Ahmednagar: "அகமதுநகர்",
