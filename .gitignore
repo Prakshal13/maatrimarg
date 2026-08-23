@@ -42,3 +42,6 @@ venv.bak/
 # IDEs
 .idea/
 *.sublime-workspace
+
+# Local Documents & Exports
+*.pdf
