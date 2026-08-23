@@ -428,18 +428,9 @@ const MaternalHealthAnalytics = () => {
                   </div>
                 </div>
 
-                <div className="flex-1 flex items-center justify-between min-h-[160px]">
-                  <div className="space-y-3 flex-1 pr-4">
-                    {riskDrivers.map((driver, idx) => (
-                      <div key={idx} className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: driver.color }}></span>
-                          <span className="text-xs font-bold text-slate-700 dark:text-slate-200">{t(driver.key) || driver.name}</span>
-                        </div>
-                        <span className="text-sm font-black text-slate-900 dark:text-white">{driver.pct}%</span>
-                      </div>
-                    ))}
-                  </div>
+                <div className="flex-1 flex items-center justify-between min-h-[160px] gap-6">
+                  
+                  {/* Left: Pie Chart */}
                   <div className="w-[120px] h-[120px] shrink-0">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
@@ -452,6 +443,20 @@ const MaternalHealthAnalytics = () => {
                       </PieChart>
                     </ResponsiveContainer>
                   </div>
+
+                  {/* Right: Legend */}
+                  <div className="space-y-3 flex-1">
+                    {riskDrivers.map((driver, idx) => (
+                      <div key={idx} className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: driver.color }}></span>
+                          <span className="text-xs font-bold text-slate-700 dark:text-slate-200">{t(driver.key) || driver.name}</span>
+                        </div>
+                        <span className="text-sm font-black text-slate-900 dark:text-white">{driver.pct}%</span>
+                      </div>
+                    ))}
+                  </div>
+                  
                 </div>
               </div>
 
