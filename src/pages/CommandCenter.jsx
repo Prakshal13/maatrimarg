@@ -123,7 +123,7 @@ const CommandCenter = () => {
       <div className="flex-1 flex flex-col min-w-0 bg-[#f7f9fb] dark:bg-[#070e1c] transition-colors duration-200">
         
         {/* Top Header Bar matching Screenshot */}
-        <header className="h-16 bg-white/90 dark:bg-[#091426] backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between sticky top-0 z-30 transition-colors duration-200">
+        <header className="h-16 bg-white/90 dark:bg-[#091426] backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between sticky top-0 z-[9999] transition-colors duration-200">
           
             {/* Global Search Bar with Omnibox Dropdown */}
             <div className="relative w-80">
