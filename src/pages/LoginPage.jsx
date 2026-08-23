@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth, DEMO_PROFILES } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { Shield, Badge, Key, LogIn, Globe, Moon, CheckCircle2 } from 'lucide-react';
@@ -8,6 +8,7 @@ const LoginPage = () => {
   const { login, loading } = useAuth();
   const { lang, changeLanguage } = useLanguage();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [clinicianId, setClinicianId] = useState('MH-DOC-8492');
   const [password, setPassword] = useState('••••••••');
@@ -15,14 +16,23 @@ const LoginPage = () => {
   const [remember, setRemember] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const redirectUser = (role) => {
+    const from = location.state?.from?.pathname;
+    if (from && from !== '/login') {
+      navigate(from);
+    } else {
+      if (role === 'asha') navigate('/asha/maternal');
+      else if (role === 'hospital_staff') navigate('/hospital');
+      else navigate('/command-center');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
     try {
       await login(clinicianId, password, selectedRole, 'Maharashtra HQ');
-      if (selectedRole === 'asha') navigate('/asha/maternal');
-      else if (selectedRole === 'hospital_staff') navigate('/hospital');
-      else navigate('/command-center');
+      redirectUser(selectedRole);
     } catch (err) {
       setErrorMsg('Login failed. Please verify credentials or use demo presets.');
     }
@@ -34,9 +44,7 @@ const LoginPage = () => {
     setClinicianId(profile.username);
     setSelectedRole(role);
     await login(profile.username, 'demo_key', role, profile.facility_or_district_id);
-    if (role === 'asha') navigate('/asha/maternal');
-    else if (role === 'hospital_staff') navigate('/hospital');
-    else navigate('/command-center');
+    redirectUser(role);
   };
 
   return (
