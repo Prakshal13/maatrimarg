@@ -312,7 +312,15 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
     mapInstanceRef.current = map;
     requestUserLocation();
 
+    const resizeObserver = new ResizeObserver(() => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.invalidateSize();
+      }
+    });
+    resizeObserver.observe(mapContainerRef.current);
+
     return () => {
+      resizeObserver.disconnect();
       map.remove();
       mapInstanceRef.current = null;
     };
@@ -471,12 +479,31 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
     if (routeLayerRef.current) {
       routeLayerRef.current.clearLayers();
       if (userLocation && closest) {
+        // Fallback straight line while loading
         L.polyline([[userLocation.lat, userLocation.lng], [closest.lat, closest.lng]], {
           color: '#006b5f',
           weight: 3.5,
           dashArray: '8, 8',
           opacity: 0.85,
         }).addTo(routeLayerRef.current);
+
+        // Fetch actual road geometry from OSRM
+        fetch(`https://router.project-osrm.org/route/v1/driving/${userLocation.lng},${userLocation.lat};${closest.lng},${closest.lat}?overview=full&geometries=geojson`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.routes && data.routes[0]) {
+              if (routeLayerRef.current) {
+                routeLayerRef.current.clearLayers();
+                const coords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+                L.polyline(coords, {
+                  color: '#006b5f',
+                  weight: 5,
+                  opacity: 0.9,
+                }).addTo(routeLayerRef.current);
+              }
+            }
+          })
+          .catch(err => console.error('OSRM routing error:', err));
       }
     }
   }, [hospitals, userLocation, showHospitals]);
