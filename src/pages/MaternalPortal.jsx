@@ -21,7 +21,7 @@ import {
 
 const MaternalPortal = () => {
   const { lang, t } = useLanguage();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
   const [vitals, setVitals] = useState({
     age: 28,
@@ -213,51 +213,107 @@ const MaternalPortal = () => {
         {/* Content Body (Grid from Stitch Screen 7) */}
         <main className="p-6 sm:p-8 space-y-6 flex-1 overflow-y-auto text-left">
           
-          {/* ASHA Live Duty & Safety SOS Bar */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3">
-            
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleToggleDuty}
-                className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 ${
-                  isOnDuty 
-                    ? 'bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-2xs' 
-                    : 'bg-slate-100 text-slate-500 border border-slate-200'
-                }`}
-              >
-                <span className={`w-2 h-2 rounded-full ${isOnDuty ? 'bg-emerald-600 animate-pulse' : 'bg-slate-400'}`}></span>
-                <span>{isOnDuty ? '🟢 On Field Duty' : '⚪ Standby Mode'}</span>
-              </button>
+          {/* Role-Specific Context Banner */}
+          {user?.role === 'asha' ? (
+            /* Frontline ASHA Duty & Safety SOS Bar */
+            <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleToggleDuty}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 ${
+                    isOnDuty 
+                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-2xs' 
+                      : 'bg-slate-100 text-slate-500 border border-slate-200'
+                  }`}
+                >
+                  <span className={`w-2 h-2 rounded-full ${isOnDuty ? 'bg-emerald-600 animate-pulse' : 'bg-slate-400'}`}></span>
+                  <span>{isOnDuty ? '🟢 On Field Duty' : '⚪ Standby Mode'}</span>
+                </button>
 
-              <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-600 font-medium">
-                <Navigation className="w-3.5 h-3.5 text-teal-600" />
-                <span>GPS Geotag:</span>
-                <span className="font-mono font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded text-[11px]">
-                  {ashaGps.lat.toFixed(4)}, {ashaGps.lng.toFixed(4)}
-                </span>
-                <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">
-                  Auto-Geotag Active
-                </span>
+                <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+                  <Navigation className="w-3.5 h-3.5 text-teal-600" />
+                  <span>GPS Geotag:</span>
+                  <span className="font-mono font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded text-[11px]">
+                    {ashaGps.lat.toFixed(4)}, {ashaGps.lng.toFixed(4)}
+                  </span>
+                  <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">
+                    Auto-Geotag Active
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleTriggerSos}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 shadow-sm ${
+                    sosActive 
+                      ? 'bg-rose-700 text-white animate-pulse' 
+                      : 'bg-rose-600 hover:bg-rose-700 text-white'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[16px]">crisis_alert</span>
+                  <span>{sosActive ? '🚨 SOS BEACON BROADCASTING' : '🆘 Trigger Emergency SOS'}</span>
+                </button>
               </div>
             </div>
+          ) : user?.role === 'dho_command' ? (
+            /* DHO Command Executive Oversight Banner */
+            <div className="bg-slate-900 text-white rounded-2xl p-4 shadow-sm border border-slate-800 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-xl bg-teal-500/20 border border-teal-400/30 flex items-center justify-center text-teal-300 font-bold text-sm">
+                  🏛️
+                </span>
+                <div>
+                  <div className="text-xs font-extrabold text-white flex items-center gap-2">
+                    <span>District Command Supervisory & Clinical Protocol Review</span>
+                    <span className="bg-teal-500/20 text-teal-300 text-[9px] font-mono px-2 py-0.5 rounded border border-teal-400/40 uppercase">
+                      Executive Mode
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-slate-400">
+                    Logged in as <strong>{user?.name || 'DHO Command Director'}</strong> • Accessing AI inference engine and triage thresholds.
+                  </div>
+                </div>
+              </div>
 
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleTriggerSos}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 shadow-sm ${
-                  sosActive 
-                    ? 'bg-rose-700 text-white animate-pulse' 
-                    : 'bg-rose-600 hover:bg-rose-700 text-white'
-                }`}
+              <Link
+                to="/command-center"
+                className="px-3 py-1.5 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-xl transition-all shadow-2xs flex items-center gap-1.5"
               >
-                <span className="material-symbols-outlined text-[16px]">crisis_alert</span>
-                <span>{sosActive ? '🚨 SOS BEACON BROADCASTING' : '🆘 Trigger Emergency SOS'}</span>
-              </button>
+                <span>Return to Live GIS Matrix</span>
+                <span>➔</span>
+              </Link>
             </div>
+          ) : (
+            /* Hospital CMO / Specialist Banner */
+            <div className="bg-teal-950 text-white rounded-2xl p-4 shadow-sm border border-teal-800 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-xl bg-teal-500/20 border border-teal-400/30 flex items-center justify-center text-teal-300 font-bold text-sm">
+                  🏥
+                </span>
+                <div>
+                  <div className="text-xs font-extrabold text-teal-100 flex items-center gap-2">
+                    <span>Tertiary Hospital Inpatient & Emergency Triage Evaluation</span>
+                    <span className="bg-teal-500/30 text-teal-200 text-[9px] font-mono px-2 py-0.5 rounded uppercase">
+                      Clinical Specialist
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-teal-300/80">
+                    Logged in as <strong>{user?.name || 'Hospital CMO'}</strong> • Verifying admission criteria and pre-arrival bed lock.
+                  </div>
+                </div>
+              </div>
 
-          </div>
+              <Link
+                to="/hospital"
+                className="px-3 py-1.5 bg-teal-700 hover:bg-teal-600 text-white text-xs font-bold rounded-xl transition-all shadow-2xs"
+              >
+                Hospital Directory ➔
+              </Link>
+            </div>
+          )}
 
-          {sosAlertMessage && (
+          {sosAlertMessage && user?.role === 'asha' && (
             <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-300 text-rose-900 text-xs font-bold flex items-center justify-between">
               <span>{sosAlertMessage}</span>
               <span className="text-[10px] uppercase font-extrabold bg-rose-200 text-rose-900 px-2 py-0.5 rounded">
