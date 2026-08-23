@@ -7,6 +7,19 @@ import AppSidebar from '../components/AppSidebar';
 import PortalHeader from '../components/PortalHeader';
 import { Baby, Activity, UserPlus, ShieldCheck, HeartPulse, ChevronRight, AlertCircle, Thermometer, Wind } from 'lucide-react';
 
+
+const LOCATION_DATA = {
+  "Maharashtra": {
+    "Gadchiroli": ["Bhamragad", "Kurkheda", "Aheri", "Dhanora", "Sironcha", "Ettapalli"],
+    "Nandurbar": ["Akkalkuwa", "Dhadgaon", "Navapur", "Taloda", "Shahada"],
+    "Amravati": ["Dharni", "Chikhaldara", "Melghat"]
+  },
+  "Tamil Nadu": {
+    "Nilgiris": ["Gudalur", "Pandalur", "Kotagiri", "Coonoor", "Ooty"],
+    "Dharmapuri": ["Pennagaram", "Harur", "Palacode", "Pappireddipatti"]
+  }
+};
+
 const ChildPortal = () => {
   const { t, lang } = useLanguage();
   const { user } = useAuth();
