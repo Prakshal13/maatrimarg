@@ -16,7 +16,7 @@ class DispatchNotificationInput(BaseModel):
     referral_id: int
     recipient_role: Literal["ambulance_driver", "hospital_cmo", "asha_worker", "family"] = "ambulance_driver"
     phone: str = Field(min_length=10, max_length=20)
-    language: Literal["en", "mr", "hi"] = "mr"
+    language: Literal["en", "mr", "hi", "ta"] = "mr"
 
 
 TEMPLATES = {
@@ -40,6 +40,17 @@ TEMPLATES = {
         "prep": (
             "⚠️ मातृमार्ग पूर्व-सूचना: गर्भवती महिला {mother_name} का जोखिम स्कोर {risk_score}% है।"
             " कृपया बेड एवं ब्लड स्टॉक तैयार रखें। अस्पताल: {hospital_name}."
+        ),
+    },
+    "ta": {
+        "dispatch": (
+            "🚨 மாத்ரிமார்க் அவசர எச்சரிக்கை: கர்ப்பிணி தாய் {mother_name} ({age} வயது), கிராமம்: {village}, இரத்த வகை: {blood_type}."
+            " அவசர ஊர்தி அனுப்பப்பட்டுள்ளது. சேருமிடம்: {hospital_name}. வருகை நேரம்: {eta} நிமிடங்கள்."
+            " அவசர உதவி: 108."
+        ),
+        "prep": (
+            "⚠️ மாத்ரிமார்க் முன்கூட்டிய எச்சரிக்கை: தாய் {mother_name} ஆபத்து மதிப்பீடு {risk_score}%."
+            " படுக்கை மற்றும் இரத்த இருப்பை தயார் நிலையில் வைக்கவும். மருத்துவமனை: {hospital_name}."
         ),
     },
     "en": {

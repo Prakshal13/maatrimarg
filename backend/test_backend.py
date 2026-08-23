@@ -213,13 +213,21 @@ def run_all_tests():
     assert_test("Hindi risk prediction HTTP 200", res_hi.status_code == 200)
     assert_test("Hindi explanation generated", "उच्च रक्तचाप (सिस्टोलिक)" in res_hi.json().get("explanation", []))
 
-    # Test Dispatch SMS notification simulation
+    # Test Tamil risk prediction
+    res_ta = client.post("/predict-risk", json={
+        "age": 29, "systolic_bp": 146, "diastolic_bp": 94, "blood_sugar": 140, "body_temp": 98.6, "heart_rate": 84, "lang": "ta"
+    })
+    assert_test("Tamil risk prediction HTTP 200", res_ta.status_code == 200)
+    assert_test("Tamil explanation generated", "உயர் இரத்த அழுத்தம் (சிஸ்டாலிக்)" in res_ta.json().get("explanation", []))
+
+    # Test Dispatch SMS notification simulation (Tamil)
     res_sms = client.post("/notifications/send-dispatch-alert", json={
         "referral_id": ref_id_1,
         "recipient_role": "ambulance_driver",
         "phone": "9876543210",
-        "language": "mr"
+        "language": "ta"
     })
+    assert_test("Tamil SMS notification dispatched HTTP 200", res_sms.status_code == 200 and "மாத்ரிமார்க்" in res_sms.json()["message_body"])
     # 12. Category D: Authentication, RBAC & DISHA PHI Masking
     print("\n--- 12. Testing Category D: Authentication, RBAC & DISHA PHI Masking ---")
     # Login as ASHA
