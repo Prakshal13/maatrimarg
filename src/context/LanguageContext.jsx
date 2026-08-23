@@ -542,9 +542,7 @@ export const TRANSLATIONS = {
     contact_admin: "Contact System Admin",
     support: "Help & Protocol Support",
     back_to_landing: "Back to Landing",
-    logout_session: "Log Out Session"
-  },
-
+    logout_session: "Log Out Session",
     // FAQ Section
     faq_title: "Frequently Asked Questions",
     faq_q1: "What is 'Regional Triage Distribution'?",
@@ -556,7 +554,9 @@ export const TRANSLATIONS = {
     faq_q4: "Who is this platform built for?",
     faq_a4: "MaatriMarg operates on three levels: ASHA Workers (for rural field data collection), Hospital CMOs (for preparing beds for incoming critical patients), and District Health Officers (for high-level governance and emergency routing).",
     faq_q5: "Are the risk predictions fully automated?",
-    faq_a5: "Our ML models act as an assistive tool, not a replacement for doctors. We maintain an 'AI Override Rate' (meaning doctors can overrule the AI), ensuring clinical safety while vastly speeding up rural screenings.",
+    faq_a5: "Our ML models act as an assistive tool, not a replacement for doctors. We maintain an 'AI Override Rate' (meaning doctors can overrule the AI), ensuring clinical safety while vastly speeding up rural screenings."
+  },
+
   mr: {
     "primary_risk_drivers": "प्राथमिक धोका घटक",
     "state_Maharashtra": "महाराष्ट्र",
@@ -1093,9 +1093,7 @@ export const TRANSLATIONS = {
     contact_admin: "प्रणाली व्यवस्थापकाशी संपर्क",
     support: "मदत व आपत्कालीन सहाय्य",
     back_to_landing: "मुख्य पृष्ठावर जा",
-    logout_session: "सत्र समाप्त करा (लॉगआउट)"
-  },
-
+    logout_session: "सत्र समाप्त करा (लॉगआउट)",
     // FAQ Section
     faq_title: "वारंवार विचारले जाणारे प्रश्न (FAQ)",
     faq_q1: "प्रादेशिक ट्रायज वितरण (Regional Triage Distribution) म्हणजे काय?",
@@ -1107,7 +1105,9 @@ export const TRANSLATIONS = {
     faq_q4: "हा प्लॅटफॉर्म कोणासाठी बनवला आहे?",
     faq_a4: "मातृमार्ग (MaatriMarg) तीन स्तरांवर काम करते: आशा कार्यकर्त्या (ग्रामीण भागात डेटा गोळा करण्यासाठी), हॉस्पिटल CMOs (येणाऱ्या गंभीर रुग्णांसाठी बेड तयार ठेवण्यासाठी) आणि जिल्हा आरोग्य अधिकारी (उच्च-स्तरीय नियंत्रण आणि आपत्कालीन मार्गदर्शनासाठी).",
     faq_q5: "धोका अंदाज पूर्णपणे स्वयंचलित (Automated) आहेत का?",
-    faq_a5: "आमचे ML मॉडेल एक सहाय्यक साधन म्हणून काम करते, डॉक्टरांना पर्याय म्हणून नाही. आम्ही 'AI ओव्हरराइड रेट' (म्हणजे डॉक्टर AI चा निर्णय बदलू शकतात) कायम ठेवतो, ज्यामुळे वैद्यकीय सुरक्षितता सुनिश्चित होते आणि ग्रामीण तपासणीला वेग येतो.",
+    faq_a5: "आमचे ML मॉडेल एक सहाय्यक साधन म्हणून काम करते, डॉक्टरांना पर्याय म्हणून नाही. आम्ही 'AI ओव्हरराइड रेट' (म्हणजे डॉक्टर AI चा निर्णय बदलू शकतात) कायम ठेवतो, ज्यामुळे वैद्यकीय सुरक्षितता सुनिश्चित होते आणि ग्रामीण तपासणीला वेग येतो."
+  },
+
   hi: {
     "primary_risk_drivers": "प्राथमिक जोखिम चालक",
     "state_Maharashtra": "महाराष्ट्र",
@@ -1644,9 +1644,7 @@ export const TRANSLATIONS = {
     contact_admin: "प्रणाली व्यवस्थापक से संपर्क",
     support: "सहायता एवं आपातकालीन सपोर्ट",
     back_to_landing: "मुख्य पृष्ठ पर लौटें",
-    logout_session: "लॉग आउट करें"
-  },
-
+    logout_session: "लॉग आउट करें",
     // FAQ Section
     faq_title: "अक्सर पूछे जाने वाले प्रश्न (FAQ)",
     faq_q1: "क्षेत्रीय ट्राइएज वितरण (Regional Triage Distribution) क्या है?",
@@ -1658,7 +1656,9 @@ export const TRANSLATIONS = {
     faq_q4: "यह प्लेटफॉर्म किसके लिए बनाया गया है?",
     faq_a4: "मातृमार्ग (MaatriMarg) तीन स्तरों पर काम करता है: आशा कार्यकर्ता (ग्रामीण क्षेत्रों में डेटा एकत्र करने के लिए), अस्पताल CMO (आने वाले गंभीर रोगियों के लिए बिस्तर तैयार करने के लिए), और जिला स्वास्थ्य अधिकारी (उच्च-स्तरीय निगरानी और आपातकालीन रूटिंग के लिए)।",
     faq_q5: "क्या जोखिम भविष्यवाणियां पूरी तरह से स्वचालित (Automated) हैं?",
-    faq_a5: "हमारे ML मॉडल एक सहायक उपकरण के रूप में कार्य करते हैं, न कि डॉक्टरों के विकल्प के रूप में। हम 'AI ओवरराइड रेट' (अर्थात डॉक्टर AI के फैसले को बदल सकते हैं) बनाए रखते हैं, जिससे नैदानिक सुरक्षा सुनिश्चित होती है और ग्रामीण जांच की गति काफी तेज होती है।",
+    faq_a5: "हमारे ML मॉडल एक सहायक उपकरण के रूप में कार्य करते हैं, न कि डॉक्टरों के विकल्प के रूप में। हम 'AI ओवरराइड रेट' (अर्थात डॉक्टर AI के फैसले को बदल सकते हैं) बनाए रखते हैं, जिससे नैदानिक सुरक्षा सुनिश्चित होती है और ग्रामीण जांच की गति काफी तेज होती है."
+  },
+
   ta: {
     "primary_risk_drivers": "முதன்மையான ஆபத்து காரணிகள்",
     "state_Maharashtra": "மகாராஷ்டிரா",
@@ -2195,7 +2195,19 @@ export const TRANSLATIONS = {
     contact_admin: "அமைப்பு நிர்வாகியைத் தொடர்பு கொள்க",
     support: "உதவி மற்றும் அவசர ஆதரவு",
     back_to_landing: "முகப்புப் பக்கத்திற்குச் செல்",
-    logout_session: "வெளியேறுக"
+    logout_session: "வெளியேறுக",
+    // FAQ Section
+    faq_title: "அடிக்கடி கேட்கப்படும் கேள்விகள் (FAQ)",
+    faq_q1: "பிராந்திய ட்ரையாஜ் விநியோகம் (Regional Triage Distribution) என்றால் என்ன?",
+    faq_a1: "இது எங்களின் நேரடி கட்டுப்பாட்டு மைய அளவீடு ஆகும். 'ட்ரேயாஜ்' (Triage) என்பது அவசரத்தின் அடிப்படையில் சிகிச்சையின் வரிசையைத் தீர்மானிக்கும் மருத்துவ செயல்முறை ஆகும். எந்தெந்த கிராமங்களில் ஆபத்தான நோயாளிகள் அதிகம் உள்ளனர் என்பதை இந்த வரைபடம் மாவட்ட சுகாதார அதிகாரிகளுக்கு காட்டுகிறது.",
+    faq_q2: "VIPER குழந்தை மருத்துவ இயந்திரம் எவ்வாறு செயல்படுகிறது?",
+    faq_a2: "VIPER என்பது குழந்தை சுகாதார மதிப்பீட்டுக் கருவியாகும். ASHA பணியாளர்கள் குழந்தைகளுக்கான SpO2 (ஆக்ஸிஜன்), இதயத் துடிப்பு மற்றும் வெப்பநிலை போன்ற எளிய விவரங்களை பதிவு செய்கிறார்கள். இந்த இயந்திரம் அந்த விவரங்களை பகுப்பாய்வு செய்து, குழந்தைகளின் ஷாக் அல்லது செப்சிஸ் போன்ற ஆரம்ப அறிகுறிகளை உடனடியாக கண்டறிந்து வழிகாட்டுகிறது.",
+    faq_q3: "தாய்மை நலத்தில் 'முதன்மை ஆபத்து காரணிகள்' (Primary Risk Drivers) எவை?",
+    faq_a3: "கர்ப்பகால உயர் இரத்த அழுத்தம் அல்லது கர்ப்பகால நீரிழிவு போன்ற முக்கிய உடலியல் காரணிகளையே 'முதன்மை ஆபத்து காரணிகள்' என்கிறோம். இதை எங்களின் மெஷின் லேர்னிங் மாடல் ஒரு குறிப்பிட்ட பகுதியில் கர்ப்பிணிப் பெண்ணுக்கு ஏற்படும் மிகப்பெரிய அச்சுறுத்தலாக கண்டறிந்துள்ளது.",
+    faq_q4: "இந்த தளம் யாருக்காக உருவாக்கப்பட்டுள்ளது?",
+    faq_a4: "மாத்ரிமார்க் (MaatriMarg) மூன்று நிலைகளில் செயல்படுகிறது: ஆஷா பணியாளர்கள் (கிராமப்புற தரவு சேகரிப்புக்காக), மருத்துவமனை CMO-கள் (வரும் ஆபத்தான நோயாளிகளுக்கு படுக்கைகளைத் தயார் செய்ய) மற்றும் மாவட்ட சுகாதார அதிகாரிகள் (உயர்மட்ட நிர்வாகம் மற்றும் அவசரகால வழிகாட்டுதலுக்கு).",
+    faq_q5: "ஆபத்து கணிப்புகள் முழுமையாக தானியங்கி முறையிலா (Automated) செயல்படுகின்றன?",
+    faq_a5: "எங்கள் ML மாடல்கள் ஒரு உதவி கருவியாக செயல்படுகின்றன, மருத்துவர்களுக்கு மாற்றாக அல்ல. மருத்துவர்கள் AI-இன் முடிவுகளை மாற்றுவதற்கான வசதியை (AI Override Rate) நாங்கள் பராமரிக்கிறோம். இது மருத்துவ பாதுகாப்பை உறுதி செய்கிறது."
   }
 };
 
