@@ -1,66 +1,42 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { api } from '../api/endpoints';
 import { useLanguage } from '../context/LanguageContext';
 import { 
   HeartPulse, 
   UserPlus, 
-  Send, 
   Activity, 
-  Hospital, 
   Navigation, 
-  CheckCircle2, 
-  AlertTriangle, 
-  Flame, 
-  Droplet, 
   Languages, 
   PhoneCall, 
-  Clock, 
-  ShieldCheck,
-  Check,
-  ChevronRight
+  CheckCircle2, 
+  RefreshCw,
+  Send,
+  Download,
+  AlertCircle
 } from 'lucide-react';
 
 const MaternalPortal = () => {
   const { lang, t } = useLanguage();
 
-  // State: Patient Selection & Registration
-  const [mothersList, setMothersList] = useState([]);
-  const [selectedMotherId, setSelectedMotherId] = useState('');
-  const [showRegModal, setShowRegModal] = useState(false);
-  
-  // Registration Form State
-  const [newMother, setNewMother] = useState({
-    name: '',
-    age: 26,
-    phone: '9876543210',
-    village: 'Bhamragad (Gadchiroli)',
-    blood_type: 'O-',
-    gestational_age_weeks: 36,
-    lat: 19.04,
-    lng: 80.18,
-    consent_given: true,
-  });
-
-  // Vitals State
   const [vitals, setVitals] = useState({
-    age: 26,
+    age: 28,
+    heart_rate: 95,
     systolic_bp: 145,
     diastolic_bp: 95,
-    blood_sugar: '140 mg/dL',
-    body_temp: 98.6,
-    heart_rate: 88,
-    labor_started: false,
+    blood_sugar: 6.2,
+    body_temp: 99.1,
   });
 
-  // Results State
   const [loading, setLoading] = useState(false);
   const [prediction, setPrediction] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [mothersList, setMothersList] = useState([]);
+  const [selectedMotherId, setSelectedMotherId] = useState('');
   const [routingResult, setRoutingResult] = useState(null);
-  const [activeReferral, setActiveReferral] = useState(null);
-  const [notificationStatus, setNotificationStatus] = useState(null);
   const [showDispatchModal, setShowDispatchModal] = useState(false);
+  const [notificationStatus, setNotificationStatus] = useState(null);
 
-  // Load mothers list on mount
   const fetchMothers = async () => {
     try {
       const res = await api.getMothers(true);
@@ -68,11 +44,10 @@ const MaternalPortal = () => {
         setMothersList(res.data);
         if (!selectedMotherId) {
           setSelectedMotherId(res.data[0].id.toString());
-          setVitals(prev => ({ ...prev, age: res.data[0].age || 26 }));
         }
       }
     } catch (e) {
-      console.warn('Could not fetch mothers list:', e);
+      console.warn('Could not fetch mothers:', e);
     }
   };
 
@@ -80,543 +55,473 @@ const MaternalPortal = () => {
     fetchMothers();
   }, []);
 
-  // When mother selection changes, update age & coordinates
-  const handleSelectMother = (idStr) => {
-    setSelectedMotherId(idStr);
-    const m = mothersList.find(item => item.id.toString() === idStr);
-    if (m) {
-      setVitals(prev => ({ ...prev, age: m.age || 26 }));
-    }
+  const handleLoadSample = () => {
+    setVitals({
+      age: 28,
+      heart_rate: 95,
+      systolic_bp: 145,
+      diastolic_bp: 95,
+      blood_sugar: 6.2,
+      body_temp: 99.1,
+    });
   };
 
-  // Register a new mother
-  const handleRegisterMother = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await api.createMother(newMother);
-      await fetchMothers();
-      setSelectedMotherId(res.data.id.toString());
-      setShowRegModal(false);
-      alert('Mother registered successfully with DISHA consent.');
-    } catch (err) {
-      alert('Failed to register mother: ' + (err.response?.data?.detail || err.message));
-    }
-  };
-
-  // Evaluate Risk & Route
-  const handleEvaluate = async (e) => {
-    e?.preventDefault();
-    setLoading(true);
+  const handleReset = () => {
+    setVitals({
+      age: 24,
+      heart_rate: 78,
+      systolic_bp: 118,
+      diastolic_bp: 76,
+      blood_sugar: 5.2,
+      body_temp: 98.4,
+    });
     setPrediction(null);
     setRoutingResult(null);
+    setErrorMsg('');
+  };
 
+  const handlePredictRisk = async (e) => {
+    e?.preventDefault();
+    setLoading(true);
+    setErrorMsg('');
     try {
-      // 1. Run live ML prediction with language parameter
-      const predRes = await api.predictRisk({
+      const res = await api.predictRisk({
         age: Number(vitals.age),
         systolic_bp: Number(vitals.systolic_bp),
         diastolic_bp: Number(vitals.diastolic_bp),
         blood_sugar: vitals.blood_sugar,
         body_temp: Number(vitals.body_temp),
         heart_rate: Number(vitals.heart_rate),
-        labor_started: Boolean(vitals.labor_started),
         lang: lang,
       });
-      setPrediction(predRes.data);
+      setPrediction(res.data);
 
-      // 2. If a registered mother is selected, log vitals to DB and calculate Dijkstra route
-      if (selectedMotherId) {
-        const m = mothersList.find(item => item.id.toString() === selectedMotherId);
-        const vitalsRes = await api.recordMotherVitals(selectedMotherId, {
-          systolic_bp: Number(vitals.systolic_bp),
-          diastolic_bp: Number(vitals.diastolic_bp),
-          blood_sugar: vitals.blood_sugar,
-          body_temp: Number(vitals.body_temp),
-          heart_rate: Number(vitals.heart_rate),
-          labor_started: Boolean(vitals.labor_started),
-        });
+      // Also compute Dijkstra route if mother coordinates available
+      const routeRes = await api.calculateRoute({
+        mother_lat: 19.04,
+        mother_lng: 80.18,
+        blood_type: 'O-',
+        needs_nicu: Number(res.data.risk_score) >= 70,
+        requires_surgeon: res.data.risk_tier === 'dispatch',
+      });
+      setRoutingResult(routeRes.data);
 
-        if (vitalsRes.data?.referral) {
-          setActiveReferral(vitalsRes.data.referral);
-        }
-
-        // Calculate Dijkstra Route
-        const routeRes = await api.calculateRoute({
-          mother_lat: m?.lat || 19.04,
-          mother_lng: m?.lng || 80.18,
-          blood_type: m?.blood_type || 'O-',
-          needs_nicu: Number(predRes.data.risk_score) >= 70,
-          requires_surgeon: predRes.data.risk_tier === 'dispatch',
-        });
-        setRoutingResult(routeRes.data);
-      }
     } catch (err) {
-      alert('Evaluation error: ' + (err.response?.data?.detail || err.message));
+      setErrorMsg('Unable to calculate risk: ' + (err.response?.data?.detail || err.message));
     } finally {
       setLoading(false);
     }
   };
 
-  // Send Emergency SMS Alert Simulation
-  const handleSendNotification = async (recipientRole = 'ambulance_driver') => {
-    if (!activeReferral) {
-      alert('Please evaluate a high-risk mother to generate an active referral first.');
-      return;
-    }
+  const handleSimulate108 = async () => {
     try {
       const res = await api.sendDispatchAlert({
-        referral_id: activeReferral.id,
-        recipient_role: recipientRole,
+        referral_id: 1,
+        recipient_role: 'ambulance_driver',
         phone: '9876543210',
         language: lang,
       });
       setNotificationStatus(res.data);
       setShowDispatchModal(true);
     } catch (e) {
-      alert('Notification failed: ' + (e.response?.data?.detail || e.message));
+      alert('Simulation error: ' + (e.response?.data?.detail || e.message));
     }
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 text-left">
+    <div className="flex min-h-screen bg-[#f8fafc] text-[#171c1f] font-sans antialiased">
       
-      {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 p-6 sm:p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
-        <div className="space-y-1.5 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-bold">
-            <HeartPulse className="w-3.5 h-3.5 animate-pulse text-rose-400" />
-            <span>{t('maternal_portal')} • ASHA / ANM Frontline Suite</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black font-['Plus_Jakarta_Sans']">
-            {t('vitals_entry')} & AI Risk Stratification
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-            Frontline decision support with Random Forest ML, blood sugar auto-normalization, multilingual explanations, and capacity-aware Dijkstra hospital dispatch.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3 relative z-10">
-          <button
-            onClick={() => setShowRegModal(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold backdrop-blur-md transition-all"
-          >
-            <UserPlus className="w-4 h-4 text-teal-300" />
-            <span>+ {t('register_patient')}</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Main Grid: Form & Live Triage Dashboard */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* Left Column: Vitals Entry Form */}
-        <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-          
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+      {/* Sidebar matching Stitch Screen 7 */}
+      <aside className="w-[260px] bg-white border-r border-slate-200 shadow-xs hidden md:flex flex-col shrink-0">
+        <div className="p-6 border-b border-slate-200">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#006b5f] flex items-center justify-center text-white font-black text-base shadow-sm">
+              <span className="material-symbols-outlined text-[18px]">medical_services</span>
+            </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <Activity className="w-5 h-5 text-blue-600" />
-                {t('vitals_entry')}
-              </h2>
-              <p className="text-xs text-slate-500">Enter maternal vitals collected during field visit</p>
+              <h1 className="text-base font-extrabold text-slate-900 leading-tight font-['Plus_Jakarta_Sans']">
+                MaatriMarg
+              </h1>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                Command Center
+              </p>
             </div>
-
-            {/* Mother Selector Dropdown */}
-            {mothersList.length > 0 && (
-              <select
-                value={selectedMotherId}
-                onChange={(e) => handleSelectMother(e.target.value)}
-                className="text-xs font-bold bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {mothersList.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.name} ({m.village || 'Village'})
-                  </option>
-                ))}
-              </select>
-            )}
           </div>
-
-          <form onSubmit={handleEvaluate} className="space-y-4">
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {t('age')} (Years)
-                </label>
-                <input
-                  type="number"
-                  value={vitals.age}
-                  onChange={(e) => setVitals({ ...vitals, age: e.target.value })}
-                  required
-                  min="14"
-                  max="60"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {t('blood_sugar')} (mg/dL or mmol/L)
-                </label>
-                <input
-                  type="text"
-                  value={vitals.blood_sugar}
-                  onChange={(e) => setVitals({ ...vitals, blood_sugar: e.target.value })}
-                  required
-                  placeholder="e.g. 140 mg/dL"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-                <span className="text-[10px] text-slate-400">Auto-detects mg/dL (Indian Standard)</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Systolic BP (mmHg)
-                </label>
-                <input
-                  type="number"
-                  value={vitals.systolic_bp}
-                  onChange={(e) => setVitals({ ...vitals, systolic_bp: e.target.value })}
-                  required
-                  min="60"
-                  max="240"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Diastolic BP (mmHg)
-                </label>
-                <input
-                  type="number"
-                  value={vitals.diastolic_bp}
-                  onChange={(e) => setVitals({ ...vitals, diastolic_bp: e.target.value })}
-                  required
-                  min="40"
-                  max="160"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {t('heart_rate')} (BPM)
-                </label>
-                <input
-                  type="number"
-                  value={vitals.heart_rate}
-                  onChange={(e) => setVitals({ ...vitals, heart_rate: e.target.value })}
-                  required
-                  min="40"
-                  max="200"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {t('body_temp')} (°F)
-                </label>
-                <input
-                  type="number"
-                  step="0.1"
-                  value={vitals.body_temp}
-                  onChange={(e) => setVitals({ ...vitals, body_temp: e.target.value })}
-                  required
-                  min="94"
-                  max="108"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-              </div>
-            </div>
-
-            {/* Active Labor Switch */}
-            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
-              <div>
-                <div className="text-xs font-bold text-slate-800">{t('labor_started')}</div>
-                <div className="text-[11px] text-slate-500">Overrides score to automatic emergency dispatch</div>
-              </div>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={vitals.labor_started}
-                  onChange={(e) => setVitals({ ...vitals, labor_started: e.target.checked })}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-rose-600"></div>
-              </label>
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-4 px-4 bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center gap-2"
-            >
-              {loading ? (
-                <span>Running ML Inferences & Dijkstra Graph...</span>
-              ) : (
-                <>
-                  <HeartPulse className="w-4 h-4 text-rose-300" />
-                  <span>{t('evaluate_risk')}</span>
-                  <ChevronRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-
-          </form>
-
         </div>
 
-        {/* Right Column: AI Triage & Optimal Hospital Destination */}
-        <div className="lg:col-span-6 space-y-6">
+        <nav className="flex-1 px-3 py-4 space-y-1 text-xs font-bold text-left">
+          <Link
+            to="/command-center"
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
+          >
+            <span className="material-symbols-outlined text-[18px]">hub</span>
+            <span>Network</span>
+          </Link>
+
+          <Link
+            to="/hospital"
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
+          >
+            <span className="material-symbols-outlined text-[18px]">domain</span>
+            <span>Hospitals</span>
+          </Link>
+
+          <button
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-[#006b5f]/10 text-[#006b5f] font-extrabold transition-all"
+          >
+            <span className="material-symbols-outlined text-[18px]">clinical_notes</span>
+            <span>Risk Assessment</span>
+          </button>
+
+          <div className="pt-6 pb-2 px-3">
+            <span className="text-[10px] uppercase font-extrabold text-slate-400 tracking-widest">
+              System Modules
+            </span>
+          </div>
+
+          <Link
+            to="/asha/child"
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
+          >
+            <span className="material-symbols-outlined text-[18px]">child_care</span>
+            <span>Pediatric VIPER</span>
+          </Link>
+
+          <Link
+            to="/asha/chronic"
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition-all"
+          >
+            <span className="material-symbols-outlined text-[18px]">ecg_heart</span>
+            <span>Cardiovascular Risk</span>
+          </Link>
+        </nav>
+
+        <div className="p-4 border-t border-slate-200">
+          <Link
+            to="/login"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-700 text-xs font-bold transition-all"
+          >
+            <span className="material-symbols-outlined text-[18px]">logout</span>
+            <span>Log Out</span>
+          </Link>
+        </div>
+      </aside>
+
+      {/* Main Canvas */}
+      <div className="flex-1 flex flex-col min-w-0">
+        
+        {/* Top Header */}
+        <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-30">
+          <div className="flex items-center gap-3">
+            <h2 className="text-base font-extrabold text-slate-900 font-['Plus_Jakarta_Sans']">
+              Maternal Risk Assessment
+            </h2>
+            <span className="px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-600 uppercase">
+              ML Inference Engine
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-bold text-slate-600 uppercase">{lang}</span>
+            <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 font-bold text-xs">
+              DOC
+            </div>
+          </div>
+        </header>
+
+        {/* Content Body (Grid from Stitch Screen 7) */}
+        <main className="p-6 sm:p-8 space-y-6 flex-1 overflow-y-auto text-left">
           
-          {prediction ? (
-            <div className="space-y-6">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
+            
+            {/* Left Column: Clinical Data Entry Form (Exact Stitch Screen 7) */}
+            <div className="xl:col-span-7 bg-white border border-slate-200 rounded-2xl shadow-2xs p-6 space-y-6">
               
-              {/* Triage Tier & Score Banner */}
-              <div className={`p-6 rounded-3xl border shadow-sm text-left ${
-                prediction.risk_tier === 'dispatch' 
-                  ? 'bg-rose-50 border-rose-200 text-rose-950' 
-                  : prediction.risk_tier === 'prep' 
-                  ? 'bg-amber-50 border-amber-200 text-amber-950' 
-                  : 'bg-emerald-50 border-emerald-200 text-emerald-950'
-              }`}>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold uppercase tracking-wider">{t('triage_tier')}</span>
-                  </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-black uppercase ${
-                    prediction.risk_tier === 'dispatch' 
-                      ? 'bg-rose-600 text-white' 
-                      : prediction.risk_tier === 'prep' 
-                      ? 'bg-amber-500 text-white' 
-                      : 'bg-emerald-600 text-white'
-                  }`}>
-                    {prediction.risk_tier_display || prediction.risk_tier}
-                  </span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 font-['Plus_Jakarta_Sans']">
+                    Clinical Data Entry
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Enter current maternal measurements collected by ASHA / PHC.
+                  </p>
                 </div>
 
-                <div className="flex items-baseline gap-3 my-2">
-                  <span className="text-4xl sm:text-5xl font-black font-['Plus_Jakarta_Sans']">
-                    {prediction.risk_score}
-                  </span>
-                  <span className="text-xs font-bold text-slate-500">/ 100 Risk Score</span>
-                </div>
-
-                {/* Multilingual Diagnostic Contributing Factors */}
-                <div className="mt-4 pt-4 border-t border-slate-200/60 space-y-2">
-                  <div className="text-xs font-bold flex items-center gap-1.5">
-                    <Languages className="w-3.5 h-3.5 text-blue-600" />
-                    <span>{t('contributing_factors')} ({lang.toUpperCase()}):</span>
-                  </div>
-                  {prediction.explanation && prediction.explanation.length > 0 ? (
-                    <ul className="space-y-1 text-xs font-medium pl-4 list-disc">
-                      {prediction.explanation.map((factor, idx) => (
-                        <li key={idx} className="leading-snug">{factor}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-xs text-slate-500">All recorded vitals within normal physiologic parameters.</p>
-                  )}
-                </div>
-
-                {/* Action Trigger */}
-                {prediction.risk_tier === 'dispatch' && (
-                  <div className="mt-5 pt-3">
-                    <button
-                      onClick={() => handleSendNotification('ambulance_driver')}
-                      className="w-full py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-md shadow-rose-600/30 flex items-center justify-center gap-2 transition-colors"
-                    >
-                      <PhoneCall className="w-4 h-4 animate-bounce" />
-                      <span>{t('send_dispatch_alert')}</span>
-                    </button>
-                  </div>
-                )}
+                <button
+                  onClick={handleLoadSample}
+                  type="button"
+                  className="px-3 py-1.5 border border-slate-200 hover:bg-slate-50 rounded-lg text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#006b5f]" />
+                  <span>Load Sample Data</span>
+                </button>
               </div>
 
-              {/* Dijkstra Routing Recommendation Card */}
-              {routingResult?.best_hospital && (
-                <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm text-left space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                    <div className="flex items-center gap-2">
-                      <Navigation className="w-5 h-5 text-teal-600" />
-                      <h3 className="font-bold text-slate-900 text-sm sm:text-base">
-                        {t('nearest_hospital')}
-                      </h3>
+              <form onSubmit={handlePredictRisk} className="space-y-5">
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  
+                  <div>
+                    <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+                      Age <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        value={vitals.age}
+                        onChange={(e) => setVitals({ ...vitals, age: e.target.value })}
+                        required
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-[#006b5f]"
+                      />
+                      <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
+                        Years
+                      </span>
                     </div>
-                    <span className="text-xs font-bold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-lg border border-teal-100">
-                      ETA: ~{routingResult.eta_minutes} min (Dijkstra)
-                    </span>
                   </div>
 
                   <div>
-                    <h4 className="text-base font-extrabold text-slate-900">
-                      {routingResult.best_hospital.name}
-                    </h4>
-                    <p className="text-xs text-slate-500">
-                      {routingResult.best_hospital.district}, {routingResult.best_hospital.state} • {routingResult.distance_km} km away
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2.5 pt-2">
-                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase">Available Beds</div>
-                      <div className="text-base font-black text-slate-800">
-                        {routingResult.best_hospital.beds_available}
-                      </div>
-                    </div>
-                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase">NICU Beds</div>
-                      <div className="text-base font-black text-blue-600">
-                        {routingResult.best_hospital.nicu_beds_available}
-                      </div>
-                    </div>
-                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase">Surgeon on Duty</div>
-                      <div className="text-base font-black text-teal-600">
-                        {routingResult.best_hospital.surgeon_on_duty ? 'YES' : 'NO'}
-                      </div>
+                    <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+                      Heart Rate <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        value={vitals.heart_rate}
+                        onChange={(e) => setVitals({ ...vitals, heart_rate: e.target.value })}
+                        required
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-[#006b5f]"
+                      />
+                      <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
+                        bpm
+                      </span>
                     </div>
                   </div>
 
                 </div>
-              )}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  
+                  <div>
+                    <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+                      Systolic BP <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        value={vitals.systolic_bp}
+                        onChange={(e) => setVitals({ ...vitals, systolic_bp: e.target.value })}
+                        required
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-[#006b5f]"
+                      />
+                      <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
+                        mmHg
+                      </span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+                      Diastolic BP <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        value={vitals.diastolic_bp}
+                        onChange={(e) => setVitals({ ...vitals, diastolic_bp: e.target.value })}
+                        required
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-[#006b5f]"
+                      />
+                      <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
+                        mmHg
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  
+                  <div>
+                    <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+                      Blood Sugar (BS) <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={vitals.blood_sugar}
+                        onChange={(e) => setVitals({ ...vitals, blood_sugar: e.target.value })}
+                        required
+                        placeholder="e.g. 6.2 or 140 mg/dL"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-[#006b5f]"
+                      />
+                      <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
+                        mmol/L or mg/dL
+                      </span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+                      Body Temp <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        step="0.1"
+                        value={vitals.body_temp}
+                        onChange={(e) => setVitals({ ...vitals, body_temp: e.target.value })}
+                        required
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-[#006b5f]"
+                      />
+                      <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
+                        °F
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                {errorMsg && (
+                  <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-semibold">
+                    {errorMsg}
+                  </div>
+                )}
+
+                <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-600 rounded-xl text-xs font-bold transition-colors w-full sm:w-auto"
+                  >
+                    Reset Form
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="px-6 py-2.5 bg-[#006b5f] hover:bg-[#005047] text-white rounded-xl text-xs font-bold shadow-xs transition-all flex items-center justify-center gap-2 w-full sm:w-auto"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">query_stats</span>
+                    <span>{loading ? 'Calculating Risk...' : 'Predict Risk'}</span>
+                  </button>
+                </div>
+
+              </form>
 
             </div>
-          ) : (
-            <div className="h-full min-h-[350px] rounded-3xl bg-slate-50 border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-8 text-center space-y-3 text-slate-400">
-              <HeartPulse className="w-12 h-12 text-slate-300" />
-              <div className="text-sm font-bold text-slate-600">No Assessment Run Yet</div>
-              <p className="text-xs max-w-xs text-slate-400">
-                Enter maternal vitals on the left and click "Evaluate AI Risk" to see Random Forest ML triage, multilingual factors, and capacity-aware Dijkstra hospital routing.
-              </p>
+
+            {/* Right Column: Assessment Result (Exact Stitch Screen 7) */}
+            <div className="xl:col-span-5 flex flex-col gap-6">
+              <div className="bg-white border border-slate-200 rounded-2xl shadow-2xs p-6 h-full flex flex-col justify-between text-left relative overflow-hidden">
+                
+                <div className="flex items-center gap-2 pb-4 border-b border-slate-100">
+                  <span className="material-symbols-outlined text-[#006b5f]">psychiatry</span>
+                  <h3 className="text-base font-bold text-slate-900 font-['Plus_Jakarta_Sans']">
+                    Assessment Result
+                  </h3>
+                </div>
+
+                <div className="flex-1 flex flex-col justify-center items-center text-center py-6">
+                  {prediction ? (
+                    <div className="space-y-4 w-full">
+                      <div className={`w-16 h-16 rounded-2xl mx-auto flex items-center justify-center shadow-xs ${
+                        prediction.risk_tier === 'dispatch' ? 'bg-rose-100 text-rose-700' : prediction.risk_tier === 'prep' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'
+                      }`}>
+                        <span className="material-symbols-outlined text-[32px]">
+                          {prediction.risk_tier === 'dispatch' ? 'emergency' : 'vital_signs'}
+                        </span>
+                      </div>
+
+                      <div>
+                        <h4 className="text-3xl font-black text-slate-900 font-['Plus_Jakarta_Sans'] uppercase tracking-tight">
+                          {prediction.risk_tier_display || prediction.risk_tier}
+                        </h4>
+                        <div className="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold mt-1">
+                          Risk Score: <strong className="text-slate-900">{prediction.risk_score}</strong> / 100
+                        </div>
+                      </div>
+
+                      {/* Contributing factors */}
+                      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-xs space-y-1.5">
+                        <div className="font-bold text-slate-700 flex items-center gap-1.5">
+                          <Languages className="w-3.5 h-3.5 text-[#006b5f]" />
+                          <span>Diagnosis Factors ({lang.toUpperCase()}):</span>
+                        </div>
+                        {prediction.explanation?.map((f, idx) => (
+                          <div key={idx} className="text-slate-600 leading-snug">• {f}</div>
+                        ))}
+                      </div>
+
+                      {/* Dijkstra Nearest Facility Card */}
+                      {routingResult?.best_hospital && (
+                        <div className="bg-teal-50/70 border border-teal-200 rounded-xl p-3.5 text-left text-xs space-y-1.5">
+                          <div className="font-extrabold text-[#006b5f] flex items-center justify-between">
+                            <span>Dijkstra Best Facility</span>
+                            <span>ETA ~{routingResult.eta_minutes} min</span>
+                          </div>
+                          <div className="font-bold text-slate-800">{routingResult.best_hospital.name}</div>
+                          <div className="text-slate-500 text-[11px]">
+                            {routingResult.best_hospital.district} • {routingResult.distance_km} km away
+                          </div>
+                        </div>
+                      )}
+
+                      {prediction.risk_tier === 'dispatch' && (
+                        <button
+                          onClick={handleSimulate108}
+                          className="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-1.5"
+                        >
+                          <PhoneCall className="w-3.5 h-3.5 animate-bounce" />
+                          <span>Trigger 108 Emergency Dispatch</span>
+                        </button>
+                      )}
+
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-center px-4 space-y-3 text-slate-400">
+                      <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center">
+                        <span className="material-symbols-outlined text-[32px] text-slate-400">analytics</span>
+                      </div>
+                      <p className="text-xs text-slate-500 max-w-xs">
+                        No assessment yet. Enter the maternal measurements on the left and select Predict Risk to calculate the current clinical risk.
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 text-center">
+                  <p className="text-[10px] text-slate-400 leading-tight">
+                    This assessment is generated by the MaatriMarg ML engine based on current measurements and is for decision support only.
+                  </p>
+                </div>
+
+              </div>
             </div>
-          )}
 
-        </div>
+          </div>
 
+        </main>
       </div>
 
-      {/* Register Patient Modal */}
-      {showRegModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-5 text-left shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2">
-                <UserPlus className="w-5 h-5 text-blue-600" />
-                {t('register_patient')} (DISHA Protocol)
-              </h3>
-              <button onClick={() => setShowRegModal(false)} className="text-slate-400 hover:text-slate-700 text-lg">✕</button>
-            </div>
-
-            <form onSubmit={handleRegisterMother} className="space-y-4 text-xs font-medium">
-              <div>
-                <label className="block font-bold text-slate-700 mb-1">{t('patient_name')}</label>
-                <input
-                  type="text"
-                  value={newMother.name}
-                  onChange={(e) => setNewMother({ ...newMother, name: e.target.value })}
-                  required
-                  placeholder="e.g. Kavita Raut"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-bold text-slate-700 mb-1">{t('age')}</label>
-                  <input
-                    type="number"
-                    value={newMother.age}
-                    onChange={(e) => setNewMother({ ...newMother, age: Number(e.target.value) })}
-                    required
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <label className="block font-bold text-slate-700 mb-1">{t('blood_group')}</label>
-                  <select
-                    value={newMother.blood_type}
-                    onChange={(e) => setNewMother({ ...newMother, blood_type: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 font-bold"
-                  >
-                    {['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'].map(b => (
-                      <option key={b} value={b}>{b}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block font-bold text-slate-700 mb-1">{t('village')}</label>
-                <input
-                  type="text"
-                  value={newMother.village}
-                  onChange={(e) => setNewMother({ ...newMother, village: e.target.value })}
-                  placeholder="e.g. Melghat Sub-Centre"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <div className="p-3 rounded-xl bg-blue-50 border border-blue-100 flex items-start gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-                <label className="flex items-center gap-2 text-[11px] text-blue-900 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={newMother.consent_given}
-                    onChange={(e) => setNewMother({ ...newMother, consent_given: e.target.checked })}
-                    required
-                    className="rounded text-blue-600 focus:ring-blue-500"
-                  />
-                  <span>Patient verbal consent recorded for DISHA / ABDM clinical routing.</span>
-                </label>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-colors"
-              >
-                Confirm Patient Registration
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Emergency Dispatch SMS Simulation Modal */}
+      {/* Emergency Alert Modal */}
       {showDispatchModal && notificationStatus && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-4 text-left shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <div className="flex items-center gap-2 text-rose-600 font-bold text-base">
-                <Send className="w-5 h-5" />
-                <span>108 Emergency Dispatch Alert Sent</span>
-              </div>
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 text-left shadow-2xl">
+            <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+              <span className="text-rose-600 font-bold text-sm flex items-center gap-2">
+                <Send className="w-4 h-4" />
+                108 Emergency SMS Dispatched
+              </span>
               <button onClick={() => setShowDispatchModal(false)} className="text-slate-400 hover:text-slate-700">✕</button>
             </div>
-
-            <div className="p-4 rounded-2xl bg-slate-900 text-emerald-300 font-mono text-xs leading-relaxed">
+            <div className="p-3 bg-slate-900 text-emerald-300 font-mono text-xs rounded-xl">
               {notificationStatus.message_body}
             </div>
-
-            <div className="text-xs text-slate-500 space-y-1">
-              <div><strong>Gateway:</strong> {notificationStatus.channel}</div>
-              <div><strong>Recipient:</strong> {notificationStatus.recipient_role} ({notificationStatus.phone})</div>
-              <div><strong>Language:</strong> {notificationStatus.language.toUpperCase()}</div>
-            </div>
-
             <button
               onClick={() => setShowDispatchModal(false)}
-              className="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors"
+              className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-lg"
             >
-              Close Simulator
+              Close
             </button>
           </div>
         </div>
