@@ -19,7 +19,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(THIS_DIR, "..", "..", "data", "maternal_risk.csv")
+DATA_PATH = os.path.join(THIS_DIR, "..", "..", "data", "Maternal_Risk.csv")
+if not os.path.exists(DATA_PATH):
+    DATA_PATH = os.path.join(THIS_DIR, "..", "..", "data", "maternal_risk.csv")
 MODEL_PATH = os.path.join(THIS_DIR, "risk_model.pkl")
 IMPORTANCE_PATH = os.path.join(THIS_DIR, "feature_importance.json")
 

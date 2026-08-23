@@ -1,0 +1,22 @@
+{
+  "case_type": "child",
+  "source_file": "child_risk.csv",
+  "original_rows": 6000,
+  "rows_used": 6000,
+  "features": [
+    "AgeMonths",
+    "RespRate",
+    "HeartRate",
+    "SpO2",
+    "TempC"
+  ],
+  "metrics": {
+    "accuracy": 0.9658,
+    "balanced_accuracy": 0.8751,
+    "macro_precision": 0.9238,
+    "macro_recall": 0.8751,
+    "macro_f1": 0.8967
+  },
+  "evidence_level": "synthetic rule-reproduction dataset; not clinically validated",
+  "trained_at": "2026-08-22T16:34:10.512689+00:00"
+}

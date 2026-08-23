@@ -6,3 +6,5 @@ scikit-learn
 pandas
 joblib
 python-multipart
+psycopg2-binary
+python-dotenv

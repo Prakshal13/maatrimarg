@@ -1,17 +1,49 @@
+# OS & System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Icon
+Icon?
+"Icon\r"
+
 # Node / React
 node_modules/
 dist/
-.DS_Store
+build/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Python (backend already has its own, this is a safety net)
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
 venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Databases & Environment
 *.db
+*.sqlite3
+.env
 
-# ML artifacts
-app/ml/risk_model.pkl
-app/ml/feature_importance.json
+# ML Model Binaries (train locally via train_generic_model.py; prevents exceeding GitHub 100MB limit)
+*.pkl
+backend/app/ml/*.pkl
+app/ml/*.pkl
 
-# Data
-data/*.csv
+# IDEs
+.idea/
+*.sublime-workspace

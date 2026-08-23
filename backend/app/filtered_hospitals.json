@@ -1,0 +1,2600 @@
+[
+  {
+    "name": "Corporation Hospital",
+    "lat": 13.0336624,
+    "lng": 80.2572467,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Corporation Hospital"
+    }
+  },
+  {
+    "name": "Govt Maternity Hospital",
+    "lat": 13.0720996,
+    "lng": 80.2589871,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt Maternity Hospital"
+    }
+  },
+  {
+    "name": "Govt Primary Health Centre",
+    "lat": 12.5274531,
+    "lng": 80.1631378,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt Primary Health Centre"
+    }
+  },
+  {
+    "name": "Govt hospital",
+    "lat": 11.4432595,
+    "lng": 77.6941951,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt hospital"
+    }
+  },
+  {
+    "name": "Goverment medical college & hospital, Villupuram",
+    "lat": 11.9933796,
+    "lng": 79.5174212,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "Villupuram",
+      "addr:street": "Mundiyampakkam",
+      "amenity": "hospital",
+      "emergency": "yes",
+      "name": "Goverment medical college & hospital, Villupuram"
+    }
+  },
+  {
+    "name": "paranji Govt Hospital",
+    "lat": 13.0995425,
+    "lng": 79.5324922,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "paranji",
+      "addr:street": "Paranji Road",
+      "amenity": "hospital",
+      "name": "paranji Govt Hospital"
+    }
+  },
+  {
+    "name": "Government Urban Primary Health Center",
+    "lat": 11.0827084,
+    "lng": 76.9427442,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "Thudiyalur",
+      "addr:district": "coimbatore",
+      "addr:place": "Thudiyalur",
+      "addr:place:ta": "\u0ba4\u0bc1\u0b9f\u0bbf\u0baf\u0bb2\u0bc2\u0bb0\u0bcd",
+      "addr:postcode": "641034",
+      "addr:state": "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd\u0ba8\u0bbe\u0b9f\u0bc1",
+      "addr:street": "Idikarai Road",
+      "addr:street:ta": "\u0b87\u0b9f\u0bbf\u0b95\u0bb0\u0bc8 \u0b9a\u0bbe\u0bb2\u0bc8",
+      "amenity": "hospital",
+      "amenity:ta": "\u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "name": "Government Urban Primary Health Center",
+      "name:ta": "\u0ba8\u0b95\u0bb0\u0bcd\u0baa\u0bcd\u0baa\u0bc1\u0bb1 \u0b85\u0bb0\u0b9a\u0bc1 \u0b86\u0bb0\u0bae\u0bcd\u0baa \u0b9a\u0bc1\u0b95\u0bbe\u0ba4\u0bbe\u0bb0 \u0ba8\u0bbf\u0bb2\u0bc8\u0baf\u0bae\u0bcd",
+      "opening_hours": "sunrise-sunset",
+      "operator": "Government",
+      "operator:type": "public"
+    }
+  },
+  {
+    "name": "central Government railway Hospital",
+    "lat": 10.7857499,
+    "lng": 78.7251483,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "name": "central Government railway Hospital"
+    }
+  },
+  {
+    "name": "government child health center",
+    "lat": 12.9241666,
+    "lng": 80.1274453,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "name": "government child health center"
+    }
+  },
+  {
+    "name": "Arakkonam Government General Hospital",
+    "lat": 13.0849714,
+    "lng": 79.6647558,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "Arakkonam",
+      "addr:district": "Vellore",
+      "addr:full": "Thiruthani Road, Arakkonam",
+      "addr:postcode": "631001",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Gudiyatham",
+      "amenity": "hospital",
+      "name": "Arakkonam Government General Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Health Center",
+    "lat": 12.885562,
+    "lng": 80.151595,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Health Center"
+    }
+  },
+  {
+    "name": "Government primary health center",
+    "lat": 11.2385887,
+    "lng": 76.9640887,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "Karamadai",
+      "addr:postcode": "641104",
+      "addr:street": "Karamadai - Kariyampalayam Road",
+      "amenity": "hospital",
+      "emergency": "yes",
+      "healthcare": "centre",
+      "healthcare:speciality": "general;community",
+      "name": "Government primary health center",
+      "name:ta": "\u0b85\u0bb0\u0b9a\u0bc1 \u0b86\u0bb0\u0bae\u0bcd\u0baa \u0b9a\u0bc1\u0b95\u0bbe\u0ba4\u0bbe\u0bb0 \u0ba8\u0bbf\u0bb2\u0bc8\u0baf\u0bae\u0bcd",
+      "operator": "Government(DPH)"
+    }
+  },
+  {
+    "name": "government sub health center",
+    "lat": 11.2376384,
+    "lng": 76.9224629,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "coimbatore",
+      "addr:place": "Pungampalayam",
+      "addr:place:ta": "\u0baa\u0bc1\u0b99\u0bcd\u0b95\u0bae\u0bcd\u0baa\u0bbe\u0bb3\u0bc8\u0baf\u0bae\u0bcd",
+      "addr:postcode": "641104",
+      "addr:street": "Kurunthamalai road",
+      "amenity": "hospital",
+      "amenity:ta": "\u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+      "healthcare": "hospital",
+      "name": "government sub health center",
+      "name:ta": "\u0b85\u0bb0\u0b9a\u0bc1 \u0ba4\u0bc1\u0ba3\u0bc8 \u0b9a\u0bc1\u0b95\u0bbe\u0ba4\u0bbe\u0bb0 \u0ba8\u0bbf\u0bb2\u0bc8\u0baf\u0bae\u0bcd",
+      "operator": "dph"
+    }
+  },
+  {
+    "name": "cumbum government general hospital",
+    "lat": 9.730261,
+    "lng": 77.2802565,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Cumbam",
+      "addr:district": "Theni",
+      "addr:full": "Gh-Cumbum, Muncipality Office, Cumbum, Kumuli Main Road",
+      "addr:postcode": "625516",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Uthamapalayam",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "healthcare:speciality": "general",
+      "name": "cumbum government general hospital",
+      "name:ta": "\u0b95\u0bae\u0bcd\u0baa\u0bae\u0bcd \u0b85\u0bb0\u0b9a\u0bc1 \u0baa\u0bca\u0ba4\u0bc1 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+      "operator:type": "public",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "UPHC Ramalinga Nagar, UKT Malai",
+    "lat": 10.815,
+    "lng": 78.6576,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:street": "Kodappu Main Road, UKT Malai",
+      "amenity": "hospital",
+      "description": "Urban Primary Health Centre Ramalinga Nagar, Uyyakondan Thirumalai",
+      "healthcare": "hospital",
+      "name": "UPHC Ramalinga Nagar, UKT Malai",
+      "opening_hours": "Mo-Th 08:00-17:00"
+    }
+  },
+  {
+    "name": "Govt. Primary Hospital, Nalli",
+    "lat": 9.2375269,
+    "lng": 77.9070875,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Sathur Mpty",
+      "addr:district": "Virudhunagar",
+      "addr:full": "Nalli - Thotiloovanpatti Road, Nalli",
+      "addr:postcode": "626205",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "name": "Govt. Primary Hospital, Nalli",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Taluk Headquarters Hospital, Boothapandy",
+    "lat": 8.2647152,
+    "lng": 77.4439763,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Kanniyakumari",
+      "addr:full": "Sf 199/11, Near Police Station, Boothapandy, Main Road",
+      "addr:postcode": "629852",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Thovala",
+      "amenity": "hospital",
+      "name": "Government Taluk Headquarters Hospital, Boothapandy",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sellur,Government Maternity Hospital",
+    "lat": 9.9350427,
+    "lng": 78.1188461,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Madurai Corp",
+      "addr:district": "Madurai",
+      "addr:full": "Kanmaikarai, Sellur, Kulamangalam Main Road",
+      "addr:postcode": "625002",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Madurai South",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Sellur,Government Maternity Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Maruthupandiyar Hospital, Tiruppathur",
+    "lat": 10.110361,
+    "lng": 78.5930852,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Sivaganga",
+      "addr:full": "Anna Sillai, Thiruppathur, Madurai Main Road",
+      "addr:postcode": "630211",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Tirupathur",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Maruthupandiyar Hospital, Tiruppathur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Nagapattinam Government District Head Hospital",
+    "lat": 10.77246,
+    "lng": 79.843971,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Nagapattinam Mpty",
+      "addr:district": "Nagapattinam",
+      "addr:full": "Rdo Office, Nagapattinam, Public Office Road",
+      "addr:postcode": "611101",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Nagapattinam Government District Head Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Govt Hospital, Alamathi",
+    "lat": 13.2097678,
+    "lng": 80.1121208,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Sholavaram",
+      "addr:district": "Thiruvallur",
+      "addr:full": "Near Alamthi Padavattamman Kovil, Alamathi",
+      "addr:postcode": "600052",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Ponneri",
+      "amenity": "hospital",
+      "name": "Govt Hospital, Alamathi",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Thandikudi District Hospital",
+    "lat": 10.308969,
+    "lng": 77.6435935,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Kodaikanal Mpty",
+      "addr:district": "Dindigul",
+      "addr:full": "Near Bus Stand, Main Road",
+      "addr:postcode": "624216",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Kodaikanal",
+      "amenity": "hospital",
+      "name": "Thandikudi District Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Govt Kilpauk Medical College Hospital",
+    "lat": 13.07832,
+    "lng": 80.243753,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone Xi",
+      "addr:district": "Chennai",
+      "addr:full": "822, Poonamallee High Rd, Near Ega Theatre, Kilpauk, Chennai",
+      "addr:postcode": "600010",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt Kilpauk Medical College Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Maternity And Child Hospital",
+    "lat": 13.0991743,
+    "lng": 80.2301988,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone Vi",
+      "addr:district": "Chennai",
+      "addr:full": "United India Nagar, Ayanavaram",
+      "addr:postcode": "600023",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Maternity And Child Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Govt. Stanley Hospital",
+    "lat": 13.10618,
+    "lng": 80.286804,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone Xi",
+      "addr:district": "Chennai",
+      "addr:full": "Mint, Royapuram, Osh Road",
+      "addr:postcode": "600001",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt. Stanley Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Govt Peripheral Hospital Periyar Nagar",
+    "lat": 13.1153048,
+    "lng": 80.2233851,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone Xi",
+      "addr:district": "Chennai",
+      "addr:full": "Govt.Peripheral Hospital, Periyar Nagar, Shiva Vishnu Koil, Periyar Nagar, Jaganadhan Salai",
+      "addr:postcode": "600082",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt Peripheral Hospital Periyar Nagar",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Unani Hospital",
+    "lat": 13.1129012,
+    "lng": 80.2957982,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Chennai",
+      "addr:full": "E Kal Mandapam Rd, Panaimarathotti, Pudumani Kuppam, Royapuram, Chennai",
+      "addr:postcode": "600013",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Unani Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Chennai Corporation Hospital",
+    "lat": 13.1142928,
+    "lng": 80.2844517,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone V",
+      "addr:district": "Chennai",
+      "addr:full": "Near old washermanpet post office, Royapuram, Solaiappar Street",
+      "addr:postcode": "600021",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Chennai Corporation Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Govt, community Health Center, Melattur",
+    "lat": 10.8581061,
+    "lng": 79.2411564,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Ammapettai",
+      "addr:district": "Thanjavur",
+      "addr:full": "Melattur, Thirukarukkavur, East Street",
+      "addr:postcode": "614301",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Papanasam",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt, community Health Center, Melattur",
+      "operator": "DHS (Department of Health Services)",
+      "operator:type": "government",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government General Taluk Hospital, Nannilam",
+    "lat": 10.87913,
+    "lng": 79.611294,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Thiruvarur",
+      "addr:full": "Beside Kothandarama Temple, Nannilam",
+      "addr:postcode": "610105",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Nannilam",
+      "amenity": "hospital",
+      "name": "Government General Taluk Hospital, Nannilam",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "K. A. P. Viswanathan Government Medical College Hospital",
+    "lat": 10.79729,
+    "lng": 78.678497,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Tiruchirapalli Corp",
+      "addr:district": "Tiruchirappalli",
+      "addr:full": "Collector Office Road, Cantonment, Tiruchirapalli",
+      "addr:postcode": "620001",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "K. A. P. Viswanathan Government Medical College Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Medical College Hospital, Karur",
+    "lat": 10.9615927,
+    "lng": 78.080414,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Karur Mpty",
+      "addr:district": "Karur",
+      "addr:full": "N Pradhaksanam Road, Karur",
+      "addr:postcode": "639001",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Medical College Hospital, Karur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Pentland Hospital",
+    "lat": 12.9156633,
+    "lng": 79.1346498,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Vellore Corp",
+      "addr:district": "Vellore",
+      "addr:full": "Government Pentland Hospital, Near Sri Krishna Residancy, Vellroe, Government Pentland Hospital Road",
+      "addr:postcode": "632001",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Pentland Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Arcot Govt Hospital",
+    "lat": 12.9039497,
+    "lng": 79.3333331,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Arcot Mpty",
+      "addr:district": "Vellore",
+      "addr:full": "Near Govt. Boys Higher Sec. School, Arcot",
+      "addr:postcode": "632503",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Arcot",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Arcot Govt Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government General Hospital, Kadugur",
+    "lat": 11.1694117,
+    "lng": 79.1495343,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Ariyalur",
+      "addr:full": "Kadugur",
+      "addr:postcode": "621718",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "name": "Government General Hospital, Kadugur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Mettur Govt Hospital",
+    "lat": 11.7960034,
+    "lng": 77.798885,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Kolathur",
+      "addr:city": "METTUR",
+      "addr:district": "Salem",
+      "addr:full": "Near Esi Dispensary, Mettur, Evn Road",
+      "addr:postcode": "636401",
+      "addr:state": "Tamil Nadu",
+      "addr:street": "W Main Rd",
+      "addr:subdistrict": "Mettur",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Mettur Govt Hospital",
+      "operator": "TN Government",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government General Hospital Parangipettai",
+    "lat": 11.4902744,
+    "lng": 79.7571092,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Parangipettai",
+      "addr:district": "Cuddalore",
+      "addr:full": "Parangipettai, Mutlur Main Road",
+      "addr:postcode": "608601",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Chidambaram",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government General Hospital Parangipettai",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Tiruvannamalai Medical College and Hospital",
+    "lat": 12.2259398,
+    "lng": 79.0660738,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Thiruvannamalai",
+      "addr:district": "Tiruvannamalai",
+      "addr:full": "Near Bsnl Office, Thiruvannamalai, Muthu Vinayagar Kovil Street",
+      "addr:postcode": "606601",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Tiruvannamalai Medical College and Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government General Hospital, Cheyyur",
+    "lat": 12.35204,
+    "lng": 80.002556,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Lathur",
+      "addr:district": "Kancheepuram",
+      "addr:full": "Pavunjur Private School, Cheyyur Main Road",
+      "addr:postcode": "603302",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Cheyyur",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government General Hospital, Cheyyur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Govt. Hospital, Melur",
+    "lat": 11.65429,
+    "lng": 78.937592,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Kallakurichi Mpty",
+      "addr:district": "Viluppuram",
+      "addr:full": "Near Bus Stop, Melur, Siruvathur Main Road",
+      "addr:postcode": "606201",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Kallakkurichi",
+      "amenity": "hospital",
+      "name": "Govt. Hospital, Melur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Vembadithalam Government General Hospital",
+    "lat": 11.5683,
+    "lng": 78.01211,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Veerapandi",
+      "addr:district": "Salem",
+      "addr:full": "Kakkapalayam, Vembadithalam, Sankari Main Road",
+      "addr:postcode": "637504",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "name": "Vembadithalam Government General Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Ponnammapettai PHC",
+    "lat": 11.6660487,
+    "lng": 78.1770681,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Salem Corporation",
+      "addr:district": "Salem",
+      "addr:full": "Ponnamapet Corporation School, Puthumariyamman Kovil Street",
+      "addr:postcode": "636003",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "description": "Primary Health Centre",
+      "healthcare": "hospital",
+      "name": "Ponnammapettai PHC",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Maternity Hospital, Agathiar",
+    "lat": 11.33716,
+    "lng": 77.727075,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Erode Corp",
+      "addr:district": "Erode",
+      "addr:full": "Near Hdfc Bank , Erode, Agathiyar",
+      "addr:postcode": "638001",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Maternity Hospital, Agathiar",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Valaisayur PHC",
+    "lat": 11.7048193,
+    "lng": 78.2479415,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Ayothiyapattinam",
+      "addr:district": "Salem",
+      "addr:full": "Valasayur, Arikadu Via",
+      "addr:postcode": "636122",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "description": "Primary Health Centre",
+      "healthcare": "hospital",
+      "name": "Valaisayur PHC",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government District Hospital",
+    "lat": 9.840094,
+    "lng": 78.485332,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Sivaganga",
+      "addr:full": "Sivaganga",
+      "addr:postcode": "630561",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government District Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Pillur Government Primary Hospital",
+    "lat": 9.8387486,
+    "lng": 78.4137465,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Sivaganga",
+      "addr:full": "Sakri",
+      "addr:postcode": "630561",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "name": "Pillur Government Primary Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Papaya Achchi Hospital",
+    "lat": 10.27924,
+    "lng": 78.5317924,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Pudukkottai",
+      "addr:full": "Ponnamaravathi",
+      "addr:postcode": "622407",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Papaya Achchi Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Government Primary Hospital",
+    "lat": 10.76659,
+    "lng": 79.071235,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Thanjavur",
+      "addr:full": "Vannarapettai",
+      "addr:postcode": "613601",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "name": "Government Primary Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Government Malaria Hospital",
+    "lat": 9.2871911,
+    "lng": 79.3104069,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Ramanathapuram",
+      "addr:full": "Rameswaram",
+      "addr:postcode": "623526",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "name": "Government Malaria Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Government Ayurvedha Hospital",
+    "lat": 8.9707417,
+    "lng": 78.1853066,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Thoothukudi",
+      "addr:full": "Veppalodai",
+      "addr:postcode": "628903",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Ayurvedha Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "RJPM Govt Maternity & Health Care Centre",
+    "lat": 9.4590865,
+    "lng": 77.5551908,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Virudhunagar",
+      "addr:full": "Rajapalayam",
+      "addr:postcode": "626117",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "RJPM Govt Maternity & Health Care Centre",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Government Sidha Hospital",
+    "lat": 10.8127985,
+    "lng": 78.6345428,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Tiruchirappalli",
+      "addr:full": "Somarasempettai",
+      "addr:postcode": "620102",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Sidha Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Government General Hospital",
+    "lat": 9.731135,
+    "lng": 77.280955,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Theni",
+      "addr:full": "Mani Nagaram, Cumbum",
+      "addr:postcode": "625516",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "name": "Government General Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Devakottai Urban PHC",
+    "lat": 9.9407414,
+    "lng": 78.8255999,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "Devakottai",
+      "addr:postcode": "630302",
+      "addr:street": "Gandhi Road , Othakadai",
+      "amenity": "hospital",
+      "email": "uphcdvk@gmail.com",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "healthcare:speciality": "general;gynaecology",
+      "internet_access": "yes",
+      "name": "Devakottai Urban PHC",
+      "operator": "DDHS",
+      "operator:type": "government",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "name": "Rajiv Gandhi Government General Hospital",
+    "lat": 13.0808972,
+    "lng": 80.2773284,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone Xi",
+      "addr:district": "Chennai",
+      "addr:full": "General Hospital Road, Central Railway Station, Park Town",
+      "addr:postcode": "600003",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "contact:mobile": "9436120190",
+      "contact:phone": "04425305711;04425305000",
+      "email": "dchsub@yahoo.co.in",
+      "healthcare": "hospital",
+      "name": "Rajiv Gandhi Government General Hospital",
+      "name:etymology:wikidata": "Q4593",
+      "name:hi": "\u0930\u093e\u091c\u0940\u0935 \u0917\u093e\u0901\u0927\u0940 \u0938\u0930\u0915\u093e\u0930 \u091c\u0928\u0930\u0932 \u0905\u0938\u094d\u092a\u0924\u093e\u0932",
+      "name:ml": "\u0d30\u0d3e\u0d1c\u0d40\u0d35\u0d4d \u0d17\u0d3e\u0d28\u0d4d\u0d27\u0d3f \u0d38\u0d7c\u0d15\u0d4d\u0d15\u0d3e\u0d7c \u0d1c\u0d28\u0d31\u0d7d \u0d06\u0d36\u0d41\u0d2a\u0d24\u0d4d\u0d30\u0d3f",
+      "name:ta": "\u0bb0\u0bbe\u0b9c\u0bc0\u0bb5\u0bcd \u0b95\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf \u0b85\u0bb0\u0b9a\u0bc1 \u0baa\u0bca\u0ba4\u0bc1 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+      "opening_hours": "24/7",
+      "operator:type": "government",
+      "source": "OpenGovernmentData",
+      "website": "https://www.mmc.tn.gov.in/",
+      "wikidata": "Q5588842",
+      "wikimedia_commons": "Category:Government General Hospital, Chennai",
+      "wikipedia": "en:Government General Hospital, Chennai"
+    }
+  },
+  {
+    "name": "District Hospital, Eroda",
+    "lat": 11.3393048,
+    "lng": 77.717926,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Erode Corp",
+      "addr:district": "Erode",
+      "addr:full": "Ward 38, Government Head Quarters Hospital, Mgr Statue Circle, Evn Road, Erode",
+      "addr:postcode": "638001",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "District Hospital, Eroda",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Raja Mirasdar Hospital",
+    "lat": 10.7844153,
+    "lng": 79.1362994,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Thanjavur Corporation",
+      "addr:district": "Thanjavur",
+      "addr:full": "Near Old Bus Stand, Thanjavur, Main Road",
+      "addr:postcode": "613001",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Raja Mirasdar Hospital",
+      "source": "OpenGovernmentData",
+      "wikidata": "Q111010396",
+      "wikipedia": "en:Government Raja Mirasdar Hospital"
+    }
+  },
+  {
+    "name": "Government Rajaji Hospital in Madurai",
+    "lat": 9.9271051,
+    "lng": 78.1301681,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Madurai East",
+      "addr:city": "Madurai",
+      "addr:district": "Madurai",
+      "addr:state": "Tamil Nadu",
+      "addr:street": "Panagal Road, Goripalayam",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Rajaji Hospital in Madurai",
+      "name:etymology:wikidata": "Q378404",
+      "source": "OpenGovernmentData",
+      "start_date": "1842",
+      "wheelchair": "yes",
+      "wikidata": "Q5589079",
+      "wikipedia": "en:Government Rajaji Hospital in Madurai"
+    }
+  },
+  {
+    "name": "Govt Peripheral Hospital KK Nagar",
+    "lat": 13.034006,
+    "lng": 80.2078405,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone Xi",
+      "addr:district": "Chennai",
+      "addr:full": "Anna Main Rd, Bharathidasan Colony, West Jafferkhanpet, Chennai",
+      "addr:postcode": "600083",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt Peripheral Hospital KK Nagar",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Rsrm Lying Hospital",
+    "lat": 13.1090673,
+    "lng": 80.288719,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone Xi",
+      "addr:district": "Chennai",
+      "addr:full": "Near Virax Textile, East Cementry Road, East Cementry Road,Ch-21",
+      "addr:postcode": "600013",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Rsrm Lying Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Peripheral Hospital",
+    "lat": 13.1260276,
+    "lng": 80.2866925,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Chennai",
+      "addr:full": "Tondiarpet, New Washermenpet, Tondiarpet, Kailasam",
+      "addr:postcode": "600081",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Peripheral Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Tamil Nadu Government Multi Super Speciality Hospital",
+    "lat": 13.0693752,
+    "lng": 80.2741496,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "name": "Tamil Nadu Government Multi Super Speciality Hospital",
+      "name:ta": "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd\u0ba8\u0bbe\u0b9f\u0bc1 \u0b85\u0bb0\u0b9a\u0bc1 \u0baa\u0ba9\u0bcd\u0ba9\u0bcb\u0b95\u0bcd\u0b95\u0bc1 \u0b89\u0baf\u0bb0\u0bcd \u0b9a\u0bbf\u0bb1\u0baa\u0bcd\u0baa\u0bc1 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+      "opening_hours": "Mo-Su 10:00-14:00",
+      "short_name": "TNGMSSH",
+      "website": "https://tngmssh.tn.gov.in/",
+      "wikidata": "Q7681366",
+      "wikipedia": "en:Tamil Nadu Government Multi Super Speciality Hospital"
+    }
+  },
+  {
+    "name": "Siluvathur PHC",
+    "lat": 10.3530399,
+    "lng": 78.0902637,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "name": "Siluvathur PHC"
+    }
+  },
+  {
+    "name": "Kamala Nehru Urban Primary Health Centre",
+    "lat": 10.3606804,
+    "lng": 77.973788,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "check_date": "2024-10-26",
+      "healthcare": "hospital",
+      "name": "Kamala Nehru Urban Primary Health Centre",
+      "name:etymology:wikidata": "Q3633365",
+      "name:ta": "\u0b95\u0bae\u0bb2\u0bbe \u0ba8\u0bc7\u0bb0\u0bc1 \u0b86\u0bb0\u0bae\u0bcd\u0baa \u0b9a\u0bc1\u0b95\u0bbe\u0ba4\u0bbe\u0bb0 \u0ba8\u0bbf\u0bb2\u0bc8\u0baf\u0bae\u0bcd"
+    }
+  },
+  {
+    "name": "Government Medical College & Hospital",
+    "lat": 10.4101898,
+    "lng": 78.8481628,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "Pudukottai",
+      "amenity": "hospital",
+      "amenity_1": "college",
+      "education": "university",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "name": "Government Medical College & Hospital"
+    }
+  },
+  {
+    "name": "Govt Dispenssry and School",
+    "lat": 10.5927913,
+    "lng": 79.4163552,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "name": "Govt Dispenssry and School"
+    }
+  },
+  {
+    "name": "Government Sivagangai Medical College & Hospital",
+    "lat": 9.838807,
+    "lng": 78.4782631,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Sivagangai Mpty",
+      "addr:district": "Sivaganga",
+      "addr:full": "Government Wch Hospital, Near Old Court, Sivaganga, Court Vasal",
+      "addr:postcode": "630561",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "barrier": "wall",
+      "healthcare": "hospital",
+      "name": "Government Sivagangai Medical College & Hospital",
+      "short_name": "GSMCH",
+      "source": "OpenGovernmentData",
+      "website": "http://www.sgmcsg.ac.in"
+    }
+  },
+  {
+    "name": "Government Hospiral",
+    "lat": 10.0638576,
+    "lng": 78.7771791,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Hospiral",
+      "name:ta": "\u0b85\u0bb0\u0b9a\u0bc1 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8"
+    }
+  },
+  {
+    "name": "T.M.Palayam PHC",
+    "lat": 10.8800121,
+    "lng": 76.9247754,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "T.M.Palayam PHC"
+    }
+  },
+  {
+    "name": "Govt.Community Health Center, melattur",
+    "lat": 10.8581073,
+    "lng": 79.2411464,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt.Community Health Center, melattur",
+      "operator": "DHS (Department of Health Services)",
+      "operator:type": "government"
+    }
+  },
+  {
+    "name": "Govt Rajaji Hospital Emergency Ward",
+    "lat": 9.9250034,
+    "lng": 78.1374473,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt Rajaji Hospital Emergency Ward",
+      "name:etymology:wikidata": "Q378404",
+      "survey:date": "2024-05-20"
+    }
+  },
+  {
+    "name": "Thoothukudi Government Medical College Hospital",
+    "lat": 8.7981499,
+    "lng": 78.1360638,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Thoothukkudi",
+      "addr:full": "Medical College Hospital Thoothukudi, Thoothukudi, Subbaiah Puram",
+      "addr:postcode": "628002",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Thoothukudi Government Medical College Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Medical College Hospital, Dindigul",
+    "lat": 10.3644811,
+    "lng": 77.9764388,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Dindigul Mpty",
+      "addr:district": "Dindigul",
+      "addr:full": "Begambur, Dindigul",
+      "addr:postcode": "624001",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "check_date": "2024-10-26",
+      "healthcare": "hospital",
+      "name": "Government Medical College Hospital, Dindigul",
+      "name:ta": "\u0b85\u0bb0\u0b9a\u0bc1 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0b95\u0bcd\u0b95\u0bb2\u0bcd\u0bb2\u0bc2\u0bb0\u0bbf \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8, \u0ba4\u0bbf\u0ba3\u0bcd\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0bb2\u0bcd",
+      "operator:type": "government",
+      "source": "OpenGovernmentData",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "name": "Government District Headquarters Hospital",
+    "lat": 10.1038513,
+    "lng": 78.7611232,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "yes",
+      "name": "Government District Headquarters Hospital",
+      "name:ta": "\u0b85\u0bb0\u0b9a\u0bc1 \u0bae\u0bbe\u0bb5\u0b9f\u0bcd\u0b9f \u0ba4\u0bb2\u0bb2\u0bc8\u0bae\u0bc8 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8 \u0b95\u0bbe\u0bb0\u0bc8\u0b95\u0bcd\u0b95\u0bc1\u0b9f\u0bbf"
+    }
+  },
+  {
+    "name": "Government Siddha hospital",
+    "lat": 10.3618726,
+    "lng": 77.9869216,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Siddha hospital"
+    }
+  },
+  {
+    "name": "Mariyanathapuram PHC",
+    "lat": 10.34989,
+    "lng": 77.9860667,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "healthcare:speciality": "vaccination;general",
+      "name": "Mariyanathapuram PHC"
+    }
+  },
+  {
+    "name": "Government Siddha Medical College and Hospital",
+    "lat": 8.7246574,
+    "lng": 77.7326837,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Tirunelveli",
+      "addr:full": "Murugankurichi, Palayamkottai, Tirunelveli",
+      "addr:postcode": "627002",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Siddha Medical College and Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Govt Hospital Mettur",
+    "lat": 11.7959119,
+    "lng": 77.7987959,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "METTUR",
+      "addr:postcode": "636401",
+      "addr:street": "GH Road",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "healthcare:speciality": "general",
+      "name": "Govt Hospital Mettur"
+    }
+  },
+  {
+    "name": "Rajakkamangalam PHC",
+    "lat": 8.1158029,
+    "lng": 77.3803867,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Rajakkamangalam PHC"
+    }
+  },
+  {
+    "name": "Government Primary Healthcare Centre",
+    "lat": 12.9916638,
+    "lng": 79.2547376,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Vellore",
+      "addr:full": "Thiruvalam CHC, Opp. Government Boys Hr. Sec School, Thiruvalam, Sivanandha Nagar",
+      "addr:postcode": "632515",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Katpadi",
+      "amenity": "hospital",
+      "area": "yes",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "name": "Government Primary Healthcare Centre",
+      "operator:type": "government",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "UPHC, Kodaikanal",
+    "lat": 10.2402835,
+    "lng": 77.5023222,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Kodaikanal Mpty",
+      "addr:district": "Dindigul",
+      "addr:full": "Back Side Of Union Office, Kodaikanal, Laws Ghat Road",
+      "addr:postcode": "624101",
+      "addr:state": "Tamil Nadu",
+      "addr:subdistrict": "Kodaikanal",
+      "amenity": "hospital",
+      "description": "Urban Primary Health Centre",
+      "healthcare": "centre",
+      "name": "UPHC, Kodaikanal",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government child birth Hospital",
+    "lat": 13.0765495,
+    "lng": 80.2245565,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:block": "Chennai Zone Viii",
+      "addr:district": "Chennai",
+      "addr:full": "Pulla Avenue Corporation School, Shenoy Nagar, Pulla Avenue",
+      "addr:postcode": "600030",
+      "addr:state": "Tamil Nadu",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government child birth Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Primary Health Centre",
+    "lat": 12.7912032,
+    "lng": 80.0329076,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:city": "Maraimalai Nagar",
+      "addr:postcode": "603209",
+      "addr:street": "Kambar Road",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Primary Health Centre"
+    }
+  },
+  {
+    "name": "Govt. Kilpauk Hospital",
+    "lat": 13.0766394,
+    "lng": 80.2430155,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Govt. Kilpauk Hospital"
+    }
+  },
+  {
+    "name": "Government Medical College - Dindigul",
+    "lat": 10.3329349,
+    "lng": 77.9827453,
+    "source_state": "Tamil Nadu",
+    "tags": {
+      "addr:district": "Dindigul",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Medical College - Dindigul"
+    }
+  },
+  {
+    "name": "Govt. Medical College",
+    "lat": 21.1295149,
+    "lng": 79.0974689,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:country": "IN",
+      "amenity": "hospital",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "name": "Govt. Medical College"
+    }
+  },
+  {
+    "name": "Siddarth Municipal Hospital",
+    "lat": 19.1597156,
+    "lng": 72.8399209,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Mumbai",
+      "addr:full": "Siddarth Municipal General Hospital, Opp Motilal Nagar Post Office, Goregaon (W), Mumbai",
+      "addr:postcode": "400104",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "Civil Hospital/General Hospital",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "name": "Siddarth Municipal Hospital",
+      "operator": "BMC",
+      "operator:type": "government",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "municipal hospital for women & child",
+    "lat": 19.8918831,
+    "lng": 75.3594412,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "municipal hospital for women & child"
+    }
+  },
+  {
+    "name": "Central Govt Heath Scheme(CGHS) Clinic",
+    "lat": 21.1703616,
+    "lng": 79.064192,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:city": "Nagpur",
+      "amenity": "hospital",
+      "name": "Central Govt Heath Scheme(CGHS) Clinic"
+    }
+  },
+  {
+    "name": "Government General Hospital, Malwani Malad",
+    "lat": 19.2007076,
+    "lng": 72.8221715,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Mumbai",
+      "addr:full": "Bafhira Nagar Road, Near Jankalyan Nagar Police Chowky, Malad",
+      "addr:postcode": "400095",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "name": "Government General Hospital, Malwani Malad",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Kurla Municipal Hospital",
+    "lat": 19.0815079,
+    "lng": 72.8831157,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:city": "Mumbai",
+      "addr:postcode": "400070",
+      "addr:street": "father peter periera road",
+      "amenity": "hospital",
+      "name": "Kurla Municipal Hospital",
+      "operator": "MCGM",
+      "website": "https://www.mcgm.gov.in"
+    }
+  },
+  {
+    "name": "Sub District Hospital Bhor",
+    "lat": 18.1439124,
+    "lng": 73.8520056,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Pune",
+      "addr:full": "Bhor",
+      "addr:postcode": "412206",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Bhor",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub District Hospital Bhor",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub District Hospital, Indapur",
+    "lat": 18.1206808,
+    "lng": 75.0258983,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:city": "Indapur",
+      "addr:district": "Pune",
+      "addr:full": "Padasthal Road, Indapur",
+      "addr:postcode": "413106",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Indapur",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub District Hospital, Indapur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Wachche Hospital, Solapur",
+    "lat": 17.6377251,
+    "lng": 75.9046376,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Solapur",
+      "addr:full": "Plot No - 13 Vishal Nagar Jule Solapur Near Bharati Vidyapeeth",
+      "addr:postcode": "413004",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "name": "Wachche Hospital, Solapur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub District Hospital, Pandharpur",
+    "lat": 17.685862,
+    "lng": 75.3331795,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Solapur",
+      "addr:full": "June Pat,Pandharpur",
+      "addr:postcode": "413304",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "name": "Sub District Hospital, Pandharpur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub District Hospital, Degloor",
+    "lat": 18.545425,
+    "lng": 77.5844353,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Nanded",
+      "addr:full": "Degloor- Hyderabad Road, Degloor",
+      "addr:postcode": "431717",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "name": "Sub District Hospital, Degloor",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "District Hospital,Beed",
+    "lat": 18.9869163,
+    "lng": 75.7533207,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Beed",
+      "addr:full": "Civil Hospital Road, Bir, Beed",
+      "addr:postcode": "431122",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Bid",
+      "amenity": "hospital",
+      "description": "District Hospital",
+      "name": "District Hospital,Beed",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "District Hospital, Satara",
+    "lat": 17.6913198,
+    "lng": 74.0094374,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Satara",
+      "addr:full": "Sadarbazar, Guruwar Peth, Satara",
+      "addr:postcode": "415002",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "District Hospital",
+      "name": "District Hospital, Satara",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "KDMC Kolsewadi Municipal Hospital",
+    "lat": 19.2314914,
+    "lng": 73.1368687,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Thane",
+      "addr:full": "Geeta Harkisan Dawakhana, Near Canara Bank, Kolsewadi East",
+      "addr:postcode": "421306",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Kalyan",
+      "amenity": "hospital",
+      "name": "KDMC Kolsewadi Municipal Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "District Hospital, Ahmednagar",
+    "lat": 19.108436,
+    "lng": 74.735394,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Ahmadnagar",
+      "addr:full": "Opp. Sarda College, Patrakarchowk, Ahmednagar",
+      "addr:postcode": "414001",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Nagar",
+      "amenity": "hospital",
+      "description": "District Hospital",
+      "name": "District Hospital, Ahmednagar",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "NDMC Arabgalli Municipal Hospital",
+    "lat": 19.143427,
+    "lng": 77.324738,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Nanded",
+      "addr:full": "Arab Galli Area, Darbaar Masjid Road, Near Nanded Fort, Nanded",
+      "addr:postcode": "431604",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "name": "NDMC Arabgalli Municipal Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Dr Shankarrao Chavan Government Medical College and Hospital, Vazirabad",
+    "lat": 19.156482,
+    "lng": 77.313095,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Nanded",
+      "addr:full": "Vazirabad, Nanded",
+      "addr:postcode": "431601",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "Medical Colleges Hospital",
+      "name": "Dr Shankarrao Chavan Government Medical College and Hospital, Vazirabad",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital Karad",
+    "lat": 17.288161,
+    "lng": 74.186186,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Satara",
+      "addr:postcode": "415110",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Karad",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital Karad",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital Phaltan",
+    "lat": 17.9919639,
+    "lng": 74.4346258,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Satara",
+      "addr:postcode": "415523",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Phaltan",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital Phaltan",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Roha, Sub District Hospital",
+    "lat": 18.4342863,
+    "lng": 73.1181287,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Raigarh",
+      "addr:full": "Sub District Hospital Roha, Nagpalika Road, Roha",
+      "addr:postcode": "402109",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Roha",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Roha, Sub District Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Shrivardhan, Sub District Hospital",
+    "lat": 18.0498631,
+    "lng": 73.0174109,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Raigarh",
+      "addr:full": "Sub District Hospital, Beach Road Near Ganesh Mandir, Shriwardhan",
+      "addr:postcode": "402113",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Shrivardhan",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Shrivardhan, Sub District Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital Georai",
+    "lat": 19.263871,
+    "lng": 75.75079,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Beed",
+      "addr:full": "Sub-District Hospital Georai, Aurangabad Road Beed",
+      "addr:postcode": "431127",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Georai",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital Georai",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital Gangapur",
+    "lat": 19.697402,
+    "lng": 75.008919,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Aurangabad",
+      "addr:postcode": "431109",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Gangapur",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital Gangapur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "District Hospital Parbhani",
+    "lat": 19.2713708,
+    "lng": 76.7644813,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Parbhani",
+      "addr:full": "Subhash Road, Near Sharda Vidyalaya, Shastri Nagar, Parbhani",
+      "addr:postcode": "431401",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "District Hospital",
+      "name": "District Hospital Parbhani",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "UPHC Ranale Talao",
+    "lat": 19.4498063,
+    "lng": 72.8181478,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Palghar",
+      "addr:full": "UPHC Ranale Talao, Ranale Talao, Manvel pada, Bhushan Hospital",
+      "addr:postcode": "401303",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "name": "UPHC Ranale Talao",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sangalwadi Municipal Hospital",
+    "lat": 16.859925,
+    "lng": 74.552072,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Sangli",
+      "addr:full": "Allo Disp no. 5 corporation, sangliwadi",
+      "addr:postcode": "416416",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Miraj",
+      "amenity": "hospital",
+      "name": "Sangalwadi Municipal Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Medical College And Hospital Miraj",
+    "lat": 16.837153,
+    "lng": 74.647081,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Sangli",
+      "addr:full": "Near State Bank Atm",
+      "addr:postcode": "416410",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Miraj",
+      "amenity": "hospital",
+      "description": "Medical Colleges Hospital",
+      "name": "Government Medical College And Hospital Miraj",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "SUB-District Hospital Parli",
+    "lat": 18.849645,
+    "lng": 76.5327379,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Beed",
+      "addr:full": "Sub-District Hospital Parali, Mondha Road Parli",
+      "addr:postcode": "431515",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Parli",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "SUB-District Hospital Parli",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital Kaij",
+    "lat": 18.713928,
+    "lng": 76.089605,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Beed",
+      "addr:full": "Sub-District Hospital Kaij, Ambajogai Road Kaij",
+      "addr:postcode": "431123",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Kaij",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital Kaij",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Govt. Hospital, Rajura Bk.",
+    "lat": 18.5624038,
+    "lng": 77.4551005,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Nanded",
+      "addr:full": "Rajura Bk",
+      "addr:postcode": "431717",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Mukhed",
+      "amenity": "hospital",
+      "description": "Government Hospital",
+      "name": "Govt. Hospital, Rajura Bk.",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital, Malkapur",
+    "lat": 20.8843497,
+    "lng": 76.2035114,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Buldana",
+      "addr:full": "Buldana Road, Near Bus Depot, Malkapur",
+      "addr:postcode": "443101",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Malkapur",
+      "amenity": "hospital",
+      "name": "Sub-District Hospital, Malkapur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "District Hospital, Dhule",
+    "lat": 20.9016416,
+    "lng": 74.7711279,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Dhule",
+      "addr:full": "Sakri Road, Vidhya Vihar Colony, Dhule",
+      "addr:postcode": "424001",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "District Hospital",
+      "name": "District Hospital, Dhule",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub District Hospital",
+    "lat": 21.0862493,
+    "lng": 79.9881813,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Bhandara",
+      "addr:full": "Near post Office",
+      "addr:postcode": "441802",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Sakoli",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub District Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital Arvi",
+    "lat": 20.9935702,
+    "lng": 78.2279469,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Wardha",
+      "addr:full": "Sub-District Hospital Arvi, Near Mamat Mandir",
+      "addr:postcode": "442201",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Arvi",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital Arvi",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Indira Gandhi Government Medical College and Hospital",
+    "lat": 21.15405,
+    "lng": 79.094649,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Nagpur",
+      "addr:full": "Central Avenue Road, Mominpura",
+      "addr:postcode": "440018",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Nagpur (Urban)",
+      "amenity": "hospital",
+      "description": "Medical Colleges Hospital",
+      "healthcare": "hospital",
+      "name": "Indira Gandhi Government Medical College and Hospital",
+      "name:etymology:wikidata": "Q1149",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Govt. Medical College and Hospital",
+    "lat": 20.7026029,
+    "lng": 77.0019289,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Akola",
+      "addr:full": "Ashok Vatika, district Collector Office Road, Near, Bhandaraj BK, Akola",
+      "addr:postcode": "444001",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "Medical College Hospital",
+      "name": "Govt. Medical College and Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub District Hospital, Morshi",
+    "lat": 21.3393182,
+    "lng": 78.0106932,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Amravati",
+      "addr:full": "Ahead of Dr.Kurade Hospital Morshi, Morshi Warud Road",
+      "addr:postcode": "444905",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Morshi",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub District Hospital, Morshi",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Shirpur Sub District Hospital",
+    "lat": 21.355138,
+    "lng": 74.883669,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Dhule",
+      "addr:postcode": "425405",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Shirpur",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Shirpur Sub District Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital Tumsar",
+    "lat": 21.382449,
+    "lng": 79.745473,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Bhandara",
+      "addr:full": "Subhaschandra Bose Hospital Tumsar, Near By Kali Mandir, Tumsar",
+      "addr:postcode": "441912",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Tumsar",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital Tumsar",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "District Hospital, Buldana",
+    "lat": 20.532784,
+    "lng": 76.186566,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Buldana",
+      "addr:full": "Milind Nagar, Near Central Jail, Buldana",
+      "addr:postcode": "443001",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "District Hospital",
+      "name": "District Hospital, Buldana",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub District Hospital, Chimur",
+    "lat": 20.4971981,
+    "lng": 79.3609591,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Chandrapur",
+      "addr:full": "Gandhi ward, Chimur",
+      "addr:postcode": "442903",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Chimur",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub District Hospital, Chimur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital, Karanja",
+    "lat": 20.4859395,
+    "lng": 77.4803659,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Washim",
+      "addr:full": "Shivaji Nagar, Near Panchayat Samiti, Karanja",
+      "addr:postcode": "444105",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Karanja",
+      "amenity": "hospital",
+      "name": "Sub-District Hospital, Karanja",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sinnar Municipal Hospital",
+    "lat": 19.845534,
+    "lng": 73.9997151,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Nashik",
+      "addr:full": "Sinnar Municipal Hospital, 14,Chowk Wada, Sinnar",
+      "addr:postcode": "422103",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Sinnar",
+      "amenity": "hospital",
+      "name": "Sinnar Municipal Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "District Hospital, Jalna",
+    "lat": 19.83228,
+    "lng": 75.874466,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Jalna",
+      "addr:full": "Maharashtra Jeevan Pradhikaran, Samarth Nagar, Jalna",
+      "addr:postcode": "431213",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "District Hospital",
+      "name": "District Hospital, Jalna",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital, Sillod",
+    "lat": 20.3010738,
+    "lng": 75.6494794,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Aurangabad",
+      "addr:postcode": "431112",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Sillod",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital, Sillod",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital, Vaijapur",
+    "lat": 19.924128,
+    "lng": 74.727928,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Aurangabad",
+      "addr:full": "Sub-District Hospital, Vaijapur",
+      "addr:postcode": "423701",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Vaijapur",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "name": "Sub-District Hospital, Vaijapur",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Medical College & Multispeciality Hospital",
+    "lat": 20.7018883,
+    "lng": 77.0002905,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Akola",
+      "addr:full": "Bhandaraj BK, Akola",
+      "addr:postcode": "444002",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "name": "Government Medical College & Multispeciality Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Jamshed Ji Tata Municipal Hospital",
+    "lat": 21.1727983,
+    "lng": 79.0914599,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Nagpur",
+      "addr:full": "Bezonbagh, Nagpur",
+      "addr:postcode": "440003",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "name": "Jamshed Ji Tata Municipal Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Masanganj Municipal Hospital",
+    "lat": 20.9365458,
+    "lng": 77.7499787,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Amravati",
+      "addr:full": "Masan Gunj, Kanwar Nagar, Om Shivniketan Colony, Amravati",
+      "addr:postcode": "444601",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "name": "Masanganj Municipal Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Government Sub Hospital",
+    "lat": 18.141394,
+    "lng": 75.733874,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Solapur",
+      "addr:full": "Pangaon",
+      "addr:postcode": "413403",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "name": "Government Sub Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Government Civil Hospital",
+    "lat": 17.0603756,
+    "lng": 74.8630135,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Sangli",
+      "addr:full": "Near Yallamma Temple, Kuchi",
+      "addr:postcode": "416405",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "name": "Government Civil Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Shirur Government Civil Hospital",
+    "lat": 19.0647304,
+    "lng": 75.4189126,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Beed",
+      "addr:full": "Shirur Kasar",
+      "addr:postcode": "413249",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "name": "Shirur Government Civil Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "New Municipal Hospital",
+    "lat": 19.3402602,
+    "lng": 72.8039102,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Palghar",
+      "addr:full": "Hathi Mohalla, Koliwada, Vasai West, Vasai-Virar",
+      "addr:postcode": "401201",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "New Municipal Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Government Rural Hospital",
+    "lat": 18.982756,
+    "lng": 73.107745,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Raigad",
+      "addr:full": "Uran Road, Panvel, Navi Mumbai",
+      "addr:postcode": "410206",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "name": "Government Rural Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Mohili Village Municipal Hospital",
+    "lat": 19.097922,
+    "lng": 72.892138,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Mumbai Suburban",
+      "addr:full": "Sir Mathuradas Vasanji Road, Lokmanya Tilak Nagar, Saki Naka, Mumbai",
+      "addr:postcode": "400072",
+      "addr:state": "Maharastra",
+      "amenity": "hospital",
+      "name": "Mohili Village Municipal Hospital",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Shri.Bhausaheb Hire Govt.Medical College",
+    "lat": 20.8650627,
+    "lng": 74.7629432,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Dhule",
+      "addr:full": "Chakkarbardi, Malegaon Road",
+      "addr:postcode": "424006",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "name": "Shri.Bhausaheb Hire Govt.Medical College",
+      "source": "Local Knowledge"
+    }
+  },
+  {
+    "name": "Pulfail UPHC A",
+    "lat": 20.7318289,
+    "lng": 78.6096637,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Pulfail UPHC A"
+    }
+  },
+  {
+    "name": "PHC",
+    "lat": 18.5799148,
+    "lng": 73.9827951,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "PHC"
+    }
+  },
+  {
+    "name": "PHC Khadkala",
+    "lat": 18.7636501,
+    "lng": 73.5552679,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "check_date": "2025-12-12",
+      "healthcare": "hospital",
+      "name": "PHC Khadkala",
+      "operator": "Zilla Parishad Pune"
+    }
+  },
+  {
+    "name": "Primary Health Center PHC Dhapewada",
+    "lat": 21.3061567,
+    "lng": 78.9184588,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:city": "Dhapewada",
+      "addr:district": "Nagpur",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Primary Health Center PHC Dhapewada"
+    }
+  },
+  {
+    "name": "Primary Health Centre",
+    "lat": 17.5982016,
+    "lng": 73.8728339,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "name": "Primary Health Centre"
+    }
+  },
+  {
+    "name": "Govt Medical College & Hospital",
+    "lat": 19.8907866,
+    "lng": 75.319315,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:city": "Aurangabad",
+      "addr:district": "Aurangabad",
+      "addr:full": "Near Panchakki Road, Jublee Park, Begum Pura Extension, Naralibag",
+      "addr:postcode": "431004",
+      "addr:state": "Maharashtra",
+      "addr:street": "Panchakki Road",
+      "amenity": "hospital",
+      "emergency": "yes",
+      "name": "Govt Medical College & Hospital",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Silver Jubilee Sub District Hospital, Baramati",
+    "lat": 18.1519568,
+    "lng": 74.5753117,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Pune",
+      "addr:postcode": "413102",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Baramati",
+      "amenity": "hospital",
+      "building": "yes",
+      "description": "Sub District Hospital",
+      "name": "Silver Jubilee Sub District Hospital, Baramati",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "PHC, Kapadsingi",
+    "lat": 19.8430188,
+    "lng": 76.6578221,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Hingoli",
+      "addr:full": "Near Veternary Dispensary Grade 2, Kapadsingi",
+      "addr:postcode": "431510",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Sengaon",
+      "amenity": "hospital",
+      "description": "Primary Health Centre",
+      "healthcare": "centre",
+      "name": "PHC, Kapadsingi",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Dr.Astin Hospital & Government Office",
+    "lat": 19.5822702,
+    "lng": 73.3909098,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "name": "Dr.Astin Hospital & Government Office"
+    }
+  },
+  {
+    "name": "Rajarshi Chhatrapati Shahu Maharaj Government Medical college and CPR hospital",
+    "lat": 16.6700385,
+    "lng": 74.234857,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Kolhapur",
+      "addr:full": "Shenda Park Rd, Shenda Park, Kolhapur",
+      "addr:postcode": "416013",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Karvir",
+      "amenity": "hospital",
+      "description": "Medical Colleges Hospital",
+      "healthcare": "hospital",
+      "name": "Rajarshi Chhatrapati Shahu Maharaj Government Medical college and CPR hospital",
+      "name:etymology:wikidata": "Q7461433",
+      "source": "OpenGovernmentData",
+      "wikidata": "Q7273313"
+    }
+  },
+  {
+    "name": "Sub District Hospital, Mangaon",
+    "lat": 18.2357833,
+    "lng": 73.2816687,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Raigarh",
+      "addr:full": "Shriwardhan Road, Near ST Stand",
+      "addr:postcode": "402104",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Mangaon",
+      "amenity": "hospital",
+      "building": "yes",
+      "description": "Sub District Hospital",
+      "name": "Sub District Hospital, Mangaon",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Hindu Hruday Samrat Balasaheb Thackerey Trauma Care Municipal Hospital",
+    "lat": 19.1409344,
+    "lng": 72.8536704,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:city": "Mumbai",
+      "addr:district": "Mumbai",
+      "addr:full": "Hindu Hruday Samrat Balasaheb Thackerey Trauma Care, Opposite Jogeshwari Vikhroli Link Road, Jogeshwari East",
+      "addr:postcode": "400060",
+      "addr:state": "Maharashtra",
+      "addr:street": "Western Express Highway",
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "healthcare:speciality": "trauma",
+      "name": "Hindu Hruday Samrat Balasaheb Thackerey Trauma Care Municipal Hospital",
+      "name:etymology:wikidata": "Q61193",
+      "opening_hours": "Mo-Su 07:00-23:00",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Government Civil Hospital, Hingoli",
+    "lat": 19.7221417,
+    "lng": 77.15437,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Hingoli",
+      "addr:full": "Shree Nagar, Hingoli",
+      "addr:postcode": "431513",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "building": "yes",
+      "description": "Civil Hospital",
+      "name": "Government Civil Hospital, Hingoli",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital",
+    "lat": 20.2344277,
+    "lng": 79.0031638,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "building": "yes",
+      "healthcare": "hospital",
+      "name": "Sub-District Hospital"
+    }
+  },
+  {
+    "name": "Shirur Anantpal PHC",
+    "lat": 18.3360819,
+    "lng": 76.8164,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Shirur Anantpal PHC"
+    }
+  },
+  {
+    "name": "District Hospital, Ratnagiri",
+    "lat": 16.9884007,
+    "lng": 73.2992631,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Ratnagiri",
+      "addr:full": "Ratnagiri District Central Co-Op Bank",
+      "addr:postcode": "415612",
+      "addr:state": "Maharashtra",
+      "amenity": "hospital",
+      "description": "District Hospital",
+      "name": "District Hospital, Ratnagiri",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub District Hospital, Udgir",
+    "lat": 18.3906989,
+    "lng": 77.1178142,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Latur",
+      "addr:full": "Udgir Sub District Hospital",
+      "addr:postcode": "413517",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Udgir",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "healthcare": "hospital",
+      "name": "Sub District Hospital, Udgir",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "District Hospital Sindhudurg",
+    "lat": 16.116248,
+    "lng": 73.6900576,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "healthcare:speciality": "general",
+      "name": "District Hospital Sindhudurg",
+      "operator:type": "government"
+    }
+  },
+  {
+    "name": "Sub District Hospital Basmath",
+    "lat": 19.3252193,
+    "lng": 77.1568389,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:district": "Hingoli",
+      "addr:full": "Mahaveer Chowk Road",
+      "addr:postcode": "431512",
+      "addr:state": "Maharashtra",
+      "addr:subdistrict": "Basmath",
+      "amenity": "hospital",
+      "description": "Sub District Hospital",
+      "healthcare": "hospital",
+      "name": "Sub District Hospital Basmath",
+      "source": "OpenGovernmentData"
+    }
+  },
+  {
+    "name": "Sub-District Hospital Pandharkawada",
+    "lat": 20.0101411,
+    "lng": 78.5476424,
+    "source_state": "Maharashtra",
+    "tags": {
+      "addr:city": "Pandharkawada",
+      "addr:housenumber": "Sub-district hospital",
+      "addr:postcode": "445302",
+      "addr:street": "Chalburdi street",
+      "amenity": "hospital",
+      "emergency": "yes",
+      "healthcare": "hospital",
+      "name": "Sub-District Hospital Pandharkawada",
+      "operator": "Government",
+      "operator:type": "government"
+    }
+  },
+  {
+    "name": "PHC Bhatangli",
+    "lat": 18.4521142,
+    "lng": 76.6748662,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "PHC Bhatangli"
+    }
+  },
+  {
+    "name": "Government Hospita",
+    "lat": 19.1854369,
+    "lng": 72.819154,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Government Hospita"
+    }
+  },
+  {
+    "name": "govt veternity hospital",
+    "lat": 21.4578189,
+    "lng": 79.1695998,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "govt veternity hospital"
+    }
+  },
+  {
+    "name": "Anjanvel PHC",
+    "lat": 17.5547288,
+    "lng": 73.154013,
+    "source_state": "Maharashtra",
+    "tags": {
+      "amenity": "hospital",
+      "healthcare": "hospital",
+      "name": "Anjanvel PHC",
+      "name:en": "Anjanvel PHC"
+    }
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "case_type": "maternal",
+  "source_file": "Maternal_Risk.csv",
+  "original_rows": 808,
+  "rows_used": 808,
+  "features": [
+    "Age",
+    "SystolicBP",
+    "DiastolicBP",
+    "BS",
+    "BodyTemp",
+    "HeartRate"
+  ],
+  "metrics": {
+    "accuracy": 0.963,
+    "balanced_accuracy": 0.9688,
+    "macro_precision": 0.9583,
+    "macro_recall": 0.9688,
+    "macro_f1": 0.9621,
+    "high_risk_roc_auc": 0.9943
+  },
+  "evidence_level": "development dataset; requires independent clinical validation",
+  "trained_at": "2026-08-22T16:34:10.182229+00:00"
+}
