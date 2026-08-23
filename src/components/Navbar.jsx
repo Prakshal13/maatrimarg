@@ -151,22 +151,16 @@ const Navbar = () => {
                 </span>
               </button>
 
-              {/* 4. Clinician Profile / Login Capsule with Icon Badge */}
-              <div className="flex items-center gap-1.5">
+              {/* 4. Clinician Profile Icon Button (Icon Only) */}
+              <div className="flex items-center gap-2">
                 <Link
                   to={roleInfo.link}
-                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 text-xs font-bold shadow-xs transition-all hover:scale-105 group cursor-pointer"
-                  title="Open Portal"
+                  className="w-9 h-9 rounded-full bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 flex items-center justify-center shadow-xs transition-all hover:scale-110 active:scale-95 cursor-pointer border border-teal-400/40"
+                  title={roleInfo.label}
                 >
-                  <div className="w-5 h-5 rounded-full bg-white/20 dark:bg-slate-950/20 flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-[13px] leading-none">
-                      {roleInfo.icon}
-                    </span>
-                  </div>
-                  <span className="truncate max-w-[130px] font-semibold tracking-wide">
-                    {roleInfo.label}
+                  <span className="material-symbols-outlined text-[20px] leading-none">
+                    {user ? (user.role === 'dho_command' ? 'admin_panel_settings' : user.role === 'hospital_staff' ? 'local_hospital' : 'medical_services') : 'person'}
                   </span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
 
                 {user && (
