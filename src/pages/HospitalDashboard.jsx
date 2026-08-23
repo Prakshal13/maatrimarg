@@ -216,7 +216,7 @@ const HospitalDashboard = () => {
               <div className="flex items-center gap-2">
                 <Filter className="w-4 h-4 text-slate-400" />
                 <span className="text-xs font-black uppercase tracking-wider text-slate-600 dark:text-slate-300">
-                  Filters
+                  {t('filters_label')}
                 </span>
               </div>
 

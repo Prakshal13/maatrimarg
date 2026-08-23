@@ -27,31 +27,31 @@ const AppSidebar = () => {
 
   const navItems = [
     {
-      label: t('dashboard') || 'Command Center',
+      label: t('dashboard'),
       path: '/command-center',
       icon: Activity,
       symbol: 'hub'
     },
     {
-      label: t('hospitals') || 'Hospitals Directory',
+      label: t('hospitals'),
       path: '/hospital',
       icon: Hospital,
       symbol: 'domain'
     },
     {
-      label: t('maternal_portal') || 'Maternal Risk Assessment',
+      label: t('maternal_portal'),
       path: '/asha/maternal',
       icon: HeartPulse,
       symbol: 'clinical_notes'
     },
     {
-      label: t('child_portal') || 'Pediatric VIPER Triage',
+      label: t('child_portal'),
       path: '/asha/child',
       icon: Baby,
       symbol: 'child_care'
     },
     {
-      label: t('chronic_portal') || 'Cardiovascular Screening',
+      label: t('chronic_portal'),
       path: '/asha/chronic',
       icon: ActivitySquare,
       symbol: 'ecg_heart'

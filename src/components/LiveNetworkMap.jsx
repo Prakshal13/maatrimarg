@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import L from 'leaflet';
 import { api } from '../api/endpoints';
 import { 
@@ -193,7 +194,7 @@ const interpolateAlongPath = (waypoints, progress) => {
   };
 };
 
-const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }) => {
+const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }) => { const { t } = useLanguage();
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const hospitalsLayerRef = useRef(null);
@@ -743,7 +744,7 @@ const LiveNetworkMap = ({ hospitals = [], onSelectHospital, selectedHospitalId }
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
           <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 font-['Plus_Jakarta_Sans'] flex items-center gap-1.5">
             <Navigation className="w-4 h-4 text-[#006b5f]" />
-            <span>Live Regional Medical GIS Matrix</span>
+            <span>{t('live_gis_matrix')}</span>
           </h3>
         </div>
 

@@ -51,7 +51,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
   const [startType, setStartType] = useState('home');
   const [coords, setCoords] = useState({ lat: 12.8214, lng: 80.0440 });
   const [isLocating, setIsLocating] = useState(false);
-  const [searchLocation, setSearchLocation] = useState('📍 Live GPS Device Location');
+  const [searchLocation, setSearchLocation] = useState("📍 " + t("live_gps_device"));
   const [selectedHospitalId, setSelectedHospitalId] = useState('');
   const [dispatchStatus, setDispatchStatus] = useState(null);
 
@@ -61,7 +61,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           setCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-          setSearchLocation('📍 Live GPS Device Location');
+          setSearchLocation('📍 ' + t('live_gps_device'));
         },
         (err) => {
           // Default to central region if denied
@@ -108,7 +108,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
         const userLat = pos.coords.latitude;
         const userLng = pos.coords.longitude;
         setCoords({ lat: userLat, lng: userLng });
-        setSearchLocation('📍 Live GPS Device Location');
+        setSearchLocation('📍 ' + t('live_gps_device'));
         setIsLocating(false);
       },
       (err) => {
@@ -139,7 +139,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  // Dispatch 108 Ambulance Action
+  // {t('dispatch_ambulance')} Action
   const handleDispatchAmbulance = () => {
     setDispatchStatus('dispatching');
     setTimeout(() => {
@@ -158,7 +158,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
             directions_run
           </span>
           <h3 className="text-sm font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans'] tracking-tight">
-            Routing Intelligence & Dispatch
+            {t('routing_dispatch')}
           </h3>
         </div>
         <span className="px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/80 border border-teal-200 dark:border-teal-500/40 text-[#006b5f] dark:text-[#2dd4bf] text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-1">
@@ -174,10 +174,10 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-[#006b5f] dark:bg-[#2dd4bf]"></span>
-              1. STARTING POINT:
+              {t('starting_point')}
             </span>
             
-            {/* Pill Toggle: Home / Address vs Hospital */}
+            {/* Pill Toggle: {t('home_address')} vs Hospital */}
             <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-950/80 p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-[10px] font-bold">
               <button
                 type="button"
@@ -188,7 +188,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
                     : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
-                <span>🏠 Home / Address</span>
+                <span>🏠 {t('home_address')}</span>
               </button>
               <button
                 type="button"
@@ -229,7 +229,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
           </div>
 
           <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400 flex items-center justify-between px-1">
-            <span>Live GPS Device Location:</span>
+            <span>{t('live_gps_device')}:</span>
             <span className="text-[#006b5f] dark:text-[#2dd4bf] font-bold">{coords.lat.toFixed(4)}° N, {coords.lng.toFixed(4)}° E</span>
           </div>
         </div>
@@ -239,10 +239,10 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-[#006b5f] dark:bg-[#2dd4bf]"></span>
-              2. DESTINATION HOSPITAL:
+              {t('dest_hospital')}
             </span>
             <span className="text-[10px] text-teal-700 dark:text-teal-400 font-bold">
-              Auto-selected nearest ({sortedHospitals[0]?.distanceKm || 0} km)
+              {t('auto_selected_nearest')} ({sortedHospitals[0]?.distanceKm || 0} km)
             </span>
           </div>
 
@@ -265,14 +265,14 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
           </select>
         </div>
 
-        {/* 4. OPTIMAL REFERRAL Card based on Proximity */}
+        {/* 4. {t('optimal_referral')} Card based on Proximity */}
         {selectedHospital && (
           <div className="p-4 rounded-2xl bg-teal-50/60 dark:bg-gradient-to-b dark:from-[#0e2238] dark:to-[#091524] border border-teal-200/90 dark:border-teal-500/30 space-y-3 shadow-md transition-colors">
             
             <div className="flex items-start justify-between">
               <div>
                 <span className="text-[10px] font-black text-[#006b5f] dark:text-[#2dd4bf] uppercase tracking-wider flex items-center gap-1">
-                  OPTIMAL REFERRAL <span className="w-1.5 h-1.5 rounded-full bg-[#006b5f] dark:bg-[#2dd4bf] inline-block animate-pulse"></span>
+                  {t('optimal_referral')} <span className="w-1.5 h-1.5 rounded-full bg-[#006b5f] dark:bg-[#2dd4bf] inline-block animate-pulse"></span>
                 </span>
                 <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white font-['Plus_Jakarta_Sans'] mt-1 leading-snug">
                   {selectedHospital.name}
@@ -337,7 +337,7 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
                 <span className="material-symbols-outlined text-[16px]">
                   ambulance
                 </span>
-                <span>{dispatchStatus === 'dispatching' ? 'Dispatching...' : 'dispatchAmbulance'}</span>
+                <span>{dispatchStatus === 'dispatching' ? 'Dispatching...' : t('dispatch_ambulance')}</span>
               </button>
 
             </div>
@@ -352,10 +352,10 @@ const RoutingDispatchPanel = ({ hospitals = [], onSelectDestination }) => {
           </div>
         )}
 
-        {/* 5. STANDBY RECEIVING FACILITIES LIST (Closest 3) */}
+        {/* 5. {t('standby_receiving')} FACILITIES LIST (Closest 3) */}
         <div className="space-y-2 pt-1">
           <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-            STANDBY RECEIVING
+            {t('standby_receiving')}
           </div>
 
           <div className="space-y-2">

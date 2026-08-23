@@ -133,7 +133,7 @@ const CommandCenter = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search facilities, routes, districts..."
+              placeholder={t("search_hospitals_ph")}
               className="w-full pl-9 pr-3 py-1.5 bg-slate-100 dark:bg-[#0b1528] border border-slate-200 dark:border-slate-700/80 rounded-xl text-xs font-semibold text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-[#006b5f] dark:focus:ring-[#2dd4bf] transition-all"
             />
           </div>
@@ -212,29 +212,29 @@ const CommandCenter = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans'] tracking-tight">
-                Real-time Maternal Logistics Command
+                {t('cmd_header_title')}
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                MaatriMarg Active Routing Matrix • Maharashtra Regional Command Hub
+                {t('cmd_header_subtitle')}
               </p>
             </div>
 
             {/* Right Action Buttons */}
             <div className="flex items-center gap-3 shrink-0">
               
-              {/* Red Coral Pill: My Location GPS Route */}
+              {/* Red Coral Pill: {t('home_sos_route')} */}
               <button
                 onClick={() => setSosModalOpen(true)}
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#cb4646] hover:bg-[#b91c1c] text-white text-xs font-black shadow-md transition-all hover:scale-105 cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[16px]">location_on</span>
-                <span>My Location GPS Route</span>
+                <span>{t("home_sos_route")}</span>
               </button>
 
               {/* Pulsing Sync Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-[#091e28] border border-teal-200 dark:border-teal-500/40 text-[10px] font-black tracking-widest text-[#006b5f] dark:text-[#2dd4bf] uppercase">
                 <span className="w-2 h-2 rounded-full bg-[#006b5f] dark:bg-[#2dd4bf] pulse-node"></span>
-                <span>TELEMETRY SYNCHRONIZED</span>
+                <span>{t('active_monitoring')}</span>
               </div>
 
             </div>
@@ -243,11 +243,11 @@ const CommandCenter = () => {
           {/* 4 Summary Telemetry Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             
-            {/* Card 1: NETWORK EFFICIENCY */}
+            {/* Card 1: {t('net_efficiency')} */}
             <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-md space-y-2 relative overflow-hidden group transition-colors">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                 <span className="text-[10px] font-black uppercase tracking-wider">
-                  NETWORK EFFICIENCY
+                  {t('net_efficiency')}
                 </span>
                 <span className="material-symbols-outlined text-[#006b5f] dark:text-[#2dd4bf] text-[18px]">
                   trending_up
@@ -263,11 +263,11 @@ const CommandCenter = () => {
               </div>
             </div>
 
-            {/* Card 2: ACTIVE DISPATCHES */}
+            {/* Card 2: {t('active_dispatches')} */}
             <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-md space-y-2 relative overflow-hidden group transition-colors">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                 <span className="text-[10px] font-black uppercase tracking-wider">
-                  ACTIVE DISPATCHES
+                  {t('active_dispatches')}
                 </span>
                 <span className="material-symbols-outlined text-rose-500 dark:text-[#2dd4bf] text-[18px]">
                   ambulance
@@ -283,11 +283,11 @@ const CommandCenter = () => {
               </div>
             </div>
 
-            {/* Card 3: AVAILABLE ICU */}
+            {/* Card 3: {t('icu_available')} */}
             <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-md space-y-2 relative overflow-hidden group transition-colors">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                 <span className="text-[10px] font-black uppercase tracking-wider">
-                  AVAILABLE ICU
+                  {t('icu_available')}
                 </span>
                 <span className="material-symbols-outlined text-teal-600 dark:text-teal-400 text-[18px]">
                   lock
@@ -303,11 +303,11 @@ const CommandCenter = () => {
               </div>
             </div>
 
-            {/* Card 4: EMERGENCY DIVERSIONS */}
+            {/* Card 4: {t('critical_diversions')} */}
             <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-md space-y-2 relative overflow-hidden group transition-colors">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                 <span className="text-[10px] font-black uppercase tracking-wider">
-                  EMERGENCY DIVERSIONS
+                  {t('critical_diversions')}
                 </span>
                 <span className="material-symbols-outlined text-rose-500 text-[18px]">
                   error
@@ -351,10 +351,10 @@ const CommandCenter = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
               <div>
                 <h3 className="font-extrabold text-slate-900 dark:text-white text-base font-['Plus_Jakarta_Sans']">
-                  Hospital Facility Telemetry Grid ({filteredHospitals.length} Active Nodes)
+                  {t('telemetry_table_title')} ({filteredHospitals.length} Active Nodes)
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                  Live bed capacities, NICU units, and blood unit availability across Maharashtra & Tamil Nadu
+                  {t('hosp_subtitle')}
                 </p>
               </div>
 
@@ -364,7 +364,7 @@ const CommandCenter = () => {
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer w-fit shadow-2xs"
               >
                 <RefreshCw className={`w-3.5 h-3.5 text-[#006b5f] dark:text-[#2dd4bf] ${watchdogRunning ? 'animate-spin' : ''}`} />
-                <span>{watchdogRunning ? 'Scanning Grid...' : 'Audit Grid Protocol'}</span>
+                <span>{watchdogRunning ? 'Scanning Grid...' : t('cmd_header_title')}</span>
               </button>
             </div>
 
