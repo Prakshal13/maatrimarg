@@ -337,14 +337,17 @@ const UserProfileDropdown = () => {
               )}
 
               {/* Demo Hint Pill for Easy Evaluation */}
-              <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                <span>🔐 PIN: Enter any 4-8 character PIN</span>
+              <div className="p-3 rounded-2xl bg-teal-50/80 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 text-[11px] text-teal-900 dark:text-teal-300 flex items-center justify-between">
+                <div>
+                  <span className="font-bold block">🔑 Official Password:</span>
+                  <span className="font-mono text-teal-700 dark:text-teal-400 font-bold">{authModalRole.password || 'AshaSunita@2026'}</span>
+                </div>
                 <button
                   type="button"
-                  onClick={() => setAuthForm(prev => ({ ...prev, password: 'SecurePIN@2026' }))}
-                  className="text-[#006b5f] dark:text-teal-400 font-bold hover:underline cursor-pointer"
+                  onClick={() => setAuthForm(prev => ({ ...prev, password: authModalRole.password || 'AshaSunita@2026' }))}
+                  className="px-2.5 py-1 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 text-white dark:text-slate-950 rounded-lg font-bold text-[10px] shadow-xs cursor-pointer"
                 >
-                  Autofill PIN
+                  Autofill Key
                 </button>
               </div>
 
