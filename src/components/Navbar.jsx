@@ -9,7 +9,7 @@ import {
   LogOut, 
   Lock, 
   Moon, 
-  Sun,
+  Sun, 
   ChevronDown, 
   CheckCircle2,
   MapPin,
@@ -43,6 +43,38 @@ const Navbar = () => {
     return null;
   }
 
+  // Get user-friendly role label and icon
+  const getRoleBadge = () => {
+    if (!user) {
+      return {
+        icon: 'account_circle',
+        label: t('clinician_login_btn') || 'Clinician Portal',
+        link: '/login'
+      };
+    }
+    if (user.role === 'dho_command') {
+      return {
+        icon: 'admin_panel_settings',
+        label: lang === 'mr' ? 'DHO कमांड मुख्यालय' : lang === 'hi' ? 'DHO कमान मुख्यालय' : lang === 'ta' ? 'DHO கட்டளை மையம்' : 'DHO Command HQ',
+        link: '/command-center'
+      };
+    }
+    if (user.role === 'hospital_staff') {
+      return {
+        icon: 'local_hospital',
+        label: lang === 'mr' ? 'रुग्णालय CMO' : lang === 'hi' ? 'अस्पताल सीएमओ' : lang === 'ta' ? 'மருத்துவமனை CMO' : 'Hospital CMO',
+        link: '/hospital'
+      };
+    }
+    return {
+      icon: 'medical_services',
+      label: lang === 'mr' ? 'आशा कार्यकर्ता' : lang === 'hi' ? 'आशा कार्यकर्ता' : lang === 'ta' ? 'ஆஷா பணியாளர்' : 'ASHA Worker',
+      link: '/asha/maternal'
+    };
+  };
+
+  const roleInfo = getRoleBadge();
+
   return (
     <>
       <header className="sticky top-0 z-50 bg-[#f7f9fb]/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
@@ -60,7 +92,7 @@ const Navbar = () => {
             </Link>
 
             {/* Right Action Items matching Screenshot */}
-            <div className="flex items-center gap-2.5 sm:gap-3.5">
+            <div className="flex items-center gap-2 sm:gap-3">
               
               {/* 1. Home SOS Route (Google Maps) Button (Red/Coral Pill from Screenshot) */}
               <button
@@ -77,7 +109,7 @@ const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-2xs transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-2xs transition-colors cursor-pointer"
                 >
                   <span className="material-symbols-outlined text-[16px] text-teal-600 dark:text-teal-400">language</span>
                   <span>{currentLang.label}</span>
@@ -108,7 +140,7 @@ const Navbar = () => {
                 )}
               </div>
 
-              {/* 3. Dark Mode Toggle Button (From Screenshot) */}
+              {/* 3. Dark Mode Toggle Button */}
               <button
                 className="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-amber-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
                 title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
@@ -119,33 +151,34 @@ const Navbar = () => {
                 </span>
               </button>
 
-              {/* 4. Clinician Login / Profile Capsule */}
-              {user ? (
-                <div className="flex items-center gap-2">
-                  <Link
-                    to={user.role === 'dho_command' ? '/command-center' : user.role === 'hospital_staff' ? '/hospital' : '/asha/maternal'}
-                    className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#091426] dark:bg-teal-500 hover:bg-[#1e293b] text-white dark:text-slate-950 text-xs font-bold shadow-xs transition-colors"
-                  >
-                    <span className="truncate max-w-[130px]">{user.name || user.username}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+              {/* 4. Clinician Profile / Login Capsule with Icon Badge */}
+              <div className="flex items-center gap-1.5">
+                <Link
+                  to={roleInfo.link}
+                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 dark:hover:bg-teal-600 text-white dark:text-slate-950 text-xs font-bold shadow-xs transition-all hover:scale-105 group cursor-pointer"
+                  title="Open Portal"
+                >
+                  <div className="w-5 h-5 rounded-full bg-white/20 dark:bg-slate-950/20 flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-[13px] leading-none">
+                      {roleInfo.icon}
+                    </span>
+                  </div>
+                  <span className="truncate max-w-[130px] font-semibold tracking-wide">
+                    {roleInfo.label}
+                  </span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+
+                {user && (
                   <button
                     onClick={logout}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 transition-colors"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                     title={t('logout_session')}
                   >
                     <span className="material-symbols-outlined text-[18px]">logout</span>
                   </button>
-                </div>
-              ) : (
-                <Link
-                  to="/login"
-                  className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#091426] dark:bg-slate-800 hover:bg-[#1e293b] text-white text-xs font-bold shadow-xs transition-colors group"
-                >
-                  <span>{t('dho_hq')}</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-              )}
+                )}
+              </div>
 
             </div>
 
@@ -153,7 +186,7 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* Emergency Location Modal (Exact from Screenshot 2) */}
+      {/* Emergency Location Modal */}
       <EmergencyLocationModal
         isOpen={sosModalOpen}
         onClose={() => setSosModalOpen(false)}
