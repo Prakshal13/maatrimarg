@@ -8,84 +8,99 @@ const NetworkThreeGlobe = () => {
     const container = mountRef.current;
     if (!container) return;
 
-    let width = container.clientWidth || 600;
-    let height = container.clientHeight || 450;
+    let width = container.clientWidth || window.innerWidth;
+    let height = container.clientHeight || 550;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(65, width / height, 0.1, 1000);
-    camera.position.z = 5.2;
+    const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 1000);
+    camera.position.z = 4.8;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // Ambient and Point Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
+    const mainLight = new THREE.DirectionalLight(0x2dd4bf, 1.5);
+    mainLight.position.set(5, 5, 5);
+    scene.add(mainLight);
 
-    const blueLight = new THREE.PointLight(0x0284c7, 3, 50);
-    blueLight.position.set(4, 4, 4);
+    const blueLight = new THREE.PointLight(0x38bdf8, 2, 20);
+    blueLight.position.set(-5, -5, 3);
     scene.add(blueLight);
 
-    const tealLight = new THREE.PointLight(0x0d9488, 3, 50);
-    tealLight.position.set(-4, -4, 4);
-    scene.add(tealLight);
-
-    // Central AI Neural Globe (Wireframe + Core)
-    const coreGeo = new THREE.IcosahedronGeometry(1.3, 2);
-    const coreMat = new THREE.MeshPhongMaterial({
-      color: 0x1e40af,
-      emissive: 0x0f172a,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.6,
-    });
-    const core = new THREE.Mesh(coreGeo, coreMat);
-    scene.add(core);
-
-    const innerSphereGeo = new THREE.SphereGeometry(0.9, 24, 24);
-    const innerSphereMat = new THREE.MeshPhongMaterial({
-      color: 0x0284c7,
-      emissive: 0x0369a1,
+    // Central AI Core (Icosahedron)
+    const coreMaterial = new THREE.MeshPhongMaterial({
+      color: 0x0f172a,
+      emissive: 0x1e293b,
       transparent: true,
       opacity: 0.85,
+      shininess: 90,
+      wireframe: false,
     });
-    const innerSphere = new THREE.Mesh(innerSphereGeo, innerSphereMat);
-    scene.add(innerSphere);
+    const coreGeo = new THREE.IcosahedronGeometry(1.35, 2);
+    const core = new THREE.Mesh(coreGeo, coreMaterial);
+    scene.add(core);
 
-    // Floating Network Nodes (Rural PHCs, Mothers, District Hospitals)
-    const nodes = [];
-    const lines = [];
-    const nodeCount = 10;
-    const nodeGeo = new THREE.SphereGeometry(0.12, 16, 16);
-    const nodeMat = new THREE.MeshPhongMaterial({
-      color: 0x14b8a6,
-      emissive: 0x0d9488,
-      shininess: 100,
-    });
-
-    const lineMat = new THREE.LineBasicMaterial({
-      color: 0x38bdf8,
+    // Wireframe overlay on core
+    const wireMat = new THREE.MeshBasicMaterial({
+      color: 0x2dd4bf,
+      wireframe: true,
       transparent: true,
       opacity: 0.35,
     });
+    const coreWire = new THREE.Mesh(coreGeo, wireMat);
+    scene.add(coreWire);
+
+    // Outer orbital ring for core
+    const ringGeo = new THREE.TorusGeometry(1.85, 0.02, 16, 100);
+    const ringMat = new THREE.MeshPhongMaterial({
+      color: 0x2dd4bf,
+      transparent: true,
+      opacity: 0.65,
+    });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI / 2.2;
+    scene.add(ring);
+
+    // Floating Nodes (Hospitals/Mothers in Maharashtra & Tamil Nadu)
+    const nodeMaterial = new THREE.MeshPhongMaterial({
+      color: 0x2dd4bf,
+      emissive: 0x0d9488,
+      transparent: true,
+      opacity: 0.85,
+      shininess: 100,
+    });
+
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0x2dd4bf,
+      transparent: true,
+      opacity: 0.25,
+    });
+
+    const nodes = [];
+    const lines = [];
+    const nodeCount = 9;
 
     for (let i = 0; i < nodeCount; i++) {
-      const node = new THREE.Mesh(nodeGeo, nodeMat);
+      const nodeGeo = new THREE.SphereGeometry(0.12, 16, 16);
+      const node = new THREE.Mesh(nodeGeo, nodeMaterial);
+
       const angle = (i / nodeCount) * Math.PI * 2;
-      const radius = 2.6 + Math.sin(i * 1.5) * 0.4;
+      const radius = 3.1;
       node.position.x = Math.cos(angle) * radius;
-      node.position.y = Math.sin(angle) * radius;
-      node.position.z = (Math.sin(i) * 1.2);
+      node.position.y = Math.sin(angle) * radius * 0.75;
+      node.position.z = (Math.sin(i * 1.7) * 1.5);
 
       scene.add(node);
-      nodes.push({ mesh: node, speed: 0.004 + (i % 3) * 0.002, angle, radius });
+      nodes.push(node);
 
-      // Line connecting to core
+      // Connecting lines to center
       const points = [new THREE.Vector3(0, 0, 0), node.position];
       const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
-      const line = new THREE.Line(lineGeo, lineMat);
+      const line = new THREE.Line(lineGeo, lineMaterial);
       scene.add(line);
       lines.push(line);
     }
@@ -95,31 +110,29 @@ const NetworkThreeGlobe = () => {
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+      const time = clock.getElapsedTime();
 
-      core.rotation.y += 0.004;
-      core.rotation.x += 0.002;
-      innerSphere.rotation.y -= 0.003;
+      core.rotation.y += 0.003;
+      core.rotation.z += 0.0015;
+      coreWire.rotation.y += 0.003;
+      coreWire.rotation.z += 0.0015;
+      ring.rotation.z -= 0.0025;
 
-      // Pulse inner core
-      const scale = 1 + Math.sin(elapsedTime * 2.5) * 0.06;
-      innerSphere.scale.set(scale, scale, scale);
+      // Pulse effect
+      const pulse = Math.sin(time * 1.8) * 0.06 + 1;
+      core.scale.set(pulse, pulse, pulse);
+      coreWire.scale.set(pulse, pulse, pulse);
 
-      // Orbit nodes
-      nodes.forEach((n, idx) => {
-        n.angle += n.speed;
-        n.mesh.position.x = Math.cos(n.angle) * n.radius;
-        n.mesh.position.y = Math.sin(n.angle) * n.radius;
+      nodes.forEach((node, i) => {
+        node.position.y += Math.sin(time + i) * 0.0015;
+        node.position.x += Math.cos(time + i) * 0.001;
 
-        // Update connected line geometry
-        const line = lines[idx];
-        if (line) {
-          const positions = line.geometry.attributes.position.array;
-          positions[3] = n.mesh.position.x;
-          positions[4] = n.mesh.position.y;
-          positions[5] = n.mesh.position.z;
-          line.geometry.attributes.position.needsUpdate = true;
-        }
+        // Update connected lines
+        const pos = lines[i].geometry.attributes.position.array;
+        pos[3] = node.position.x;
+        pos[4] = node.position.y;
+        pos[5] = node.position.z;
+        lines[i].geometry.attributes.position.needsUpdate = true;
       });
 
       renderer.render(scene, camera);
@@ -129,8 +142,8 @@ const NetworkThreeGlobe = () => {
 
     const handleResize = () => {
       if (!container) return;
-      width = container.clientWidth;
-      height = container.clientHeight;
+      width = container.clientWidth || window.innerWidth;
+      height = container.clientHeight || 550;
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
@@ -149,7 +162,7 @@ const NetworkThreeGlobe = () => {
   }, []);
 
   return (
-    <div ref={mountRef} className="w-full h-full min-h-[380px] lg:min-h-[460px] flex items-center justify-center relative cursor-grab active:cursor-grabbing" />
+    <div ref={mountRef} className="absolute inset-0 w-full h-full pointer-events-none" />
   );
 };
 
