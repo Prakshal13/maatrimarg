@@ -113,16 +113,16 @@ const CommandCenter = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#070e1c] dark:bg-slate-950 text-slate-100 font-sans antialiased selection:bg-teal-500 selection:text-white transition-colors duration-200">
+    <div className="flex min-h-screen bg-[#f7f9fb] dark:bg-[#070e1c] text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-teal-500 selection:text-white transition-colors duration-200">
       
       {/* Sidebar Navigation */}
       <AppSidebar />
 
       {/* Main Command Center Canvas */}
-      <div className="flex-1 flex flex-col min-w-0 bg-[#070e1c] dark:bg-slate-950">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#f7f9fb] dark:bg-[#070e1c] transition-colors duration-200">
         
         {/* Top Header Bar matching Screenshot */}
-        <header className="h-16 bg-[#091426] dark:bg-slate-900 border-b border-slate-800 px-6 flex items-center justify-between sticky top-0 z-30 transition-colors">
+        <header className="h-16 bg-white/90 dark:bg-[#091426] backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between sticky top-0 z-30 transition-colors duration-200">
           
           {/* Global Search Bar */}
           <div className="relative w-80">
@@ -134,7 +134,7 @@ const CommandCenter = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search facilities, routes, districts..."
-              className="w-full pl-9 pr-3 py-1.5 bg-[#0b1528] dark:bg-slate-800 border border-slate-700/80 rounded-xl text-xs font-semibold text-slate-200 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-[#2dd4bf] transition-all"
+              className="w-full pl-9 pr-3 py-1.5 bg-slate-100 dark:bg-[#0b1528] border border-slate-200 dark:border-slate-700/80 rounded-xl text-xs font-semibold text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-[#006b5f] dark:focus:ring-[#2dd4bf] transition-all"
             />
           </div>
 
@@ -145,15 +145,15 @@ const CommandCenter = () => {
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-700/80 bg-[#0b1528] dark:bg-slate-800 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-[#0b1528] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer shadow-2xs"
               >
-                <span className="material-symbols-outlined text-[16px] text-[#2dd4bf]">language</span>
+                <span className="material-symbols-outlined text-[16px] text-teal-600 dark:text-[#2dd4bf]">language</span>
                 <span>{currentLang.label}</span>
                 <span className="material-symbols-outlined text-[14px] text-slate-400">expand_more</span>
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-44 bg-[#0b1528] dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-700 py-1.5 z-50 divide-y divide-slate-800">
+                <div className="absolute right-0 mt-2 w-44 bg-white dark:bg-[#0b1528] rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 py-1.5 z-50 divide-y divide-slate-100 dark:divide-slate-800">
                   {languages.map((l) => (
                     <button
                       key={l.code}
@@ -161,15 +161,15 @@ const CommandCenter = () => {
                         changeLanguage(l.code);
                         setLangDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-teal-950/60 transition-colors ${
-                        lang === l.code ? 'font-bold text-[#2dd4bf] bg-teal-950/40' : 'text-slate-300'
+                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-teal-50 dark:hover:bg-teal-950/60 transition-colors ${
+                        lang === l.code ? 'font-bold text-[#006b5f] dark:text-[#2dd4bf] bg-teal-50/50 dark:bg-teal-950/40' : 'text-slate-700 dark:text-slate-300'
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         <span>{l.flag}</span>
                         <span>{l.label}</span>
                       </div>
-                      {lang === l.code && <CheckCircle2 className="w-3.5 h-3.5 text-[#2dd4bf]" />}
+                      {lang === l.code && <CheckCircle2 className="w-3.5 h-3.5 text-[#006b5f] dark:text-[#2dd4bf]" />}
                     </button>
                   ))}
                 </div>
@@ -178,8 +178,8 @@ const CommandCenter = () => {
 
             {/* Dark Theme Toggle Button */}
             <button
-              className="p-2 rounded-lg bg-[#0b1528] dark:bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-800 transition-colors flex items-center justify-center cursor-pointer"
-              title="Toggle Theme"
+              className="p-2 rounded-lg bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-amber-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               onClick={toggleTheme}
             >
               <span className="material-symbols-outlined text-[18px]">
@@ -190,10 +190,10 @@ const CommandCenter = () => {
             {/* Notification Bell */}
             <button 
               onClick={() => alert("Real-time Triage Alerts: All 14 District Hubs operational without delay.")}
-              className="p-2 rounded-lg bg-[#0b1528] dark:bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-800 transition-colors relative cursor-pointer"
+              className="p-2 rounded-lg bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors relative cursor-pointer shadow-2xs"
               title="Notifications"
             >
-              <Bell className="w-4 h-4 text-slate-300" />
+              <Bell className="w-4 h-4" />
               <span className="w-2 h-2 rounded-full bg-rose-500 absolute top-1.5 right-1.5 animate-ping"></span>
               <span className="w-2 h-2 rounded-full bg-rose-500 absolute top-1.5 right-1.5"></span>
             </button>
@@ -208,13 +208,13 @@ const CommandCenter = () => {
         {/* Content Body */}
         <main className="p-6 sm:p-8 space-y-7 flex-1 overflow-y-auto text-left">
           
-          {/* Main Title & Action Row matching Screenshot */}
+          {/* Main Title & Action Row */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-black text-white font-['Plus_Jakarta_Sans'] tracking-tight">
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans'] tracking-tight">
                 Real-time Maternal Logistics Command
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
                 MaatriMarg Active Routing Matrix • Maharashtra Regional Command Hub
               </p>
             </div>
@@ -225,88 +225,88 @@ const CommandCenter = () => {
               {/* Red Coral Pill: My Location GPS Route */}
               <button
                 onClick={() => setSosModalOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#cb4646] hover:bg-[#b91c1c] text-white text-xs font-black shadow-lg shadow-rose-950/50 transition-all hover:scale-105 cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#cb4646] hover:bg-[#b91c1c] text-white text-xs font-black shadow-md transition-all hover:scale-105 cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[16px]">location_on</span>
                 <span>My Location GPS Route</span>
               </button>
 
               {/* Pulsing Sync Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#091e28] border border-teal-500/40 text-[10px] font-black tracking-widest text-[#2dd4bf] uppercase">
-                <span className="w-2 h-2 rounded-full bg-[#2dd4bf] pulse-node"></span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-[#091e28] border border-teal-200 dark:border-teal-500/40 text-[10px] font-black tracking-widest text-[#006b5f] dark:text-[#2dd4bf] uppercase">
+                <span className="w-2 h-2 rounded-full bg-[#006b5f] dark:bg-[#2dd4bf] pulse-node"></span>
                 <span>TELEMETRY SYNCHRONIZED</span>
               </div>
 
             </div>
           </div>
 
-          {/* 4 Summary Telemetry Cards matching Screenshot */}
+          {/* 4 Summary Telemetry Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             
             {/* Card 1: NETWORK EFFICIENCY */}
-            <div className="bg-[#0b1528] dark:bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg space-y-2 relative overflow-hidden group">
-              <div className="flex items-center justify-between text-slate-400">
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+            <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-md space-y-2 relative overflow-hidden group transition-colors">
+              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                <span className="text-[10px] font-black uppercase tracking-wider">
                   NETWORK EFFICIENCY
                 </span>
-                <span className="material-symbols-outlined text-[#2dd4bf] text-[18px]">
+                <span className="material-symbols-outlined text-[#006b5f] dark:text-[#2dd4bf] text-[18px]">
                   trending_up
                 </span>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-black text-white font-['Plus_Jakarta_Sans']">
+                <span className="text-3xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">
                   {summary.network_efficiency || '89.4%'}
                 </span>
-                <span className="text-xs font-bold text-emerald-400 font-mono">
+                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-mono">
                   +2.1%
                 </span>
               </div>
             </div>
 
             {/* Card 2: ACTIVE DISPATCHES */}
-            <div className="bg-[#0b1528] dark:bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg space-y-2 relative overflow-hidden group">
-              <div className="flex items-center justify-between text-slate-400">
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+            <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-md space-y-2 relative overflow-hidden group transition-colors">
+              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                <span className="text-[10px] font-black uppercase tracking-wider">
                   ACTIVE DISPATCHES
                 </span>
-                <span className="material-symbols-outlined text-[#2dd4bf] text-[18px]">
+                <span className="material-symbols-outlined text-rose-500 dark:text-[#2dd4bf] text-[18px]">
                   ambulance
                 </span>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-black text-white font-['Plus_Jakarta_Sans']">
+                <span className="text-3xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">
                   {summary.active_dispatches || 12}
                 </span>
-                <span className="text-xs text-slate-400 font-medium">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                   in transit
                 </span>
               </div>
             </div>
 
             {/* Card 3: AVAILABLE ICU */}
-            <div className="bg-[#0b1528] dark:bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg space-y-2 relative overflow-hidden group">
-              <div className="flex items-center justify-between text-slate-400">
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+            <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-md space-y-2 relative overflow-hidden group transition-colors">
+              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                <span className="text-[10px] font-black uppercase tracking-wider">
                   AVAILABLE ICU
                 </span>
-                <span className="material-symbols-outlined text-teal-400 text-[18px]">
+                <span className="material-symbols-outlined text-teal-600 dark:text-teal-400 text-[18px]">
                   lock
                 </span>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-black text-white font-['Plus_Jakarta_Sans']">
+                <span className="text-3xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">
                   32
                 </span>
-                <span className="text-xs text-slate-400 font-medium">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                   beds reserved
                 </span>
               </div>
             </div>
 
             {/* Card 4: EMERGENCY DIVERSIONS */}
-            <div className="bg-[#0b1528] dark:bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg space-y-2 relative overflow-hidden group">
-              <div className="flex items-center justify-between text-slate-400">
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+            <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-md space-y-2 relative overflow-hidden group transition-colors">
+              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                <span className="text-[10px] font-black uppercase tracking-wider">
                   EMERGENCY DIVERSIONS
                 </span>
                 <span className="material-symbols-outlined text-rose-500 text-[18px]">
@@ -314,10 +314,10 @@ const CommandCenter = () => {
                 </span>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-black text-rose-500 font-['Plus_Jakarta_Sans']">
+                <span className="text-3xl font-black text-rose-600 dark:text-rose-500 font-['Plus_Jakarta_Sans']">
                   1
                 </span>
-                <span className="text-xs text-rose-400/90 font-medium">
+                <span className="text-xs text-rose-600/90 dark:text-rose-400/90 font-medium">
                   divert active
                 </span>
               </div>
@@ -347,13 +347,13 @@ const CommandCenter = () => {
           </div>
 
           {/* Bottom Hospital Facility Grid */}
-          <div className="bg-[#0b1528] dark:bg-slate-900 rounded-3xl border border-slate-800 shadow-xl p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
+          <div className="bg-white dark:bg-[#0b1528] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 space-y-4 transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
               <div>
-                <h3 className="font-extrabold text-white text-base font-['Plus_Jakarta_Sans']">
+                <h3 className="font-extrabold text-slate-900 dark:text-white text-base font-['Plus_Jakarta_Sans']">
                   Hospital Facility Telemetry Grid ({filteredHospitals.length} Active Nodes)
                 </h3>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   Live bed capacities, NICU units, and blood unit availability across Maharashtra & Tamil Nadu
                 </p>
               </div>
@@ -361,9 +361,9 @@ const CommandCenter = () => {
               <button
                 onClick={handleTriggerWatchdog}
                 disabled={watchdogRunning}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold transition-all cursor-pointer w-fit"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer w-fit shadow-2xs"
               >
-                <RefreshCw className={`w-3.5 h-3.5 text-[#2dd4bf] ${watchdogRunning ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`w-3.5 h-3.5 text-[#006b5f] dark:text-[#2dd4bf] ${watchdogRunning ? 'animate-spin' : ''}`} />
                 <span>{watchdogRunning ? 'Scanning Grid...' : 'Audit Grid Protocol'}</span>
               </button>
             </div>
@@ -372,34 +372,34 @@ const CommandCenter = () => {
               {filteredHospitals.slice(0, 9).map((h) => (
                 <div 
                   key={h.id}
-                  className="p-4 rounded-2xl bg-[#091426] border border-slate-800/80 hover:border-teal-500/50 transition-all space-y-2.5 group"
+                  className="p-4 rounded-2xl bg-slate-50 dark:bg-[#091426] border border-slate-200 dark:border-slate-800/80 hover:border-teal-500/50 transition-all space-y-2.5 group"
                 >
                   <div className="flex items-start justify-between">
                     <div className="min-w-0 pr-2">
-                      <h4 className="font-bold text-xs text-white group-hover:text-[#2dd4bf] truncate transition-colors">
+                      <h4 className="font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#006b5f] dark:group-hover:text-[#2dd4bf] truncate transition-colors">
                         {h.name}
                       </h4>
-                      <p className="text-[10px] text-slate-400">
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">
                         {h.district}, {h.state}
                       </p>
                     </div>
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/60 text-[9px] font-black uppercase tracking-wider shrink-0">
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 text-[9px] font-black uppercase tracking-wider shrink-0">
                       ONLINE
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2 text-center bg-slate-950/70 p-2 rounded-xl border border-slate-800/60 text-[10px]">
+                  <div className="grid grid-cols-3 gap-2 text-center bg-white dark:bg-slate-950/70 p-2 rounded-xl border border-slate-200 dark:border-slate-800/60 text-[10px]">
                     <div>
-                      <span className="text-slate-500 block">Total Beds</span>
-                      <strong className="text-white font-mono">{h.beds_available ?? 24}</strong>
+                      <span className="text-slate-400 dark:text-slate-500 block">Total Beds</span>
+                      <strong className="text-slate-800 dark:text-white font-mono">{h.beds_available ?? 24}</strong>
                     </div>
                     <div>
-                      <span className="text-slate-500 block">ICU / NICU</span>
-                      <strong className="text-[#2dd4bf] font-mono">{h.nicu_beds_available ?? 4}</strong>
+                      <span className="text-slate-400 dark:text-slate-500 block">ICU / NICU</span>
+                      <strong className="text-[#006b5f] dark:text-[#2dd4bf] font-mono">{h.nicu_beds_available ?? 4}</strong>
                     </div>
                     <div>
-                      <span className="text-slate-500 block">Blood Units</span>
-                      <strong className="text-rose-400 font-mono">{h.blood_units_available ?? 12}</strong>
+                      <span className="text-slate-400 dark:text-slate-500 block">Blood Units</span>
+                      <strong className="text-rose-600 dark:text-rose-400 font-mono">{h.blood_units_available ?? 12}</strong>
                     </div>
                   </div>
                 </div>
