@@ -56,6 +56,15 @@ def _hospital_to_dict(h: Hospital) -> dict:
 
 @router.get("/hospitals")
 def list_hospitals(state: str | None = None, district: str | None = None, db: Session = Depends(get_db)):
+    if db.query(Hospital).count() < 100:
+        try:
+            from app.seed_hospitals import HOSPITALS
+            for h in HOSPITALS:
+                db.add(Hospital(**h))
+            db.commit()
+        except Exception as e:
+            print(f"[Warning] Auto-seed hospitals failed: {e}")
+
     query = db.query(Hospital)
     if state:
         query = query.filter(Hospital.state == state)
