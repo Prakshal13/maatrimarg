@@ -6,10 +6,6 @@ venv/
 *.db
 *.sqlite3
 
-# ML binaries
-*.pkl
-app/ml/*.pkl
-
 # OS & Node
 .DS_Store
 Icon

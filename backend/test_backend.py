@@ -19,6 +19,15 @@ def run_all_tests():
     print("      MAATRIMARG BACKEND FULL TEST & VERIFICATION")
     print("========================================================\n")
     
+    init_db()
+    db = SessionLocal()
+    if db.query(Hospital).count() == 0:
+        from app.seed_hospitals import HOSPITALS
+        for h in HOSPITALS[:20]:  # Seed sample hospitals for tests
+            db.add(Hospital(**h))
+        db.commit()
+    db.close()
+    
     passed = 0
     total = 0
 

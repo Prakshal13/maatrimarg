@@ -90,12 +90,13 @@ def train(case_type: str):
     X = df[config["features"]]
     y = df["_encoded"].astype(int)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-    model = RandomForestClassifier(n_estimators=200, class_weight="balanced", random_state=42)
+    max_depth = 14 if case_type == "chronic" else None
+    model = RandomForestClassifier(n_estimators=200, max_depth=max_depth, class_weight="balanced", random_state=42)
     model.fit(X_train, y_train)
     predictions = model.predict(X_test)
     metrics = _metrics(y_test, predictions, model.predict_proba(X_test), model.classes_)
 
-    joblib.dump(model, model_path)
+    joblib.dump(model, model_path, compress=3)
     importances = dict(sorted(zip(config["features"], model.feature_importances_.tolist()), key=lambda item: item[1], reverse=True))
     with open(importance_path, "w") as file:
         json.dump(importances, file, indent=2)

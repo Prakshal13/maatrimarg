@@ -39,11 +39,6 @@ venv.bak/
 *.sqlite3
 .env
 
-# ML Model Binaries (train locally via train_generic_model.py; prevents exceeding GitHub 100MB limit)
-*.pkl
-backend/app/ml/*.pkl
-app/ml/*.pkl
-
 # IDEs
 .idea/
 *.sublime-workspace
