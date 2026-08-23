@@ -4,17 +4,20 @@ import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Page components
-import LandingPage from './pages/LandingPage';
-import LoginPage from './pages/LoginPage';
-import MaternalPortal from './pages/MaternalPortal';
-import ChildPortal from './pages/ChildPortal';
-import ChronicPortal from './pages/ChronicPortal';
-import HospitalDashboard from './pages/HospitalDashboard';
-import CommandCenter from './pages/CommandCenter';
-import MaternalHealthAnalytics from './pages/MaternalHealthAnalytics';
-import AdminGovernanceCenter from './pages/AdminGovernanceCenter';
+// Page components
+import { lazy, Suspense } from 'react';
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const MaternalPortal = lazy(() => import('./pages/MaternalPortal'));
+const ChildPortal = lazy(() => import('./pages/ChildPortal'));
+const ChronicPortal = lazy(() => import('./pages/ChronicPortal'));
+const HospitalDashboard = lazy(() => import('./pages/HospitalDashboard'));
+const CommandCenter = lazy(() => import('./pages/CommandCenter'));
+const MaternalHealthAnalytics = lazy(() => import('./pages/MaternalHealthAnalytics'));
+const AdminGovernanceCenter = lazy(() => import('./pages/AdminGovernanceCenter'));
 
 // Protected Route Guard
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -45,80 +48,82 @@ function App() {
             <div className="min-h-screen bg-[#f6fafe] dark:bg-slate-950 text-[#191c1e] dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
               <Navbar />
               <main className="flex-1">
-              <Routes>
-                {/* Public Routes */}
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/login" element={<LoginPage />} />
+              <ErrorBoundary>
+                <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#f6fafe] dark:bg-slate-950 text-slate-400 font-bold">Loading Platform...</div>}>
+                  <Routes>
+                    {/* Public Routes */}
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/login" element={<LoginPage />} />
 
-                {/* Frontline ASHA Portals */}
-                <Route 
-                  path="/asha/maternal" 
-                  element={
-                    <ProtectedRoute allowedRoles={['asha', 'dho_command', 'hospital_staff']}>
-                      <MaternalPortal />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route 
-                  path="/asha/child" 
-                  element={
-                    <ProtectedRoute allowedRoles={['asha', 'dho_command']}>
-                      <ChildPortal />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route 
-                  path="/asha/chronic" 
-                  element={
-                    <ProtectedRoute allowedRoles={['asha', 'dho_command']}>
-                      <ChronicPortal />
-                    </ProtectedRoute>
-                  } 
-                />
+                    {/* Frontline ASHA Portals */}
+                    <Route 
+                      path="/asha/maternal" 
+                      element={
+                        <ProtectedRoute allowedRoles={['asha', 'dho_command', 'hospital_staff']}>
+                          <MaternalPortal />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/asha/child" 
+                      element={
+                        <ProtectedRoute allowedRoles={['asha', 'dho_command', 'hospital_staff']}>
+                          <ChildPortal />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/asha/chronic" 
+                      element={
+                        <ProtectedRoute allowedRoles={['asha', 'dho_command', 'hospital_staff']}>
+                          <ChronicPortal />
+                        </ProtectedRoute>
+                      } 
+                    />
 
-                {/* Hospital Staff Dashboard */}
-                <Route 
-                  path="/hospital" 
-                  element={
-                    <ProtectedRoute allowedRoles={['hospital_staff', 'dho_command']}>
-                      <HospitalDashboard />
-                    </ProtectedRoute>
-                  } 
-                />
+                    {/* Command Center & Hospital Routing (DHO & Staff) */}
+                    <Route 
+                      path="/command-center" 
+                      element={
+                        <ProtectedRoute allowedRoles={['dho_command', 'hospital_staff']}>
+                          <CommandCenter />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/hospital" 
+                      element={
+                        <ProtectedRoute allowedRoles={['dho_command', 'hospital_staff']}>
+                          <HospitalDashboard />
+                        </ProtectedRoute>
+                      } 
+                    />
 
-                {/* Regional Health Analytics & Heatmap (CMO & DHO) */}
-                <Route 
-                  path="/analytics" 
-                  element={
-                    <ProtectedRoute allowedRoles={['hospital_staff', 'dho_command']}>
-                      <MaternalHealthAnalytics />
-                    </ProtectedRoute>
-                  } 
-                />
+                    {/* High-Level State Analytics (CMO & DHO) */}
+                    <Route 
+                      path="/analytics" 
+                      element={
+                        <ProtectedRoute allowedRoles={['dho_command', 'hospital_staff']}>
+                          <MaternalHealthAnalytics />
+                        </ProtectedRoute>
+                      } 
+                    />
 
-                {/* DHO District Command Center */}
-                <Route 
-                  path="/command-center" 
-                  element={
-                    <ProtectedRoute allowedRoles={['dho_command']}>
-                      <CommandCenter />
-                    </ProtectedRoute>
-                  } 
-                />
+                    {/* Admin & Governance Center (DHO / State Admin) */}
+                    <Route 
+                      path="/admin" 
+                      element={
+                        <ProtectedRoute allowedRoles={['dho_command']}>
+                          <AdminGovernanceCenter />
+                        </ProtectedRoute>
+                      } 
+                    />
 
-                {/* Admin & Governance Center (DHO / State Admin) */}
-                <Route 
-                  path="/admin" 
-                  element={
-                    <ProtectedRoute allowedRoles={['dho_command']}>
-                      <AdminGovernanceCenter />
-                    </ProtectedRoute>
-                  } 
-                />
-
-                {/* Catch-all fallback */}
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
+                    {/* Catch-all fallback */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+                </Suspense>
+              </ErrorBoundary>
             </main>
           </div>
         </BrowserRouter>

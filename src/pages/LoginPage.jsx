@@ -148,8 +148,8 @@ const LoginPage = () => {
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400 max-w-[320px] leading-relaxed">
               {activeTab === 'signin' 
-                ? 'National Maternal & Child Health Intelligence Platform'
-                : 'Frontline ASHA Worker Self-Registration & Onboarding Grid'}
+                ? t('login_platform_subtitle')
+                : t('login_asha_register_subtitle')}
             </p>
           </div>
 
@@ -165,7 +165,7 @@ const LoginPage = () => {
               }`}
             >
               <Lock className="w-3.5 h-3.5" />
-              <span>Existing Staff Sign In</span>
+              <span>{t('login_existing_staff')}</span>
             </button>
 
             <button
@@ -178,7 +178,7 @@ const LoginPage = () => {
               }`}
             >
               <UserPlus className="w-3.5 h-3.5" />
-              <span>Register New ASHA</span>
+              <span>{t('login_register_asha')}</span>
             </button>
           </div>
 
@@ -189,8 +189,8 @@ const LoginPage = () => {
               {/* Pre-configured Demo Accounts Helper Box */}
               <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2.5">
                 <div className="flex items-center justify-between text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                  <span>Pre-Configured Official Accounts:</span>
-                  <span className="text-[10px] text-teal-600 dark:text-teal-400 font-bold lowercase">1-click to test</span>
+                  <span>{t('login_preconfigured_accounts')}</span>
+                  <span className="text-[10px] text-teal-600 dark:text-teal-400 font-bold lowercase">{t('login_one_click_test')}</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -208,7 +208,7 @@ const LoginPage = () => {
                         }`}
                       >
                         <div className="text-[11px] font-bold text-slate-900 dark:text-white truncate">
-                          {acc.role === 'asha' ? '👩‍⚕️ ASHA Worker' : acc.role === 'hospital_staff' ? '🏥 Hospital CMO' : '🏛️ DHO Command'}
+                          {acc.role === 'asha' ? `👩‍⚕️ ${t('login_asha_worker')}` : acc.role === 'hospital_staff' ? `🏥 ${t('login_hospital_cmo')}` : `🏛️ ${t('login_dho_command')}`}
                         </div>
                         <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400 truncate mt-0.5">
                           {acc.username}
@@ -228,7 +228,7 @@ const LoginPage = () => {
                 {/* Clinician ID */}
                 <div className="space-y-1">
                   <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-400" htmlFor="clinician_id">
-                    Clinician ID / Mobile Number
+                    {t('login_clinician_id')}
                   </label>
                   <div className="relative">
                     <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">
@@ -239,7 +239,7 @@ const LoginPage = () => {
                       type="text"
                       value={clinicianId}
                       onChange={(e) => setClinicianId(e.target.value)}
-                      placeholder="e.g. 9876543210 or staff ID"
+                      placeholder={t('login_clinician_placeholder')}
                       required
                       className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] transition-all"
                     />
@@ -250,14 +250,14 @@ const LoginPage = () => {
                 <div className="space-y-1">
                   <div className="flex justify-between items-center">
                     <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-400" htmlFor="password">
-                      Security Key / Password
+                      {t('login_security_key')}
                     </label>
                     <a 
                       href="#" 
                       onClick={(e) => { e.preventDefault(); alert("Access PIN Recovery: Use official credentials shown above or register a new ASHA account."); }}
                       className="text-[11px] font-bold text-[#006b5f] dark:text-teal-400 hover:underline"
                     >
-                      Forgot Key?
+                      {t('login_forgot_key')}
                     </a>
                   </div>
                   <div className="relative">
@@ -269,7 +269,7 @@ const LoginPage = () => {
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter security key / PIN"
+                      placeholder={t('login_enter_key_placeholder')}
                       required
                       className="w-full pl-10 pr-10 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] transition-all font-mono"
                     />
@@ -298,7 +298,7 @@ const LoginPage = () => {
                     className="rounded border-slate-300 dark:border-slate-700 text-[#006b5f] focus:ring-[#006b5f] h-4 w-4"
                   />
                   <label htmlFor="remember" className="text-xs text-slate-600 dark:text-slate-400 font-medium">
-                    Verify device for 30 days
+                    {t('login_verify_device')}
                   </label>
                 </div>
 
@@ -308,7 +308,7 @@ const LoginPage = () => {
                   className="w-full bg-[#1e293b] dark:bg-teal-500 hover:bg-[#0f172a] dark:hover:bg-teal-600 text-white dark:text-slate-950 rounded-xl py-3.5 text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
                 >
                   <Lock className="w-4 h-4" />
-                  <span>{loading ? 'Authenticating...' : 'Authenticate Access'}</span>
+                  <span>{loading ? t('login_authenticating') : t('login_authenticate_btn')}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
@@ -506,7 +506,7 @@ const LoginPage = () => {
           <div className="text-center border-t border-slate-200 dark:border-slate-800 pt-3">
             <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 flex items-center justify-center gap-1.5 uppercase tracking-wider">
               <span className="material-symbols-outlined text-[14px]">shield</span>
-              <span>End-to-End Encrypted Session • Ayushman Bharat Digital Health</span>
+              <span>{t('login_encrypted_session')}</span>
             </p>
           </div>
 

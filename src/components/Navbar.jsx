@@ -37,7 +37,9 @@ const Navbar = () => {
   // If inside portal pages with their own unified sidebar, let the sidebar handle navigation
   const isPortalPage = location.pathname.startsWith('/command-center') || 
                        location.pathname.startsWith('/hospital') || 
-                       location.pathname.startsWith('/asha');
+                       location.pathname.startsWith('/asha') ||
+                       location.pathname.startsWith('/analytics') ||
+                       location.pathname.startsWith('/admin');
 
   if (isPortalPage) {
     return null;
@@ -66,11 +68,11 @@ const Navbar = () => {
               <button
                 onClick={() => setSosModalOpen(true)}
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#cb4646] hover:bg-[#b91c1c] text-white text-xs font-bold shadow-xs transition-all hover:scale-105 cursor-pointer"
-                title="Open Live 108 Emergency Route on Google Maps"
+                title={t("portal_header_sos_title")}
               >
                 <span className="material-symbols-outlined text-[15px]">location_on</span>
                 <span className="hidden sm:inline">{t('home_sos_route')}</span>
-                <span className="sm:hidden">SOS Route</span>
+                <span className="sm:hidden">{t("sos_route_short")}</span>
               </button>
 
               {/* 2. Language Selector Dropdown */}
@@ -111,7 +113,7 @@ const Navbar = () => {
               {/* 3. Dark Mode Toggle Button */}
               <button
                 className="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-amber-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
-                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                title={theme === 'dark' ? t('portal_header_light_mode') : t('portal_header_dark_mode')}
                 onClick={toggleTheme}
               >
                 <span className="material-symbols-outlined text-[18px]">

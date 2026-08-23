@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { api } from '../api/endpoints';
-import NetworkThreeGlobe from '../components/NetworkThreeGlobe';
+
+const NetworkThreeGlobe = lazy(() => import('../components/NetworkThreeGlobe'));
 import { 
   ArrowRight, 
   ShieldCheck, 
@@ -106,7 +107,9 @@ const LandingPage = () => {
         {/* Central Three.js 3D Globe Canvas */}
         <div className="relative w-full max-w-4xl h-36 sm:h-44 -mt-6 z-0 overflow-visible pointer-events-none flex items-center justify-center">
           <div className="w-full h-[400px] absolute -top-24">
-            <NetworkThreeGlobe />
+            <Suspense fallback={null}>
+              <NetworkThreeGlobe />
+            </Suspense>
           </div>
         </div>
 
@@ -123,18 +126,16 @@ const LandingPage = () => {
                 <span className="w-2.5 h-2.5 rounded-full bg-[#2dd4bf] pulse-node"></span>
               </div>
 
-              <div className="space-y-2.5">
-                <div className="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full"></div>
-                <div className="h-2 w-4/5 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
-                <div className="h-2 w-3/5 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+              <div className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium py-1">
+                <strong className="text-slate-900 dark:text-slate-100 font-black">{t('landing_maatri_marg')}</strong>{t('landing_description')}
               </div>
 
               <div className="pt-4 border-t border-slate-200/60 dark:border-slate-700">
                 <div className="text-3xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">
-                  98.4%
+                  165+
                 </div>
-                <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mt-0.5">
-                  {t('operational_fidelity')}
+                <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mt-0.5 uppercase tracking-wide">
+                  {t('mapped_facilities')}
                 </div>
               </div>
             </div>
@@ -256,13 +257,13 @@ const LandingPage = () => {
             {t('footer_tagline')}
           </div>
           <div className="flex flex-wrap justify-center gap-6 font-medium">
-            <a href="#" onClick={(e) => { e.preventDefault(); alert("Terms of Service: MaatriMarg Clinical AI & Regional Health Protocol (Ayushman Bharat / DISHA Compliant)"); }} className="hover:text-[#006b5f] dark:hover:text-teal-400 transition-colors">
+            <a href="#" onClick={(e) => { e.preventDefault(); alert(t('terms_alert')); }} className="hover:text-[#006b5f] dark:hover:text-teal-400 transition-colors">
               {t('terms_of_service')}
             </a>
-            <a href="#" onClick={(e) => { e.preventDefault(); alert("Data Privacy: End-to-End Encrypted Patient Telemetry & Anonymized PHI Storage"); }} className="hover:text-[#006b5f] dark:hover:text-teal-400 transition-colors">
+            <a href="#" onClick={(e) => { e.preventDefault(); alert(t('privacy_alert')); }} className="hover:text-[#006b5f] dark:hover:text-teal-400 transition-colors">
               {t('data_privacy')}
             </a>
-            <a href="#" onClick={(e) => { e.preventDefault(); alert("System Admin: Contact District Health Command HQ (DHO Technical Operations)"); }} className="hover:text-[#006b5f] dark:hover:text-teal-400 transition-colors">
+            <a href="#" onClick={(e) => { e.preventDefault(); alert(t('admin_alert')); }} className="hover:text-[#006b5f] dark:hover:text-teal-400 transition-colors">
               {t('contact_admin')}
             </a>
           </div>

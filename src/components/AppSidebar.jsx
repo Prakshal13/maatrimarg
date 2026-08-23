@@ -116,7 +116,7 @@ const AppSidebar = () => {
         <div className="px-3 pb-2 text-[10px] uppercase font-extrabold text-slate-400 dark:text-slate-500 tracking-widest flex items-center justify-between">
           <span>{t('core_system_portals')}</span>
           <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-teal-600 dark:text-teal-400 font-bold uppercase">
-            {userRole === 'asha' ? 'ASHA' : userRole === 'hospital_staff' ? 'CMO' : 'DHO'}
+            {userRole === 'asha' ? t('sidebar_asha') : userRole === 'hospital_staff' ? t('sidebar_cmo') : t('sidebar_dho')}
           </span>
         </div>
 
@@ -148,7 +148,7 @@ const AppSidebar = () => {
         </div>
 
         <button
-          onClick={() => alert("Emergency Support: Dial 108 Emergency Dispatch or Contact District CMO Command HQ")}
+          onClick={() => alert(t("support_alert"))}
           className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-all text-left cursor-pointer"
         >
           <span className="material-symbols-outlined text-[18px]">help</span>

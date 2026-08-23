@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../api/endpoints';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
@@ -39,6 +39,7 @@ const CommandCenter = () => {
   const { t, lang, changeLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [summary, setSummary] = useState({
     hospital_count: 260,
     districts_covered: 14,
@@ -124,19 +125,55 @@ const CommandCenter = () => {
         {/* Top Header Bar matching Screenshot */}
         <header className="h-16 bg-white/90 dark:bg-[#091426] backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between sticky top-0 z-30 transition-colors duration-200">
           
-          {/* Global Search Bar */}
-          <div className="relative w-80">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">
-              search
-            </span>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t("search_hospitals_ph")}
-              className="w-full pl-9 pr-3 py-1.5 bg-slate-100 dark:bg-[#0b1528] border border-slate-200 dark:border-slate-700/80 rounded-xl text-xs font-semibold text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-[#006b5f] dark:focus:ring-[#2dd4bf] transition-all"
-            />
-          </div>
+            {/* Global Search Bar with Omnibox Dropdown */}
+            <div className="relative w-80">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">
+                search
+              </span>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t("search_hospitals_ph")}
+                className="w-full pl-9 pr-3 py-1.5 bg-slate-100 dark:bg-[#0b1528] border border-slate-200 dark:border-slate-700/80 rounded-xl text-xs font-semibold text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-[#006b5f] dark:focus:ring-[#2dd4bf] transition-all"
+              />
+              
+              {searchQuery.trim().length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[#0b1528] rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 max-h-80 overflow-y-auto z-50 py-2">
+                  {filteredHospitals.length === 0 ? (
+                    <p className="px-4 py-3 text-xs text-slate-500 dark:text-slate-400">No hospitals found matching "{searchQuery}"</p>
+                  ) : (
+                    filteredHospitals.slice(0, 5).map(h => (
+                      <button 
+                        key={h.id}
+                        onClick={() => {
+                          setSearchQuery('');
+                          navigate('/hospital', { state: { openHospitalId: h.id } });
+                        }}
+                        className="w-full text-left px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors flex items-center justify-between group border-b border-slate-100 dark:border-slate-800 last:border-0 cursor-pointer"
+                      >
+                        <div className="flex flex-col gap-0.5 min-w-0 pr-3">
+                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-[#006b5f] dark:group-hover:text-[#2dd4bf] transition-colors truncate">
+                            {h.name}
+                          </span>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate">
+                            {h.district}, {h.state}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 px-1.5 py-0.5 rounded uppercase hidden sm:block">
+                            Online
+                          </span>
+                          <span className="text-[10px] font-bold text-slate-600 dark:text-slate-300">
+                            {h.beds_available ?? 24} Beds
+                          </span>
+                        </div>
+                      </button>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
 
           {/* Right Header Badges */}
           <div className="flex items-center gap-3">
@@ -346,67 +383,7 @@ const CommandCenter = () => {
 
           </div>
 
-          {/* Bottom Hospital Facility Grid */}
-          <div className="bg-white dark:bg-[#0b1528] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 space-y-4 transition-colors">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
-              <div>
-                <h3 className="font-extrabold text-slate-900 dark:text-white text-base font-['Plus_Jakarta_Sans']">
-                  {t('telemetry_table_title')} ({filteredHospitals.length} {t('active_nodes')})
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                  {t('hosp_subtitle')}
-                </p>
-              </div>
 
-              <button
-                onClick={handleTriggerWatchdog}
-                disabled={watchdogRunning}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer w-fit shadow-2xs"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 text-[#006b5f] dark:text-[#2dd4bf] ${watchdogRunning ? 'animate-spin' : ''}`} />
-                <span>{watchdogRunning ? t('scanning_grid') : t('audit_grid')}</span>
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2">
-              {filteredHospitals.slice(0, 9).map((h) => (
-                <div 
-                  key={h.id}
-                  className="p-4 rounded-2xl bg-slate-50 dark:bg-[#091426] border border-slate-200 dark:border-slate-800/80 hover:border-teal-500/50 transition-all space-y-2.5 group"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="min-w-0 pr-2">
-                      <h4 className="font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#006b5f] dark:group-hover:text-[#2dd4bf] truncate transition-colors">
-                        {h.name}
-                      </h4>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400">
-                        {h.district}, {h.state}
-                      </p>
-                    </div>
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 text-[9px] font-black uppercase tracking-wider shrink-0">
-                      ONLINE
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2 text-center bg-white dark:bg-slate-950/70 p-2 rounded-xl border border-slate-200 dark:border-slate-800/60 text-[10px]">
-                    <div>
-                      <span className="text-slate-400 dark:text-slate-500 block">{t('total_beds')}</span>
-                      <strong className="text-slate-800 dark:text-white font-mono">{h.beds_available ?? 24}</strong>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 dark:text-slate-500 block">{t('icu_nicu')}</span>
-                      <strong className="text-[#006b5f] dark:text-[#2dd4bf] font-mono">{h.nicu_beds_available ?? 4}</strong>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 dark:text-slate-500 block">{t('blood_units')}</span>
-                      <strong className="text-rose-600 dark:text-rose-400 font-mono">{h.blood_units_available ?? 12}</strong>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
 
         </main>
 

@@ -211,7 +211,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
                 type="text"
                 value={searchAddress}
                 onChange={(e) => setSearchAddress(e.target.value)}
-                placeholder="Search starting location..."
+                placeholder={t('search_starting_location')}
                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-800 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] transition-all"
               />
             </div>
@@ -233,7 +233,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
                 className="px-3 py-1.5 bg-slate-200/80 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer"
               >
                 <Crosshair className={`w-3.5 h-3.5 text-slate-700 dark:text-teal-400 ${isLocating ? 'animate-spin' : ''}`} />
-                <span>{isLocating ? 'Locating...' : 'Fetch GPS'}</span>
+                <span>{isLocating ? t('locating_ellipsis') : t('fetch_gps')}</span>
               </button>
             </div>
           </div>
@@ -264,7 +264,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
               <div className="flex items-start justify-between">
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#006b5f] dark:text-teal-400 block">
-                    DESTINATION HOSPITAL DETAILS
+                    {t('dest_hospital_details')}
                   </span>
                   <h4 className="text-sm font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans'] mt-0.5">
                     {bestMatch.hospital.name}
@@ -275,7 +275,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
                 </div>
 
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-[10px] font-extrabold uppercase tracking-wider border border-emerald-200 dark:border-emerald-800 shrink-0">
-                  READY
+                  {t('status_ready')}
                 </span>
               </div>
 
@@ -283,7 +283,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
               <div className="grid grid-cols-3 gap-2 py-2 border-y border-teal-200/60 dark:border-teal-800/60 text-center bg-white/70 dark:bg-slate-900/70 rounded-xl p-2">
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block uppercase">
-                    ETA
+                    {t('eta')}
                   </span>
                   <strong className="text-xs sm:text-sm font-black text-[#006b5f] dark:text-teal-400 font-mono">
                     {formatEta(bestMatch.estimatedMinutes, lang)}
@@ -292,7 +292,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
 
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block uppercase">
-                    Distance
+                    {t('distance')}
                   </span>
                   <strong className="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-mono">
                     {bestMatch.distanceKm} km
@@ -301,10 +301,10 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
 
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 block uppercase">
-                    ICU Beds
+                    {t('icu_beds')}
                   </span>
                   <strong className="text-xs sm:text-sm font-black text-emerald-700 dark:text-emerald-400 font-mono">
-                    {bestMatch.hospital.nicu_beds_available ?? 4} Beds
+                    {bestMatch.hospital.nicu_beds_available ?? 4} {t('beds')}
                   </strong>
                 </div>
               </div>
@@ -313,7 +313,7 @@ const EmergencyLocationModal = ({ isOpen, onClose }) => {
               <div className="flex items-center justify-between text-xs pt-1">
                 <span className="flex items-center gap-1 text-[#006b5f] dark:text-teal-400 font-bold">
                   <span className="text-base leading-none">✱</span>
-                  <span>Labor OT Standby</span>
+                  <span>{t('labor_ot_standby')}</span>
                 </span>
 
                 <a

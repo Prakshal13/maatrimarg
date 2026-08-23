@@ -146,7 +146,7 @@ const UserProfileDropdown = () => {
                       {user ? (user.name || user.username) : 'Select Official Persona'}
                     </span>
                     <span className="text-[10px] font-bold text-[#006b5f] dark:text-teal-400 block">
-                      {user ? activeRoleInfo.label : 'Authentication Required for All Portals'}
+                      {user ? activeRoleInfo.label : t('auth_required_portals')}
                     </span>
                   </div>
                 </div>
@@ -154,14 +154,14 @@ const UserProfileDropdown = () => {
                 {user && (
                   <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-[10px] font-extrabold flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Active
+                    {t('status_active')}
                   </span>
                 )}
               </div>
 
               {user && (
                 <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium pt-1">
-                  Facility: {user.facility_or_district_id || 'Maharashtra Command HQ'}
+                  {t('facility_label')}: {user.facility_or_district_id || t('maharashtra_command_hq')}
                 </p>
               )}
             </div>
@@ -169,7 +169,7 @@ const UserProfileDropdown = () => {
             {/* Role Persona Selector (Triggers Authenticated Verification) */}
             <div className="py-2.5 px-2.5 space-y-1.5">
               <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-2 pt-1">
-                {user ? 'Switch Authenticated Persona' : 'Select Portal & Authenticate'}
+                {user ? t('switch_authenticated_persona') : t('select_portal_authenticate')}
               </div>
 
               {DEMO_PROFILES.map((p) => {
@@ -217,7 +217,7 @@ const UserProfileDropdown = () => {
               >
                 <span className="flex items-center gap-2">
                   <Lock className="w-3.5 h-3.5 text-[#006b5f] dark:text-teal-400" />
-                  <span>Custom Credentials Login</span>
+                  <span>{t('custom_credentials_login')}</span>
                 </span>
                 <span className="material-symbols-outlined text-[16px] text-slate-400">chevron_right</span>
               </Link>
@@ -264,7 +264,7 @@ const UserProfileDropdown = () => {
                     {getRoleInfo(authModalRole.role).label}
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Enter security key / PIN to verify access
+                    {t('enter_security_key_verify')}
                   </p>
                 </div>
               </div>
@@ -283,7 +283,7 @@ const UserProfileDropdown = () => {
               {/* Clinician ID */}
               <div className="space-y-1">
                 <label className="block text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-                  Clinician / Staff ID
+                  {t('clinician_staff_id')}
                 </label>
                 <div className="relative">
                   <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">
@@ -294,7 +294,7 @@ const UserProfileDropdown = () => {
                     value={authForm.username}
                     onChange={(e) => setAuthForm({ ...authForm, username: e.target.value })}
                     required
-                    placeholder="e.g. 9876543210 or staff ID"
+                    placeholder={t('login_clinician_placeholder')}
                     className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] transition-all"
                   />
                 </div>
@@ -304,7 +304,7 @@ const UserProfileDropdown = () => {
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
                   <label className="block text-[11px] font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-                    Security Key / Access PIN <span className="text-rose-500">*</span>
+                    {t('security_key_access_pin')} <span className="text-rose-500">*</span>
                   </label>
                 </div>
                 <div className="relative">
@@ -317,7 +317,7 @@ const UserProfileDropdown = () => {
                     onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })}
                     required
                     autoFocus
-                    placeholder="Enter security key / PIN"
+                    placeholder={t('login_enter_key_placeholder')}
                     className="w-full pl-10 pr-10 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-[#006b5f] transition-all"
                   />
                   <button
@@ -339,7 +339,7 @@ const UserProfileDropdown = () => {
               {/* Demo Hint Pill for Easy Evaluation */}
               <div className="p-3 rounded-2xl bg-teal-50/80 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 text-[11px] text-teal-900 dark:text-teal-300 flex items-center justify-between">
                 <div>
-                  <span className="font-bold block">🔑 Official Password:</span>
+                  <span className="font-bold block">🔑 {t('official_password')}:</span>
                   <span className="font-mono text-teal-700 dark:text-teal-400 font-bold">{authModalRole.password || 'AshaSunita@2026'}</span>
                 </div>
                 <button
@@ -347,7 +347,7 @@ const UserProfileDropdown = () => {
                   onClick={() => setAuthForm(prev => ({ ...prev, password: authModalRole.password || 'AshaSunita@2026' }))}
                   className="px-2.5 py-1 bg-[#006b5f] hover:bg-[#005047] dark:bg-teal-500 text-white dark:text-slate-950 rounded-lg font-bold text-[10px] shadow-xs cursor-pointer"
                 >
-                  Autofill Key
+                  {t('autofill_key')}
                 </button>
               </div>
 
@@ -358,7 +358,7 @@ const UserProfileDropdown = () => {
                 className="w-full py-3.5 px-5 rounded-2xl bg-[#091426] dark:bg-teal-500 hover:bg-[#1e293b] dark:hover:bg-teal-600 text-white dark:text-slate-950 font-bold text-xs sm:text-sm shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 group cursor-pointer"
               >
                 <Lock className="w-4 h-4 text-[#2dd4bf] dark:text-slate-950" />
-                <span>{isVerifying ? 'Verifying Credentials...' : 'Verify Access & Open Portal'}</span>
+                <span>{isVerifying ? t('verifying_credentials') : t('verify_access_portal')}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </button>
 

@@ -33,7 +33,7 @@ const PortalHeader = ({ title, subtitle, badgeText = 'ML Inference Engine', show
 
   return (
     <>
-      <header className="h-16 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 transition-colors duration-200">
+      <header className="h-16 shrink-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 transition-colors duration-200">
         
         {/* Left Title & Badge */}
         <div className="flex items-center gap-3 min-w-0">
@@ -63,11 +63,11 @@ const PortalHeader = ({ title, subtitle, badgeText = 'ML Inference Engine', show
           <button
             onClick={() => setSosModalOpen(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#cb4646] hover:bg-[#b91c1c] text-white text-xs font-bold shadow-xs transition-all hover:scale-105 cursor-pointer"
-            title="Open Live 108 Emergency Route on Google Maps"
+            title={t("portal_header_sos_title")}
           >
             <span className="material-symbols-outlined text-[15px]">location_on</span>
             <span className="hidden sm:inline">{t('home_sos_route')}</span>
-            <span className="sm:hidden">SOS</span>
+            <span className="sm:hidden">{t("portal_header_sos")}</span>
           </button>
 
           {/* Language Selector Dropdown */}
@@ -109,7 +109,7 @@ const PortalHeader = ({ title, subtitle, badgeText = 'ML Inference Engine', show
           {/* Dark / Light Mode Toggle Button */}
           <button
             className="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-amber-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
-            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            title={theme === 'dark' ? t('portal_header_light_mode') : t('portal_header_dark_mode')}
             onClick={toggleTheme}
           >
             <span className="material-symbols-outlined text-[18px]">
