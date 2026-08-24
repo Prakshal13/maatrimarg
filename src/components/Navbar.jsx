@@ -57,7 +57,7 @@ const Navbar = () => {
                 <div className="w-8 h-8 rounded-lg bg-[#091426] dark:bg-teal-500 flex items-center justify-center text-[#2dd4bf] dark:text-slate-950 shadow-sm group-hover:scale-105 transition-transform">
                   <span className="material-symbols-outlined text-[20px]">hub</span>
                 </div>
-                <span className="font-extrabold text-sm tracking-wider text-[#091426] dark:text-white uppercase font-['Plus_Jakarta_Sans']">
+                <span className="font-extrabold text-sm tracking-wider text-[#091426] dark:text-white uppercase font-['Plus_Jakarta_Sans'] hidden sm:block">
                   {t('app_title')}
                 </span>
               </Link>
@@ -69,7 +69,7 @@ const Navbar = () => {
               {/* 1. Home SOS Route (Google Maps) Button */}
               <button
                 onClick={() => setSosModalOpen(true)}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#cb4646] hover:bg-[#b91c1c] text-white text-xs font-bold shadow-xs transition-all hover:scale-105 cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#cb4646] hover:bg-[#b91c1c] text-white text-xs font-bold shadow-xs transition-all hover:scale-105 cursor-pointer whitespace-nowrap"
                 title={t("portal_header_sos_title")}
               >
                 <span className="material-symbols-outlined text-[15px]">location_on</span>
@@ -84,7 +84,7 @@ const Navbar = () => {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-2xs transition-colors cursor-pointer"
                 >
                   <span className="material-symbols-outlined text-[16px] text-teal-600 dark:text-teal-400">language</span>
-                  <span>{currentLang.label}</span>
+                  <span className="hidden sm:inline">{currentLang.label}</span>
                   <span className="material-symbols-outlined text-[14px] text-slate-400">expand_more</span>
                 </button>
 
