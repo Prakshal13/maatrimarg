@@ -123,10 +123,10 @@ const CommandCenter = () => {
       <div className="flex-1 flex flex-col min-w-0 bg-[#f7f9fb] dark:bg-[#070e1c] transition-colors duration-200">
         
         {/* Top Header Bar matching Screenshot */}
-        <header className="h-16 bg-white/90 dark:bg-[#091426] backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between sticky top-0 z-[9999] transition-colors duration-200">
+        <header className="h-16 bg-white/90 dark:bg-[#091426] backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 flex items-center justify-between gap-2 sticky top-0 z-[9999] transition-colors duration-200">
           
             {/* Global Search Bar with Omnibox Dropdown */}
-            <div className="relative w-80">
+            <div className="relative w-full max-w-[200px] sm:max-w-[320px]">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">
                 search
               </span>
@@ -139,7 +139,7 @@ const CommandCenter = () => {
               />
               
               {searchQuery.trim().length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[#0b1528] rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 max-h-80 overflow-y-auto z-50 py-2">
+                <div className="absolute top-full left-0 w-[260px] sm:w-full mt-2 bg-white dark:bg-[#0b1528] rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 max-h-80 overflow-y-auto z-50 py-2">
                   {filteredHospitals.length === 0 ? (
                     <p className="px-4 py-3 text-xs text-slate-500 dark:text-slate-400">No hospitals found matching "{searchQuery}"</p>
                   ) : (
@@ -176,7 +176,7 @@ const CommandCenter = () => {
             </div>
 
           {/* Right Header Badges */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             
             {/* Language Switcher */}
             <div className="relative">
@@ -185,7 +185,7 @@ const CommandCenter = () => {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-[#0b1528] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer shadow-2xs"
               >
                 <span className="material-symbols-outlined text-[16px] text-teal-600 dark:text-[#2dd4bf]">language</span>
-                <span>{currentLang.label}</span>
+                <span className="hidden sm:inline">{currentLang.label}</span>
                 <span className="material-symbols-outlined text-[14px] text-slate-400">expand_more</span>
               </button>
 

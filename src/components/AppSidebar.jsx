@@ -93,9 +93,30 @@ const AppSidebar = () => {
   // Filter items specifically based on logged-in user persona
   const navItems = ALL_NAV_ITEMS.filter(item => item.allowedRoles.includes(userRole));
 
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
   return (
     <>
-      <aside className="w-[260px] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-xs hidden md:flex flex-col shrink-0 h-screen sticky top-0 text-left select-none transition-colors z-[100]">
+      {/* Mobile Hamburger Toggle (Floating) */}
+      <button 
+        onClick={() => setIsMobileOpen(!isMobileOpen)}
+        className="md:hidden fixed bottom-6 left-6 z-[9999] w-12 h-12 bg-[#006b5f] dark:bg-teal-500 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-105 transition-transform"
+      >
+        <span className="material-symbols-outlined text-[24px]">
+          {isMobileOpen ? 'close' : 'menu'}
+        </span>
+      </button>
+
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div 
+          className="md:hidden fixed inset-0 bg-black/50 z-[9998] backdrop-blur-sm"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+
+      {/* Sidebar Container */}
+      <aside className={`w-[260px] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-2xl md:shadow-xs flex flex-col shrink-0 h-screen fixed md:sticky top-0 left-0 text-left select-none transition-transform duration-300 z-[9999] ${isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
         
         {/* Brand Header */}
         <div className="p-6 border-b border-slate-200 dark:border-slate-800">
