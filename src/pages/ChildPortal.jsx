@@ -177,7 +177,7 @@ const ChildPortal = () => {
             
             {/* Left: Input Form */}
             <div className="lg:col-span-6 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 transition-colors">
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
                 <div>
                   <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <Activity className="w-5 h-5 text-[#006b5f] dark:text-teal-400" />
@@ -194,7 +194,7 @@ const ChildPortal = () => {
                       const c = childrenList.find(item => item.id.toString() === e.target.value);
                       if (c) setVitals(prev => ({ ...prev, age_months: c.age_months || 18 }));
                     }}
-                    className="text-xs font-bold bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 outline-none"
+                    className="w-full sm:w-auto max-w-full truncate text-xs font-bold bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 outline-none"
                   >
                     {childrenList.map((c) => (
                       <option key={c.id} value={c.id}>

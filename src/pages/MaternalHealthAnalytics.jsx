@@ -322,7 +322,7 @@ const MaternalHealthAnalytics = () => {
             
             {/* Predictive Demand */}
             <div className="bg-white dark:bg-[#0b1528] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm transition-colors">
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-8">
                 <h3 className="text-xl font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans']">{t('predictive_demand_matrix')}</h3>
                 <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
                   {['24H', '7D', '1M'].map(time => (

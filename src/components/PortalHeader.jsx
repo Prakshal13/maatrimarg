@@ -36,9 +36,9 @@ const PortalHeader = ({ title, subtitle, badgeText = 'ML Inference Engine', show
       <header className="h-16 shrink-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-[9999] transition-colors duration-200">
         
         {/* Left Title & Badge */}
-        <div className="flex items-center gap-3 min-w-0">
-          <div>
-            <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3 min-w-0 flex-1 mr-2">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 min-w-0">
               <h2 className="text-sm sm:text-base font-black text-slate-900 dark:text-white font-['Plus_Jakarta_Sans'] truncate">
                 {title || t('app_title')}
               </h2>

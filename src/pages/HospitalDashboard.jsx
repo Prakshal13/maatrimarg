@@ -366,7 +366,7 @@ const HospitalDashboard = () => {
 
       {/* Edit Capacity Drawer Modal */}
       {drawerOpen && selectedHospital && (
-        <div className="fixed inset-0 z-50 flex items-center justify-end">
+        <div className="fixed inset-0 z-[10000] flex items-center justify-end">
           <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs" onClick={() => setDrawerOpen(false)} />
           <div className="relative w-full max-w-md bg-white dark:bg-slate-900 h-full shadow-2xl p-6 flex flex-col justify-between z-10 animate-reveal text-left overflow-y-auto">
             <div className="space-y-4">
