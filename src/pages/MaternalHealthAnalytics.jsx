@@ -354,7 +354,7 @@ const MaternalHealthAnalytics = () => {
                     <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} dy={10} />
                     <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
                     <RechartsTooltip contentStyle={tooltipStyle} />
-                    <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
+                    <Legend verticalAlign="bottom" height={60} iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
                     
                     {/* Expected (Dashed) */}
                     <Area type="monotone" dataKey="expected" name={t('expected_demand', 'Expected Demand')} stroke="#0d9488" strokeWidth={2} strokeDasharray="5 5" fill="none" />
