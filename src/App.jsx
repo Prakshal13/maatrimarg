@@ -5,6 +5,8 @@ import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { Analytics } from '@vercel/analytics/react';
+
 
 // Page components
 // Page components
@@ -126,7 +128,8 @@ function App() {
               </ErrorBoundary>
             </main>
           </div>
-        </BrowserRouter>
+          <Analytics />
+          </BrowserRouter>
       </AuthProvider>
     </LanguageProvider>
     </ThemeProvider>
